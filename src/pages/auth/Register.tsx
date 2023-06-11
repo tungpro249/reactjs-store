@@ -247,7 +247,7 @@ const Register = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/account/login" variant="body2">
                     {"Bạn đã có tài khoản? Đăng nhập"}
                   </Link>
                 </Grid>

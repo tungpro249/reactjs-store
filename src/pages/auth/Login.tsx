@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useState } from "react";
 import Copyright from "../../components/copyRight";
+import Foodter from "../../components/foodter";
+import Navbar from "../../components/navbar";
 
 const Login = () => {
   const [data, setData] = useState([]);
@@ -40,6 +42,7 @@ const Login = () => {
 
   return (
     <>
+      <Navbar />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -112,16 +115,16 @@ const Login = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/register" variant="body2">
+                  <Link href="/account/register" variant="body2">
                     {"Bạn chưa có tài khoản? Đăng ký"}
                   </Link>
                 </Grid>
               </Grid>
             </Box>
           </Box>
-          <Copyright />
         </Grid>
       </Grid>
+      <Foodter />
     </>
   );
 };
