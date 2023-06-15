@@ -30,10 +30,20 @@ const Navbar = () => {
             TinTin
           </IconButton>
         </Link>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
-        </Typography>
-        <Link href="/account/login">Login</Link>
+        <Box sx={{ display: "flex", flexGrow: 1 }}>
+          <Typography variant="h6" component="div" pr={2}>
+            Sản phẩm mới
+          </Typography>
+          <Typography variant="h6" component="div" pr={2}>
+            Blog
+          </Typography>
+          <Typography variant="h6" component="div" pr={2}>
+            Sale
+          </Typography>
+        </Box>
+        <Link href="/account/login">Đăng nhập</Link>
+        <Box sx={{ padding: "0 20px" }} />
+        <Link href="/card">Giỏ hàng</Link>
       </Toolbar>
     </>
   );
