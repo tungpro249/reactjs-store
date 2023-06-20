@@ -32,13 +32,13 @@ const Navbar = () => {
         </Link>
         <Box sx={{ display: "flex", flexGrow: 1 }}>
           <Typography variant="h6" component="div" pr={2}>
-            Sản phẩm mới
+            <Link href="/collections/san-pham-moi">Sản phẩm mới</Link>
           </Typography>
           <Typography variant="h6" component="div" pr={2}>
-            Blog
+            <Link href="/blog">Blog</Link>
           </Typography>
           <Typography variant="h6" component="div" pr={2}>
-            Sale
+            <Link href="/collections/sale">Sale</Link>
           </Typography>
         </Box>
         <Link href="/account/login">Đăng nhập</Link>

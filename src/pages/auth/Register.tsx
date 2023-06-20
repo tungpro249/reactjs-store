@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Copyright from "../../components/copyRight";
+import { REGISTER_API } from "../../constants/api";
 
 const Register = () => {
   const [data, setData] = useState([]);
@@ -34,7 +35,7 @@ const Register = () => {
 
   const handleSubmit = () => {
     if (!isValid()) {
-      // fetchData();
+      fetchData();
     }
   };
 
@@ -81,30 +82,24 @@ const Register = () => {
     return null;
   };
 
-  // const fetchData = async () => {
-  //     try {
-  //         const response = await axios.post(registerApi, {
-  {
-    /*            user_name: userName,*/
-  }
-  {
-    /*            last_name: lastName,*/
-  }
-  {
-    /*            first_name: firstName,*/
-  }
-  //             pass_word: password,
-  //             email: email,
-  //             phone: phone,
-  //         });
-  //         if (response.data !== null) {
-  //             alert("Tạo tài khoản thành công");
-  //         }
-  //     } catch (error) {
-  //         setErrorMessage("An error occurred while fetching data.");
-  //     }
-  //     setIsLoading(false);
-  // };
+  const fetchData = async () => {
+    try {
+      const response = await axios.post(REGISTER_API, {
+        user_name: userName,
+        // last_name: lastName,
+        // first_name: firstName,
+        // pass_word: password,
+        email,
+        phone,
+      });
+      if (response.data !== null) {
+        alert("Tạo tài khoản thành công");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred while fetching data.");
+    }
+    setIsLoading(false);
+  };
 
   return (
     <>
@@ -260,4 +255,5 @@ const Register = () => {
     </>
   );
 };
+
 export default Register;

@@ -16,6 +16,7 @@ import { useState } from "react";
 import Copyright from "../../components/copyRight";
 import Foodter from "../../components/foodter";
 import Navbar from "../../components/navbar";
+import { LOGIN_API } from "../../constants/api";
 
 const Login = () => {
   const [data, setData] = useState([]);
@@ -28,15 +29,15 @@ const Login = () => {
     fetchData();
   };
   const fetchData = async () => {
-    // try {
-    //     const response = await axios.post(loginApi, {
-    //         user_name: userName,
-    //         pass_word: password,
-    //     });
-    //     setData(response.data);
-    // } catch (error) {
-    //     setErrorMessage("An error occurred while fetching data.");
-    // }
+    try {
+      const response = await axios.post(LOGIN_API, {
+        user_name: userName,
+        pass_word: password,
+      });
+      setData(response.data);
+    } catch (error) {
+      setErrorMessage("An error occurred while fetching data.");
+    }
     setIsLoading(false);
   };
 
