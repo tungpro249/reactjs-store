@@ -12,6 +12,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Copyright from "../../components/copyRight";
 import { REGISTER_API } from "../../constants/api";
+import Navbar from "../../components/navbar";
+import Foodter from "../../components/foodter";
 
 const Register = () => {
   const [data, setData] = useState([]);
@@ -103,7 +105,8 @@ const Register = () => {
 
   return (
     <>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Navbar />
+      <Grid container component="main">
         <CssBaseline />
         <Grid
           item
@@ -249,9 +252,9 @@ const Register = () => {
               </Grid>
             </Box>
           </Box>
-          <Copyright />
         </Grid>
       </Grid>
+      <Foodter />
     </>
   );
 };

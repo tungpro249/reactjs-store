@@ -3,42 +3,63 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useState } from "react";
-import Copyright from "../../components/copyRight";
+import { useEffect, useState } from "react";
 import Foodter from "../../components/foodter";
 import Navbar from "../../components/navbar";
 import { LOGIN_API } from "../../constants/api";
 
 const Login = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = () => {
-    fetchData();
+    if (isValid()) {
+      fetchData();
+    }
   };
+
+  const resetError = () => {
+    setEmailError("");
+    setPasswordError("");
+  };
+
+  const isValid = () => {
+    resetError();
+    let check = true;
+    if (email.trim() === "") {
+      setEmailError("Bạn chưa nhập email");
+      check = false;
+    }
+    if (password.trim() === "") {
+      setPasswordError("Bạn chưa nhâp mật khẩu");
+      check = false;
+    }
+    return check;
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.post(LOGIN_API, {
-        user_name: userName,
+        email: email,
         pass_word: password,
       });
-      setData(response.data);
+      console.log(response);
+      if (response.data !== null) {
+        alert("Đăng nhập thành công.");
+      } else {
+        console.log(response);
+      }
     } catch (error) {
-      setErrorMessage("An error occurred while fetching data.");
+      console.log(error);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -82,12 +103,14 @@ const Login = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="userName"
-                onChange={(e) => setUserName(e.target.value)}
-                label="Tên đăng nhập"
-                name="userName"
-                autoComplete="userName"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
+                error={!!emailError}
+                helperText={emailError !== "" ? emailError : ""}
               />
               <TextField
                 margin="normal"
@@ -99,6 +122,8 @@ const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                error={!!passwordError}
+                helperText={passwordError !== "" ? passwordError : ""}
               />
               <Button
                 type="button"
