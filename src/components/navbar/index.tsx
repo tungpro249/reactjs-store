@@ -5,6 +5,12 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import Link from "@mui/material/Link";
 
 const Navbar = () => {
+  const links = [
+    { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
+    { href: "/blog", label: "Blog" },
+    { href: "/collections/sale", label: "Sale" },
+  ];
+
   return (
     <>
       <Box
@@ -31,21 +37,24 @@ const Navbar = () => {
           </IconButton>
         </Link>
         <Box sx={{ display: "flex", flexGrow: 1 }}>
-          <Typography variant="h6" component="div" pr={2}>
-            <Link href="/collections/san-pham-moi">Sản phẩm mới</Link>
-          </Typography>
-          <Typography variant="h6" component="div" pr={2}>
-            <Link href="/blog">Blog</Link>
-          </Typography>
-          <Typography variant="h6" component="div" pr={2}>
-            <Link href="/collections/sale">Sale</Link>
-          </Typography>
+          {links.map((link) => (
+            <Typography key={link.href} variant="h6" component="div" pr={2}>
+              <Link href={link.href} sx={{ color: "black", textDecoration: "none" }}>
+                {link.label}
+              </Link>
+            </Typography>
+          ))}
         </Box>
-        <Link href="/account/login">Đăng nhập</Link>
+        <Link href="/account/login" sx={{ color: "black", textDecoration: "none" }}>
+          Đăng nhập
+        </Link>
         <Box sx={{ padding: "0 20px" }} />
-        <Link href="/card">Giỏ hàng</Link>
+        <Link href="/card" sx={{ color: "black", textDecoration: "none" }}>
+          Giỏ hàng
+        </Link>
       </Toolbar>
     </>
   );
 };
+
 export default Navbar;
