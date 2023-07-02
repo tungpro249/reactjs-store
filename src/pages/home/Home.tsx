@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <Grid container padding={"0 100px"}>
+      <Grid container padding={"0 25px 25px"}>
         <Grid item xs={3} md={3} lg={3}>
           <ClothesCard />
         </Grid>

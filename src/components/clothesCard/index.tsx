@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@
 
 function ClothesCard() {
   return (
-    <Card>
+    <Card style={{ padding: "25px", margin: "10px" }}>
       <CardMedia
         component="img"
         alt="Clothes Image"
@@ -21,10 +21,10 @@ function ClothesCard() {
       </CardContent>
       <CardActions>
         <Button size="small" color="primary">
-          Buy
+          Mua
         </Button>
         <Button size="small" color="secondary">
-          Add to Cart
+          Thêm vào giỏ hàng
         </Button>
       </CardActions>
     </Card>
