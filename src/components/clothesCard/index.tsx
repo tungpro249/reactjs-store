@@ -1,22 +1,22 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
-function ClothesCard() {
+function ClothesCard({ item, handleViewDetail }: { item: any; handleViewDetail: any }) {
   return (
     <Card style={{ padding: "25px", margin: "10px" }}>
       <CardMedia
         component="img"
-        alt="Clothes Image"
+        alt={item.name}
         height="300"
-        image="https://picsum.photos/200/300"
-        title="Clothes Image"
+        image={item.image}
+        title={item.name}
       />
       <CardContent>
         <Typography variant="h5" component="h2">
-          Clothes Title
+          {item.name}
         </Typography>
-        <Typography color="textSecondary">$99.99</Typography>
+        <Typography color="textSecondary">{item.price}</Typography>
         <Typography variant="body2" component="p">
-          Clothes Description
+          {item.description}
         </Typography>
       </CardContent>
       <CardActions>
