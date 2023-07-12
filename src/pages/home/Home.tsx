@@ -5,9 +5,14 @@ import { Grid } from "@mui/material";
 import ClothesCard from "../../components/clothesCard";
 import SliderCarosel from "../../components/sliderCarosel";
 import axios from "axios";
+import DetailProduct from "../detailProduct";
+import { typeProduct } from "../../types/typeProduct";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState<typeProduct | null>(null);
+  const [showDetail, setShowDetail] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,23 +25,31 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const handleProductClick = (product: typeProduct) => {
+    console.log("huhu", product);
+    setSelectedProduct(product);
+    setShowDetail(true);
+  };
+
   return (
     <div>
       <Navbar />
       {/*<SliderCarosel />*/}
       <Grid container padding={"0 25px 25px"}>
         {data.map((item, index) => (
-          <Grid item xs={3} md={3} lg={3} onClick={() => console.log("dcm vl", item)}>
-            <ClothesCard
-              item={item}
-              key={index}
-              handleViewDetail={() => {
-                console.log("vcl", item);
-              }}
-            />
+          <Grid xs={3} md={3} lg={3} onClick={() => handleProductClick(item)}>
+            <ClothesCard item={item} />
           </Grid>
         ))}
       </Grid>
+      {showDetail && selectedProduct && (
+        <DetailProduct
+          name={selectedProduct.name}
+          description={selectedProduct.description}
+          image={selectedProduct.image}
+          price={selectedProduct.price}
+        />
+      )}
       <Foodter />
     </div>
   );
