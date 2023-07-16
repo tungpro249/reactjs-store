@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Foodter from "../../components/foodter";
-import Navbar from "../../components/navbar";
-import { Grid } from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Grid} from "@mui/material";
 import ClothesCard from "../../components/clothesCard";
-import SliderCarosel from "../../components/sliderCarosel";
 import axios from "axios";
-import DetailProduct from "../detailProduct";
-import { typeProduct } from "../../types/typeProduct";
+import {typeProduct} from "../../types/typeProduct";
+import {useNavigate} from "react-router-dom";
+import {useAppController} from "../../contexts/app";
 
 export default function Home() {
   const [data, setData] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState<typeProduct | null>(null);
-  const [showDetail, setShowDetail] = useState(false);
+
+  const navigate = useNavigate();
+  // @ts-ignore
+  const [controller] = useAppController();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,31 +26,19 @@ export default function Home() {
   }, []);
 
   const handleProductClick = (product: typeProduct) => {
-    console.log("huhu", product);
-    setSelectedProduct(product);
-    setShowDetail(true);
+    navigate(`/product/${product.name}`);
   };
 
   return (
     <div>
-      <Navbar />
       {/*<SliderCarosel />*/}
       <Grid container padding={"0 25px 25px"}>
         {data.map((item, index) => (
           <Grid xs={3} md={3} lg={3} onClick={() => handleProductClick(item)}>
-            <ClothesCard item={item} />
+            <ClothesCard item={item}/>
           </Grid>
         ))}
       </Grid>
-      {showDetail && selectedProduct && (
-        <DetailProduct
-          name={selectedProduct.name}
-          description={selectedProduct.description}
-          image={selectedProduct.image}
-          price={selectedProduct.price}
-        />
-      )}
-      <Foodter />
     </div>
   );
 }

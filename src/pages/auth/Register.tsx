@@ -105,7 +105,6 @@ const Register = () => {
 
   return (
     <>
-      <Navbar />
       <Grid container component="main">
         <CssBaseline />
         <Grid
@@ -254,7 +253,6 @@ const Register = () => {
           </Box>
         </Grid>
       </Grid>
-      <Foodter />
     </>
   );
 };

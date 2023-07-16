@@ -21,13 +21,13 @@ const Navbar = () => {
           justifyContent: "space-between",
         }}
       >
-        <p>
-          <HomeIcon />
-          Hệ thống showroom
+        <p style={{ display: "flex", alignItems: "center" }}>
+          <HomeIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
+          <span>Hệ thống showroom</span>
         </p>
-        <p>
-          <PhoneIcon />
-          Mua hàng onlline
+        <p style={{ display: "flex", alignItems: "center" }}>
+          <PhoneIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
+          <span>Mua hàng onlline</span>
         </p>
       </Box>
       <Toolbar>
@@ -49,7 +49,7 @@ const Navbar = () => {
           Đăng nhập
         </Link>
         <Box sx={{ padding: "0 20px" }} />
-        <Link href="/card" sx={{ color: "black", textDecoration: "none" }}>
+        <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
           Giỏ hàng
         </Link>
       </Toolbar>

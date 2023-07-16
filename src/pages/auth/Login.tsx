@@ -9,20 +9,20 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import {useEffect, useState} from "react";
-import Foodter from "../../components/foodter";
-import Navbar from "../../components/navbar";
-import {LOGIN_API} from "../../constants/api";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { LOGIN_API } from "../../constants/api";
+import { useNavigate } from "react-router-dom";
+import { loginSuccess, useAppController } from "../../contexts/app";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const navigate = useNavigate();
 
+  // @ts-ignore
+  const [controller, dispatch] = useAppController();
   const handleSubmit = () => {
     if (isValid()) {
       fetchData();
@@ -56,6 +56,7 @@ const Login = () => {
       });
       if (response.data !== null) {
         alert("Đăng nhập thành công.");
+        loginSuccess(dispatch, true);
         navigate("/");
       }
     } catch (error) {
@@ -65,9 +66,8 @@ const Login = () => {
 
   return (
     <>
-      <Navbar/>
-      <Grid container component="main" sx={{height: "100vh"}}>
-        <CssBaseline/>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -93,14 +93,13 @@ const Login = () => {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{m: 1, bgcolor: "secondary.main"}}>
-              <LockOutlinedIcon/>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Đăng nhập
             </Typography>
-            <Box component="form" noValidate onSubmit={() => {
-            }} sx={{mt: 1}}>
+            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -131,7 +130,7 @@ const Login = () => {
                 type="button"
                 fullWidth
                 variant="contained"
-                sx={{mt: 3, mb: 2}}
+                sx={{ mt: 3, mb: 2 }}
                 onClick={() => handleSubmit()}
               >
                 Đăng nhập
@@ -152,7 +151,6 @@ const Login = () => {
           </Box>
         </Grid>
       </Grid>
-      <Foodter/>
     </>
   );
 };
