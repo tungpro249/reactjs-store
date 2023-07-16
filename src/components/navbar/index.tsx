@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Link from "@mui/material/Link";
@@ -10,6 +10,8 @@ const Navbar = () => {
     { href: "/blog", label: "Blog" },
     { href: "/collections/sale", label: "Sale" },
   ];
+
+  const isLogin = localStorage.getItem("user");
 
   return (
     <>
@@ -45,9 +47,13 @@ const Navbar = () => {
             </Typography>
           ))}
         </Box>
-        <Link href="/account/login" sx={{ color: "black", textDecoration: "none" }}>
-          Đăng nhập
-        </Link>
+        {isLogin !== null ? (
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        ) : (
+          <Link href="/account/login" sx={{ color: "black", textDecoration: "none" }}>
+            Đăng nhập
+          </Link>
+        )}
         <Box sx={{ padding: "0 20px" }} />
         <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
           Giỏ hàng

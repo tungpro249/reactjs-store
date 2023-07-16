@@ -57,6 +57,7 @@ const Login = () => {
       if (response.data !== null) {
         alert("Đăng nhập thành công.");
         loginSuccess(dispatch, true);
+        localStorage.setItem("user", JSON.stringify({ currentUser: response.data }));
         navigate("/");
       }
     } catch (error) {
