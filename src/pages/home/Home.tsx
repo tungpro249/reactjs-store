@@ -1,23 +1,27 @@
-import React, {useEffect, useState} from "react";
-import {Grid} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import ClothesCard from "../../components/clothesCard";
 import axios from "axios";
-import {typeProduct} from "../../types/typeProduct";
-import {useNavigate} from "react-router-dom";
-import {useAppController} from "../../contexts/app";
+import { typeProduct } from "../../types/typeProduct";
+import { useNavigate } from "react-router-dom";
+import { getAllProductSuccess, useProductController } from "../../contexts/productContext";
+import { GET_ALL_PRODUCT_API } from "../../constants/api";
 
 export default function Home() {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
   // @ts-ignore
-  const [controller] = useAppController();
+  const [, productDispatch] = useProductController();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getAllProduct = await axios.get("http://localhost:8000/api/products/get-products");
-        setData(getAllProduct.data);
+        const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
+        if (getAllProduct.data) {
+          setData(getAllProduct.data);
+          getAllProductSuccess(productDispatch, getAllProduct.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +39,7 @@ export default function Home() {
       <Grid container padding={"0 25px 25px"}>
         {data.map((item, index) => (
           <Grid xs={3} md={3} lg={3} onClick={() => handleProductClick(item)}>
-            <ClothesCard item={item}/>
+            <ClothesCard item={item} />
           </Grid>
         ))}
       </Grid>

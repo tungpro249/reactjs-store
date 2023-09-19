@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo, useReducer } from "react";
+import { LOGIN_SUCCESS } from "../constants/action";
 
 // @ts-ignore
 const AppContext = createContext();
@@ -19,7 +20,7 @@ const initialState: AppStateType = {
 
 const reducer = (state: AppStateType, action: AppActionType) => {
   switch (action.type) {
-    case "LOGIN_SUCCESS": {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         isLogin: action.payload,
@@ -48,7 +49,6 @@ const useAppController = () => {
   return context;
 };
 
-const loginSuccess = (dispatch: any, data: any) =>
-  dispatch({ type: "LOGIN_SUCCESS", payload: data });
+const loginSuccess = (dispatch: any, data: any) => dispatch({ type: LOGIN_SUCCESS, payload: data });
 
 export { AppContextProvider, useAppController, loginSuccess };

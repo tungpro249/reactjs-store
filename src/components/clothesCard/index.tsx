@@ -1,6 +1,10 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function ClothesCard({ item }: { item: any }) {
+  const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+  const isAdmin = storedUser && storedUser.currentUser?.data?.isAdmin;
+  const checkRole = isAdmin || "";
+
   return (
     <Card style={{ padding: "25px", margin: "10px" }}>
       <CardMedia component="img" alt={""} height="300" image={item?.image} title={item?.name} />
@@ -13,14 +17,25 @@ function ClothesCard({ item }: { item: any }) {
           {item?.description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" color="primary">
-          Mua
-        </Button>
-        <Button size="small" color="secondary">
-          Thêm vào giỏ hàng
-        </Button>
-      </CardActions>
+      {!checkRole ? (
+        <CardActions>
+          <Button size="small" color="primary">
+            Mua
+          </Button>
+          <Button size="small" color="secondary">
+            Thêm vào giỏ hàng
+          </Button>
+        </CardActions>
+      ) : (
+        <CardActions>
+          <Button size="small" color="primary">
+            Sửa
+          </Button>
+          <Button size="small" color="secondary">
+            Xóa
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }
