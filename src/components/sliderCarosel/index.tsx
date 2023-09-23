@@ -3,26 +3,36 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const SliderCarosel = () => (
-  <Carousel autoPlay>
+  <Carousel autoPlay showThumbs={false} infiniteLoop>
     <div>
-      <img alt="" src="http://lorempixel.com/output/cats-q-c-640-480-1.jpg" />
-      <p className="legend">Legend 1</p>
+      <img
+        alt=""
+        src="https://file.hstatic.net/200000182297/file/banner_web_15_02_23_bc417e51b3bb4665845c5e80fa268e1c.jpg"
+      />
     </div>
     <div>
-      <img alt="" src="http://lorempixel.com/output/cats-q-c-640-480-2.jpg" />
-      <p className="legend">Legend 2</p>
+      <img
+        alt=""
+        src="https://file.hstatic.net/200000182297/file/sacc_3ac903271d5a4ea0b08e55159bbabfd0.jpg"
+      />
     </div>
     <div>
-      <img alt="" src="http://lorempixel.com/output/cats-q-c-640-480-3.jpg" />
-      <p className="legend">Legend 3</p>
+      <img
+        alt=""
+        src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840"
+      />
     </div>
     <div>
-      <img alt="" src="http://lorempixel.com/output/cats-q-c-640-480-4.jpg" />
-      <p className="legend">Legend 4</p>
+      <img
+        alt=""
+        src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840"
+      />
     </div>
     <div>
-      <img alt="" src="http://lorempixel.com/output/cats-q-c-640-480-5.jpg" />
-      <p className="legend">Legend 5</p>
+      <img
+        alt=""
+        src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840"
+      />
     </div>
   </Carousel>
 );

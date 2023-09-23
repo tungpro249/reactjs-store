@@ -6,6 +6,7 @@ import { typeProduct } from "../../types/typeProduct";
 import { useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../contexts/productContext";
 import { GET_ALL_PRODUCT_API } from "../../constants/api";
+import SliderCarosel from "../../components/sliderCarosel";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ export default function Home() {
 
   return (
     <div>
-      {/*<SliderCarosel />*/}
+      <SliderCarosel />
       <Grid container padding={"0 25px 25px"}>
         {data.map((item, index) => (
           <Grid xs={3} md={3} lg={3} onClick={() => handleProductClick(item)}>

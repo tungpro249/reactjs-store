@@ -23,6 +23,7 @@ const Login = () => {
 
   // @ts-ignore
   const [controller, dispatch] = useAppController();
+
   const handleSubmit = () => {
     if (isValid()) {
       fetchData();
@@ -56,9 +57,9 @@ const Login = () => {
       });
       if (response.data !== null) {
         alert("Đăng nhập thành công.");
-        loginSuccess(dispatch, true);
         localStorage.setItem("user", JSON.stringify({ currentUser: response.data }));
         navigate("/");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

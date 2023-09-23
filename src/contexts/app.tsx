@@ -7,6 +7,7 @@ AppContext.displayName = "AppContext";
 
 type AppStateType = {
   isLogin: boolean;
+  user: any;
 };
 
 type AppActionType = {
@@ -16,14 +17,16 @@ type AppActionType = {
 
 const initialState: AppStateType = {
   isLogin: false,
+  user: [],
 };
 
 const reducer = (state: AppStateType, action: AppActionType) => {
   switch (action.type) {
     case LOGIN_SUCCESS: {
+      console.log(action.payload);
       return {
         ...state,
-        isLogin: action.payload,
+        user: action.payload,
       };
     }
     default: {
