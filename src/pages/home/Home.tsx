@@ -9,7 +9,7 @@ import { GET_ALL_PRODUCT_API } from "../../constants/api";
 import SliderCarosel from "../../components/sliderCarosel";
 
 export default function Home() {
-  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
   // @ts-ignore
@@ -20,7 +20,7 @@ export default function Home() {
       try {
         const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
         if (getAllProduct.data) {
-          setData(getAllProduct.data);
+          setProducts(getAllProduct.data);
           getAllProductSuccess(productDispatch, getAllProduct.data);
         }
       } catch (error) {
@@ -31,14 +31,14 @@ export default function Home() {
   }, []);
 
   const handleProductClick = (product: typeProduct) => {
-    navigate(`/product/${product.name}`);
+    navigate(`/product/${product.id}`);
   };
 
   return (
     <div>
       <SliderCarosel />
       <Grid container padding={"0 25px 25px"}>
-        {data.map((item, index) => (
+        {products.map((item, index) => (
           <Grid xs={3} md={3} lg={3} onClick={() => handleProductClick(item)}>
             <ClothesCard item={item} />
           </Grid>

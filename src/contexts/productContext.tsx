@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useReducer } from "react";
-import { GET_ALL_PRODUCT } from "../constants/action";
+import { GET_ALL_PRODUCT, GET_PRODUCT_DETAIL } from "../constants/action";
 
 // @ts-ignore
 const ProductContext = createContext();
@@ -7,6 +7,7 @@ ProductContext.displayName = "ProductContext";
 
 type ProductStateType = {
   product: any;
+  productDetail: any;
 };
 
 type ProductActionType = {
@@ -16,6 +17,7 @@ type ProductActionType = {
 
 const initialState: ProductStateType = {
   product: [],
+  productDetail: [],
 };
 
 const reducer = (state: ProductStateType, action: ProductActionType) => {
@@ -24,6 +26,12 @@ const reducer = (state: ProductStateType, action: ProductActionType) => {
       return {
         ...state,
         product: action.payload,
+      };
+    }
+    case GET_PRODUCT_DETAIL: {
+      return {
+        ...state,
+        productDetail: action.payload,
       };
     }
     default: {
@@ -52,4 +60,12 @@ const useProductController = () => {
 const getAllProductSuccess = (dispatch: any, data: any) =>
   dispatch({ type: GET_ALL_PRODUCT, payload: data });
 
-export { ProductContextProvider, useProductController, getAllProductSuccess };
+const getProductDetailSuccess = (dispatch: any, data: any) =>
+  dispatch({ type: GET_PRODUCT_DETAIL, payload: data });
+
+export {
+  ProductContextProvider,
+  useProductController,
+  getAllProductSuccess,
+  getProductDetailSuccess,
+};
