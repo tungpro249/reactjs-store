@@ -12,6 +12,7 @@ import DetailProduct from "./pages/detailProduct";
 import Foodter from "./components/foodter";
 import Navbar from "./components/navbar";
 import Cart from "./pages/cart";
+import ReceiveNotifyEmail from "./components/receiveNotifiEmail";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>
+      <ReceiveNotifyEmail />
       <Foodter />
     </>
   );

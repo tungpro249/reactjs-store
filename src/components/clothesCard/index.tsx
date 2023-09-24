@@ -5,6 +5,14 @@ function ClothesCard({ item }: { item: any }) {
   const isAdmin = storedUser && storedUser.currentUser?.data?.isAdmin;
   const checkRole = isAdmin || "";
 
+  const handleBuy = () => {
+    alert("mua hang");
+  };
+
+  const handleAddToCart = () => {
+    alert("them gio hang");
+  };
+
   return (
     <Card style={{ padding: "25px", margin: "10px" }}>
       <CardMedia component="img" alt={""} height="300" image={item?.image} title={item?.name} />
@@ -19,7 +27,7 @@ function ClothesCard({ item }: { item: any }) {
       </CardContent>
       {!checkRole ? (
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={handleBuy}>
             Mua
           </Button>
           <Button size="small" color="secondary">
