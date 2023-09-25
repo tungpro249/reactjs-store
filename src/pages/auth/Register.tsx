@@ -107,29 +107,17 @@ const Register = () => {
     <>
       <Grid container component="main">
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8d2FsbHBhcGVyc3x8fHx8fDE2ODQ5NDM2NDA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5}>
+        <Grid item xs={12} sm={8} md={5} sx={{ margin: "auto" }}>
           <Box
             sx={{
               my: 8,
               mx: 4,
+              px: 4,
+              py: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              background: "#edeaea77",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -239,7 +227,7 @@ const Register = () => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/forget-password" variant="body2">
                     Quên mật khẩu ?
                   </Link>
                 </Grid>

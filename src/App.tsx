@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home/Home";
 import About from "./components/about/About";
 import SignIn from "./pages/auth/Login";
@@ -13,8 +13,11 @@ import Foodter from "./components/foodter";
 import Navbar from "./components/navbar";
 import Cart from "./pages/cart";
 import ReceiveNotifyEmail from "./components/receiveNotifiEmail";
+import ForgetPassword from "./pages/auth/ForgetPasswod";
 
 function App() {
+  const location = useLocation();
+  const showReceiveNotifyEmail = location.pathname === "/";
   return (
     <>
       <Navbar />
@@ -24,6 +27,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/account/login" element={<SignIn />} />
           <Route path="/account/register" element={<Register />} />
+          <Route path={"/forget-password"} element={<ForgetPassword />} />
           <Route path="/collections/san-pham-moi" element={<Collections api={"san pham moi"} />} />
           <Route path="/collections/sale" element={<Collections api={"sale"} />} />
           <Route path="/cart" element={<Cart />} />
@@ -32,7 +36,7 @@ function App() {
           <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>
-      <ReceiveNotifyEmail />
+      {showReceiveNotifyEmail && <ReceiveNotifyEmail />}
       <Foodter />
     </>
   );

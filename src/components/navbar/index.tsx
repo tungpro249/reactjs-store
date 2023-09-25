@@ -16,17 +16,17 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import Link from "@mui/material/Link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
-import { useAppController } from "../../contexts/app";
 
 const Navbar = () => {
+  const [name, setName] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("user"));
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const links = [
     { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
     { href: "/blog", label: "Blog" },
     { href: "/collections/sale", label: "Sale" },
   ];
-
-  const [user, setUser] = useState(localStorage.getItem("user"));
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleAvatarClick = () => {
     setMenuOpen(true);
@@ -39,8 +39,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    window.location.reload();
   };
-  const [name, setName] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -84,17 +84,26 @@ const Navbar = () => {
             </Typography>
           ))}
         </Box>
+
+        <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
+          <Box style={{ display: "flex", alignItems: "center" }}>
+            <ShoppingCartIcon />
+            <Box pr={1} />
+            <span>Giỏ hàng</span>
+          </Box>
+        </Link>
+        <Box sx={{ padding: "0 20px" }} />
         {user !== null ? (
           <>
-            <Avatar
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-              onClick={handleAvatarClick}
-            />
-            <span>
-              {/*@ts-ignore*/}
-              {name?.last_name} {name?.first_name}
-            </span>
+            <Box style={{ display: "flex", alignItems: "center" }} onClick={handleAvatarClick}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <Box pr={1} />
+              <span>
+                {/*@ts-ignore*/}
+                {name?.last_name} {name?.first_name}
+              </span>
+            </Box>
+
             <Menu
               open={menuOpen}
               onClose={handleMenuClose}
@@ -106,25 +115,26 @@ const Navbar = () => {
                 vertical: "top",
                 horizontal: "right",
               }}
+              sx={{ top: "64px" }}
             >
               <MenuList>
                 <MenuItem onClick={handleMenuClose}>
                   <ListItemIcon>
                     <Person />
                   </ListItemIcon>
-                  <ListItemText primary="Profile" />
+                  <ListItemText primary="Tài khoản của tôi" />
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                   <ListItemIcon>
                     <AccountCircle />
                   </ListItemIcon>
-                  <ListItemText primary="My Account" />
+                  <ListItemText primary="Thay đổi mật khẩu" />
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
                     <ExitToApp />
                   </ListItemIcon>
-                  <ListItemText primary="Logout" />
+                  <ListItemText primary="Đăng xuất" />
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -134,11 +144,6 @@ const Navbar = () => {
             Đăng nhập
           </Link>
         )}
-        <Box sx={{ padding: "0 20px" }} />
-        <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
-          <ShoppingCartIcon sx={{ margin: "-2px 10px" }} />
-          <span>Giỏ hàng</span>
-        </Link>
       </Toolbar>
     </>
   );
