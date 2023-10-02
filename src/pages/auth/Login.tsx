@@ -24,7 +24,7 @@ const Login = () => {
   // @ts-ignore
   const [controller, dispatch] = useAppController();
 
-  const handleSubmit = () => {
+  const handleLogin = () => {
     if (isValid()) {
       fetchData();
     }
@@ -121,7 +121,7 @@ const Login = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={() => handleSubmit()}
+                onClick={() => handleLogin()}
               >
                 Đăng nhập
               </Button>

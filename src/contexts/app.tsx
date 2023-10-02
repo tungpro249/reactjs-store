@@ -23,7 +23,6 @@ const initialState: AppStateType = {
 const reducer = (state: AppStateType, action: AppActionType) => {
   switch (action.type) {
     case LOGIN_SUCCESS: {
-      console.log(action.payload);
       return {
         ...state,
         user: action.payload,
