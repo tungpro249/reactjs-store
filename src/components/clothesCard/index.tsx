@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function ClothesCard({ item }: { item: any }) {
+  console.log(item);
   return (
     <>
       <CardMedia component="img" alt={""} height="300" image={item?.image} title={item?.name} />

@@ -9,6 +9,7 @@ import { deleteProduct, GET_ALL_PRODUCT_API } from "../../constants/api";
 import SliderCarosel from "../../components/sliderCarosel";
 
 export default function Home() {
+  console.log("dcm vai lon");
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
@@ -53,10 +54,6 @@ export default function Home() {
     navigate(`/product/${product.id}`);
   };
 
-  const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
-  const isAdmin = storedUser && storedUser.currentUser?.data?.isAdmin;
-  const checkRole = isAdmin || "";
-
   const handleBuy = () => {
     alert("mua hang");
   };
@@ -81,35 +78,19 @@ export default function Home() {
       <h2 style={{ textAlign: "center" }}>Sản phẩm mới</h2>
       <Grid container padding={"0 25px 25px"}>
         {products.map((item: typeProduct, index) => (
-          <Grid xs={3} md={3} lg={3}>
+          <Grid xs={3} md={3} lg={3} key={index}>
             <Card style={{ padding: "25px", margin: "10px" }}>
               <Box onClick={() => handleProductClick(item)}>
                 <ClothesCard item={item} />
               </Box>
-              {!checkRole ? (
-                <CardActions>
-                  <Button size="small" color="primary" onClick={handleBuy}>
-                    Mua
-                  </Button>
-                  <Button size="small" color="secondary">
-                    Thêm vào giỏ hàng
-                  </Button>
-                </CardActions>
-              ) : (
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Sửa
-                  </Button>
-                  {/*@ts-ignore*/}
-                  <Button
-                    size="small"
-                    color="secondary"
-                    onClick={() => handleDeleteProduct(item.id)}
-                  >
-                    Xóa
-                  </Button>
-                </CardActions>
-              )}
+              <CardActions>
+                <Button size="small" color="primary" onClick={handleBuy}>
+                  Mua
+                </Button>
+                <Button size="small" color="secondary">
+                  Thêm vào giỏ hàng
+                </Button>
+              </CardActions>
             </Card>
           </Grid>
         ))}
