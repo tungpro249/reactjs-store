@@ -18,6 +18,7 @@ import Box from "@mui/material/Box";
 import Dashboard from "./pages/dashbroad";
 import SideBar from "./components/sideBar";
 import ProductAdmin from "./pages/productAdmin";
+import Category from "./pages/category";
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/product" element={<ProductAdmin />} />
+              <Route path="/category" element={<Category />} />
             </>
           ) : (
             //customer page

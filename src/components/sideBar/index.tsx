@@ -49,6 +49,14 @@ const SideBar = () => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
+          <ListItemButton component={Link} to="/category">
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText primary="category" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
           <ListItemButton component={Link} to="/customer">
             <ListItemIcon>
               <PersonIcon />

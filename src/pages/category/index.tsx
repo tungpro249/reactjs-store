@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { GET_ALL_PRODUCT_API } from "../../constants/api";
+import { GET_ALL_CATEGORIES } from "../../constants/api";
 import { Box, Grid, Modal, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import { typeProduct } from "../../types/typeProduct";
 import TableForm from "../../components/table";
 
-export default function ProductAdmin() {
-  const [products, setProducts] = useState([]);
+const Category = () => {
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(GET_ALL_PRODUCT_API);
+        const response = await axios.get(GET_ALL_CATEGORIES);
         if (response.data) {
-          setProducts(response.data);
+          setCategories(response.data);
         }
       } catch (error) {
         console.log("Error fetching products:", error);
@@ -41,14 +40,7 @@ export default function ProductAdmin() {
     return <div>vai lon</div>;
   };
 
-  const columns = [
-    { header: "Tên sản phẩm", field: "name" },
-    { header: "Mô tả", field: "description" },
-    { header: "Danh mục", field: "category" },
-    { header: "Số lượng", field: "quantity" },
-    { header: "Hình ảnh", field: "image" },
-    { header: "Giá tiền", field: "price" },
-  ];
+  const columns = [{ header: "Tên sản phẩm", field: "name" }];
 
   return (
     <>
@@ -57,7 +49,7 @@ export default function ProductAdmin() {
         <Grid item xs={12} pr={2}>
           <TableForm
             columns={columns}
-            data={products}
+            data={categories}
             handleDelete={deleteProduct}
             handleEdit={editProduct}
           />
@@ -73,4 +65,6 @@ export default function ProductAdmin() {
       </Modal>
     </>
   );
-}
+};
+
+export default Category;

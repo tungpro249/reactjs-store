@@ -9,7 +9,6 @@ import { deleteProduct, GET_ALL_PRODUCT_API } from "../../constants/api";
 import SliderCarosel from "../../components/sliderCarosel";
 
 export default function Home() {
-  console.log("dcm vai lon");
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
