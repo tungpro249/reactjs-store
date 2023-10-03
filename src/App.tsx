@@ -28,7 +28,7 @@ function App() {
   const checkRole = isAdmin || "";
 
   return (
-    <Box sx={{ display: checkRole ? "flex" : "none" }}>
+    <Box sx={{ display: checkRole ? "flex" : "" }}>
       {checkRole ? <SideBar /> : <Navbar />}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
