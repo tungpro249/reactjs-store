@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { GET_ALL_PRODUCT_API } from "../../constants/api";
-import { Box, Grid, Modal, Typography } from "@mui/material";
+import { deleteProduct, GET_ALL_PRODUCT_API } from "../../constants/api";
+import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import { typeProduct } from "../../types/typeProduct";
 import TableForm from "../../components/table";
@@ -24,23 +24,66 @@ export default function ProductAdmin() {
   }, []);
 
   const [open, setOpen] = useState(false);
-  const deleteProduct = (productId: number) => {
+
+  const [productId, setProductId] = useState<number | null>(null);
+
+  const handleDeleteProduct = (productId: number) => {
+    setType("DELETE");
     setOpen(true);
-    console.log(productId);
+    setProductId(productId);
   };
 
   const editProduct = (productId: number) => {
-    console.log(productId);
+    setType("UPDATE");
+    setOpen(true);
+    setProductId(productId);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const contentOpen = () => {
-    return <div>vai lon</div>;
+  const handleDeleteConfirm = async () => {
+    try {
+      if (productId) {
+        await axios.delete(deleteProduct(productId));
+
+        // Cập nhật danh sách sản phẩm sau khi xóa thành công
+        const updatedProducts = products.filter((item: any) => item.id !== productId);
+        setProducts(updatedProducts);
+
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  const formUpdate = (closeForm: Function) => <Box>San pham co id la</Box>;
+  const formDelete = (closeForm: Function) => (
+    <Box
+      style={{
+        background: "white",
+        margin: "auto",
+        width: "400px",
+        height: "300px",
+        textAlign: "center",
+      }}
+    >
+      <h3>Bạn có muốn xóa</h3>
+      <Box>
+        <Button onClick={handleDeleteConfirm}>Xóa</Button>
+        <Button onClick={() => handleClose()}>Hủy</Button>
+      </Box>
+    </Box>
+  );
+  const [type, setType] = useState("");
+
+  const showModalContent = () => {
+    if (type === "UPDATE") return formUpdate(handleClose);
+    if (type === "DELETE") return formDelete(handleClose);
+    return <div />;
+  };
   const columns = [
     { header: "Tên sản phẩm", field: "name" },
     { header: "Mô tả", field: "description" },
@@ -58,7 +101,7 @@ export default function ProductAdmin() {
           <TableForm
             columns={columns}
             data={products}
-            handleDelete={deleteProduct}
+            handleDelete={handleDeleteProduct}
             handleEdit={editProduct}
           />
         </Grid>
@@ -69,7 +112,7 @@ export default function ProductAdmin() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        {contentOpen()}
+        {showModalContent()}
       </Modal>
     </>
   );

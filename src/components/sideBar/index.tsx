@@ -11,12 +11,14 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CategoryIcon from "@mui/icons-material/Category";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExitToApp } from "@mui/icons-material";
 
 const SideBar = () => {
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("user");
+    navigate("/");
     window.location.reload();
   };
   return (

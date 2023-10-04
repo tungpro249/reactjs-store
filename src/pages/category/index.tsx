@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { GET_ALL_CATEGORIES } from "../../constants/api";
-import { Box, Grid, Modal, Typography } from "@mui/material";
+import { deleteCategory, GET_ALL_CATEGORIES } from "../../constants/api";
+import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../components/table";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,20 +25,57 @@ const Category = () => {
 
   const [open, setOpen] = useState(false);
   const deleteProduct = (productId: number) => {
+    setType("DELETE");
     setOpen(true);
-    console.log(productId);
+    setCategoryId(productId);
   };
 
   const editProduct = (productId: number) => {
-    console.log(productId);
+    setType("UPDATE");
+    setOpen(true);
+    setCategoryId(productId);
   };
+  const handleDelete = async () => {
+    if (categoryId) {
+      try {
+        const response = await axios.delete(deleteCategory(categoryId));
+        alert("Xóa thành công");
+        console.log(response.data);
+      } catch (error) {
+        console.log("Error deleting data:", error);
+      }
+    }
+  };
+
+  const formUpdate = (closeForm: Function) => <Box>San pham co id la</Box>;
+  const formDelete = (closeForm: Function) => (
+    <Box
+      style={{
+        background: "white",
+        margin: "auto",
+        width: "400px",
+        height: "300px",
+        textAlign: "center",
+      }}
+    >
+      <h3>Bạn có muốn xóa</h3>
+      <Box>
+        <Button onClick={handleDelete}>Xóa</Button>
+        <Button onClick={() => handleClose()}>Hủy</Button>
+      </Box>
+    </Box>
+  );
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const contentOpen = () => {
-    return <div>vai lon</div>;
+  const [type, setType] = useState("");
+
+  const showModalContent = () => {
+    if (type === "UPDATE") return formUpdate(handleClose);
+    if (type === "DELETE") return formDelete(handleClose);
+    return <div />;
   };
 
   const columns = [{ header: "Tên sản phẩm", field: "name" }];
@@ -61,7 +99,7 @@ const Category = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        {contentOpen()}
+        {showModalContent()}
       </Modal>
     </>
   );
