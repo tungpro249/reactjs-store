@@ -1,5 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import Copyright from "../copyRight";
+import { Link } from "react-router-dom";
 
 const Foodter = () => {
   return (
@@ -19,24 +20,67 @@ const Foodter = () => {
             </Box>
           </Grid>
           <Grid item xs={3} md={3} sm={3} lg={3} pr={3}>
-            Giới thiệu <br />
-            Triết lý kinh doanh tại NEM Fashion NEM's <br />
-            Blog <br />
-            Hệ thống showroom <br />
-            Liên hệ
+            <Link to="/about" className="link-style">
+              Giới thiệu
+            </Link>{" "}
+            <br />
+            <Link to="/blog" className="link-style">
+              Blog
+            </Link>{" "}
+            <br />
+            <Link to="/showroom" className="link-style">
+              Hệ thống showroom
+            </Link>{" "}
+            <br />
+            <Link to="/contact" className="link-style">
+              Liên hệ
+            </Link>
           </Grid>
           <Grid item xs={3} md={3} sm={3} lg={3} pr={3}>
-            Chính sách giao nhận - Vận chuyển <br />
-            Hướng dẫn thanh toán <br />
-            Tra cứu đơn hàng
-            <br /> Hướng dẫn chọn Size
-            <br /> Quy định đổi hàng <br />
-            Quy định bảo hành và sửa chữa <br />
-            Khách hàng thân thiết
+            <Link to="/shipping-policy" className="link-style">
+              Chính sách giao nhận - Vận chuyển
+            </Link>{" "}
+            <br />
+            <Link to="/payment-guide" className="link-style">
+              Hướng dẫn thanh toán
+            </Link>{" "}
+            <br />
+            <Link to="/order-tracking" className="link-style">
+              Tra cứu đơn hàng
+            </Link>{" "}
+            <br />
+            <Link to="/size-guide" className="link-style">
+              Hướng dẫn chọn Size
+            </Link>{" "}
+            <br />
+            <Link to="/return-policy" className="link-style">
+              Quy định đổi hàng
+            </Link>{" "}
+            <br />
+            <Link to="/warranty-policy" className="link-style">
+              Quy định bảo hành và sửa chữa
+            </Link>
+            <br />
+            <Link to="/loyalty-program" className="link-style">
+              Khách hàng thân thiết
+            </Link>
           </Grid>
 
           <Grid item xs={3} md={3} sm={3} lg={3}>
-            Phương thức thanh toán
+            <p>Phương thức thanh toán</p>
+            <p style={{ paddingTop: "10px" }}>
+              <img
+                src={
+                  "https://theme.hstatic.net/200000182297/1000887316/14/image_method_3.png?v=855"
+                }
+              />
+            </p>
+            <p style={{ paddingTop: "10px" }}>
+              <img
+                src={"https://theme.hstatic.net/200000182297/1000887316/14/bct.png?v=855"}
+                width={"118px"}
+              />
+            </p>
           </Grid>
         </Grid>
       </Box>

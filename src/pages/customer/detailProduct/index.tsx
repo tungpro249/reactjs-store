@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { getProductDetail } from "../../constants/api";
-import { typeProduct } from "../../types/typeProduct";
+import { getProductDetail } from "../../../constants/api";
+import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
 
 const DetailProduct = () => {

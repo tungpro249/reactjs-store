@@ -1,61 +1,49 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { deleteProduct, GET_ALL_PRODUCT_API } from "../../constants/api";
+import { deleteCategory, GET_ALL_CATEGORIES } from "../../../constants/api";
 import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import { typeProduct } from "../../types/typeProduct";
-import TableForm from "../../components/table";
+import TableForm from "../../../components/table";
 
-export default function ProductAdmin() {
-  const [products, setProducts] = useState([]);
+const Category = () => {
+  const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(GET_ALL_PRODUCT_API);
+        const response = await axios.get(GET_ALL_CATEGORIES);
         if (response.data) {
-          setProducts(response.data);
+          setCategories(response.data);
         }
       } catch (error) {
-        console.log("Error fetching products:", error);
+        console.log("Error fetching categories:", error);
       }
     };
     fetchData();
   }, []);
 
   const [open, setOpen] = useState(false);
-
-  const [productId, setProductId] = useState<number | null>(null);
-
-  const handleDeleteProduct = (productId: number) => {
+  const handleDeleteCategory = (categoryId: number) => {
     setType("DELETE");
     setOpen(true);
-    setProductId(productId);
+    setCategoryId(categoryId);
   };
 
-  const editProduct = (productId: number) => {
+  const handleEditCategory = (categoryId: number) => {
     setType("UPDATE");
     setOpen(true);
-    setProductId(productId);
+    setCategoryId(categoryId);
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDeleteConfirm = async () => {
-    try {
-      if (productId) {
-        await axios.delete(deleteProduct(productId));
-
-        // Cập nhật danh sách sản phẩm sau khi xóa thành công
-        const updatedProducts = products.filter((item: any) => item.id !== productId);
-        setProducts(updatedProducts);
-
-        handleClose();
+  const handleDelete = async () => {
+    if (categoryId) {
+      try {
+        const response = await axios.delete(deleteCategory(categoryId));
+        alert("Xóa thành công");
+        window.location.reload();
+      } catch (error) {
+        console.log("Error deleting data:", error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -72,11 +60,16 @@ export default function ProductAdmin() {
     >
       <h3>Bạn có muốn xóa</h3>
       <Box>
-        <Button onClick={handleDeleteConfirm}>Xóa</Button>
+        <Button onClick={handleDelete}>Xóa</Button>
         <Button onClick={() => handleClose()}>Hủy</Button>
       </Box>
     </Box>
   );
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [type, setType] = useState("");
 
   const showModalContent = () => {
@@ -84,14 +77,8 @@ export default function ProductAdmin() {
     if (type === "DELETE") return formDelete(handleClose);
     return <div />;
   };
-  const columns = [
-    { header: "Tên sản phẩm", field: "name" },
-    { header: "Mô tả", field: "description" },
-    { header: "Danh mục", field: "category" },
-    { header: "Số lượng", field: "quantity" },
-    { header: "Hình ảnh", field: "image" },
-    { header: "Giá tiền", field: "price" },
-  ];
+
+  const columns = [{ header: "Tên sản phẩm", field: "name" }];
 
   return (
     <>
@@ -100,9 +87,9 @@ export default function ProductAdmin() {
         <Grid item xs={12} pr={2}>
           <TableForm
             columns={columns}
-            data={products}
-            handleDelete={handleDeleteProduct}
-            handleEdit={editProduct}
+            data={categories}
+            handleDelete={handleDeleteCategory}
+            handleEdit={handleEditCategory}
           />
         </Grid>
       </Grid>
@@ -116,4 +103,6 @@ export default function ProductAdmin() {
       </Modal>
     </>
   );
-}
+};
+
+export default Category;

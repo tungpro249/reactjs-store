@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Card, CardActions, Grid, Modal, Typography } from "@mui/material";
-import ClothesCard from "../../components/clothesCard";
+import ClothesCard from "../../../components/clothesCard";
 import axios from "axios";
-import { typeProduct } from "../../types/typeProduct";
+import { typeProduct } from "../../../types/typeProduct";
 import { useNavigate } from "react-router-dom";
-import { getAllProductSuccess, useProductController } from "../../contexts/productContext";
-import { deleteProduct, GET_ALL_PRODUCT_API } from "../../constants/api";
-import SliderCarosel from "../../components/sliderCarosel";
+import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
+import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import SliderCarosel from "../../../components/sliderCarosel";
 
 export default function Home() {
   const [products, setProducts] = useState([]);

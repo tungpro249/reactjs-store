@@ -1,24 +1,25 @@
 import React, { Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./pages/home/Home";
-import About from "./components/about/About";
+import Home from "./pages/customer/home/Home";
+import About from "./pages/customer/about/About";
 import SignIn from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import "./App.css";
 import NotFound from "./components/notFound";
 import Blog from "./pages/blog";
 import Collections from "./pages/collections";
-import DetailProduct from "./pages/detailProduct";
+import DetailProduct from "./pages/customer/detailProduct";
 import Foodter from "./components/foodter";
 import Navbar from "./components/navbar";
-import Cart from "./pages/cart";
+import Cart from "./pages/customer/cart";
 import ReceiveNotifyEmail from "./components/receiveNotifiEmail";
 import ForgetPassword from "./pages/auth/ForgetPasswod";
 import Box from "@mui/material/Box";
-import Dashboard from "./pages/dashbroad";
+import Dashboard from "./pages/admin/dashbroad";
 import SideBar from "./components/sideBar";
-import ProductAdmin from "./pages/productAdmin";
-import Category from "./pages/category";
+import ProductAdmin from "./pages/admin/productAdmin";
+import Category from "./pages/admin/category";
+import VerticalTabs from "./pages/customer/tabs";
 
 function App() {
   const location = useLocation();
@@ -56,6 +57,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/product/:id" element={<DetailProduct />} />
+              <Route path={"/shipping-policy"} element={<VerticalTabs />} />
             </>
           )}
           <Route path={"*"} element={<NotFound />} />

@@ -85,7 +85,7 @@ const Navbar = () => {
           ))}
         </Box>
 
-        <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
+        <Link href="/customer/cart" sx={{ color: "black", textDecoration: "none" }}>
           <Box style={{ display: "flex", alignItems: "center" }}>
             <ShoppingCartIcon />
             <Box pr={1} />
