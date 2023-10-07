@@ -2,13 +2,30 @@ import { Box, Button, TextField, Grid, CssBaseline, Avatar, Typography, Link } f
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { CHANGE_PASSWORD_API } from "../../constants/api";
 
 const ChangePassword = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 
+  // @ts-ignore
+  const email = JSON.parse(localStorage.getItem("user")).currentUser.data.email || "";
+  console.log(email);
+
   const navigate = useNavigate();
+
+  const handleChangePassword = async () => {
+    const response = await axios.post(CHANGE_PASSWORD_API, {
+      email,
+      old_password: oldPass,
+      new_password: newPass,
+    });
+    if (response) {
+      alert("Thay đổi mật khẩu thành công");
+    }
+  };
 
   return (
     <>
@@ -68,7 +85,12 @@ const ChangePassword = () => {
                 helperText={errorEmail ? errorEmail : ""}
               />
               <Box style={{ display: "flex", justifyContent: "center" }}>
-                <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => {}}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() => handleChangePassword()}
+                >
                   Xác nhận
                 </Button>
                 <Box sx={{ padding: "0 30px" }} />
