@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ADD_CATEGORY_API, deleteCategory, GET_ALL_CATEGORIES } from "../../../constants/api";
+import {
+  ADD_CATEGORY_API,
+  deleteCategory,
+  GET_ALL_CATEGORIES,
+  updateCategory,
+} from "../../../constants/api";
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
@@ -66,6 +71,18 @@ const Category = () => {
     }
   };
 
+  const handleUpdate = async () => {
+    if (categoryId) {
+      try {
+        const response = await axios.put(updateCategory(categoryId), { name });
+        alert("Thêm thành công");
+        window.location.reload();
+      } catch (error) {
+        console.log("Error deleting data:", error);
+      }
+    }
+  };
+
   const formAdd = (closeForm: Function) => (
     <Box
       style={{
@@ -88,7 +105,28 @@ const Category = () => {
       </Box>
     </Box>
   );
-  const formUpdate = (closeForm: Function) => <Box>San pham co id la</Box>;
+  const formUpdate = (closeForm: Function) => (
+    <Box
+      style={{
+        background: "white",
+        margin: "auto",
+        width: "400px",
+        height: "300px",
+        textAlign: "center",
+      }}
+    >
+      <h3>Sửa</h3>
+      <TextField
+        placeholder={"Tên danh muc"}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <Box>
+        <Button onClick={handleUpdate}>Sửa</Button>
+        <Button onClick={() => handleClose()}>Hủy</Button>
+      </Box>
+    </Box>
+  );
   const formDelete = (closeForm: Function) => (
     <Box
       style={{
