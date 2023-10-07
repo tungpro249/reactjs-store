@@ -40,30 +40,30 @@ const Foodter = () => {
             <Link to="/shipping-policy" className="link-style">
               Chính sách giao nhận - Vận chuyển
             </Link>{" "}
-            <br />
-            <Link to="/payment-guide" className="link-style">
-              Hướng dẫn thanh toán
-            </Link>{" "}
-            <br />
-            <Link to="/order-tracking" className="link-style">
-              Tra cứu đơn hàng
-            </Link>{" "}
-            <br />
-            <Link to="/size-guide" className="link-style">
-              Hướng dẫn chọn Size
-            </Link>{" "}
-            <br />
-            <Link to="/return-policy" className="link-style">
-              Quy định đổi hàng
-            </Link>{" "}
-            <br />
-            <Link to="/warranty-policy" className="link-style">
-              Quy định bảo hành và sửa chữa
-            </Link>
-            <br />
-            <Link to="/loyalty-program" className="link-style">
-              Khách hàng thân thiết
-            </Link>
+            {/*<br />*/}
+            {/*<Link to="/payment-guide" className="link-style">*/}
+            {/*  Hướng dẫn thanh toán*/}
+            {/*</Link>{" "}*/}
+            {/*<br />*/}
+            {/*<Link to="/order-tracking" className="link-style">*/}
+            {/*  Tra cứu đơn hàng*/}
+            {/*</Link>{" "}*/}
+            {/*<br />*/}
+            {/*<Link to="/size-guide" className="link-style">*/}
+            {/*  Hướng dẫn chọn Size*/}
+            {/*</Link>{" "}*/}
+            {/*<br />*/}
+            {/*<Link to="/return-policy" className="link-style">*/}
+            {/*  Quy định đổi hàng*/}
+            {/*</Link>{" "}*/}
+            {/*<br />*/}
+            {/*<Link to="/warranty-policy" className="link-style">*/}
+            {/*  Quy định bảo hành và sửa chữa*/}
+            {/*</Link>*/}
+            {/*<br />*/}
+            {/*<Link to="/loyalty-program" className="link-style">*/}
+            {/*  Khách hàng thân thiết*/}
+            {/*</Link>*/}
           </Grid>
 
           <Grid item xs={3} md={3} sm={3} lg={3}>
