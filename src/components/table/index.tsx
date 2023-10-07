@@ -23,7 +23,12 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
 
   return (
     <TableContainer>
-      <Table style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }}>
+      <Table
+        style={{
+          border: "1px solid rgba(0, 0, 0, 0.1)",
+          background: "#f5f5f5",
+        }}
+      >
         <TableHead>
           <TableRow>
             {columns.map((column: any, index: number) => (

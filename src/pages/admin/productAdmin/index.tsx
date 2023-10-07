@@ -5,6 +5,7 @@ import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import { typeProduct } from "../../../types/typeProduct";
 import TableForm from "../../../components/table";
+import SidePath from "../../../components/sidePath";
 
 export default function ProductAdmin() {
   const [products, setProducts] = useState([]);
@@ -96,14 +97,17 @@ export default function ProductAdmin() {
   return (
     <>
       <Toolbar />
-      <Grid container spacing={2} pt={5}>
+      <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
-          <TableForm
-            columns={columns}
-            data={products}
-            handleDelete={handleDeleteProduct}
-            handleEdit={editProduct}
-          />
+          <SidePath handdleAdd={() => {}} />
+          <Box pt={5}>
+            <TableForm
+              columns={columns}
+              data={products}
+              handleDelete={handleDeleteProduct}
+              handleEdit={editProduct}
+            />
+          </Box>
         </Grid>
       </Grid>
       <Modal

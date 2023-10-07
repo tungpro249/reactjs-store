@@ -22,8 +22,16 @@ const SideBar = () => {
     window.location.reload();
   };
   return (
-    <div>
-      <h1>dashboard</h1>
+    <div
+      style={{
+        background: "#f5f5f5",
+        padding: "25px",
+        borderRadius: "10px",
+        height: "90vh",
+        marginTop: "5px",
+      }}
+    >
+      <h1 style={{ padding: "10px" }}>Dashboard</h1>
       <Divider />
       <List>
         <ListItem disablePadding>
@@ -31,7 +39,7 @@ const SideBar = () => {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="home" />
+            <ListItemText primary="Trang chủ" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -39,7 +47,7 @@ const SideBar = () => {
             <ListItemIcon>
               <ListAltIcon />
             </ListItemIcon>
-            <ListItemText primary="order" />
+            <ListItemText primary="Đơn hàng" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -47,7 +55,7 @@ const SideBar = () => {
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
-            <ListItemText primary="product" />
+            <ListItemText primary="Sản phẩm" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -55,7 +63,7 @@ const SideBar = () => {
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
-            <ListItemText primary="category" />
+            <ListItemText primary="Danh mục" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -63,7 +71,7 @@ const SideBar = () => {
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="customer" />
+            <ListItemText primary="Khách hàng" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -71,7 +79,7 @@ const SideBar = () => {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText primary="setting" />
+            <ListItemText primary="Cài đặt" />
           </ListItemButton>
         </ListItem>
       </List>
