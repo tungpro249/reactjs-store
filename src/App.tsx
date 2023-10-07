@@ -49,11 +49,8 @@ function App() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route
-                path="/collections/san-pham-moi"
-                element={<Collections api={"san pham moi"} />}
-              />
-              <Route path="/collections/sale" element={<Collections api={"sale"} />} />
+              <Route path="/collections/san-pham-moi" element={<Collections />} />
+              <Route path="/collections/sale" element={<Collections />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/product/:id" element={<DetailProduct />} />
