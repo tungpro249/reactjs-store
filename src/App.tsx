@@ -20,6 +20,7 @@ import SideBar from "./components/sideBar";
 import ProductAdmin from "./pages/admin/productAdmin";
 import Category from "./pages/admin/category";
 import VerticalTabs from "./pages/customer/tabs";
+import ChangePassword from "./pages/auth/ChangePassword";
 
 function App() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/account/login" element={<SignIn />} />
           <Route path="/account/register" element={<Register />} />
+          <Route path="/account/change-password" element={<ChangePassword />} />
           <Route path={"/forget-password"} element={<ForgetPassword />} />
           {checkRole ? (
             // admin page*

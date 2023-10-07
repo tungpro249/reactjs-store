@@ -119,16 +119,26 @@ const Navbar = () => {
             >
               <MenuList>
                 <MenuItem onClick={handleMenuClose}>
-                  <ListItemIcon>
-                    <Person />
-                  </ListItemIcon>
-                  <ListItemText primary="Tài khoản của tôi" />
+                  <Link
+                    href={"/account/change-password"}
+                    style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                  >
+                    <ListItemIcon>
+                      <Person />
+                    </ListItemIcon>
+                    <ListItemText primary="Tài khoản của tôi" />
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
-                  <ListItemIcon>
-                    <AccountCircle />
-                  </ListItemIcon>
-                  <ListItemText primary="Thay đổi mật khẩu" />
+                  <Link
+                    href={"/account/change-password"}
+                    style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                  >
+                    <ListItemIcon>
+                      <AccountCircle />
+                    </ListItemIcon>
+                    <ListItemText primary="Thay đổi mật khẩu" />
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
