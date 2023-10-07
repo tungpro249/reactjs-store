@@ -3,9 +3,10 @@ import { Box, Button } from "@mui/material";
 
 const ReceiveNotifyEmail = () => {
   return (
-    <Box style={{ textAlign: "center", padding: "10px" }}>
+    <Box style={{ textAlign: "center", background: "#f5f5f5", lineHeight: "1.5" }} pt={8} pb={8}>
       <h1>ĐĂNG KÝ BẢN TIN</h1>
       <h3>Đăng ký nhận bản tin NEM để được cập nhật những mẫu thiết kế mới nhất</h3>
+      <br />
       <TextField
         id="outlined-basic"
         label=""

@@ -7,7 +7,7 @@ import Register from "./pages/auth/Register";
 import "./App.css";
 import NotFound from "./components/notFound";
 import Blog from "./pages/blog";
-import Collections from "./pages/collections";
+import Collections from "./pages/customer/collections";
 import DetailProduct from "./pages/customer/detailProduct";
 import Foodter from "./components/foodter";
 import Navbar from "./components/navbar";

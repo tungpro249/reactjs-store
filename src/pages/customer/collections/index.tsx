@@ -1,8 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_ALL_CATEGORIES } from "../../constants/api";
-import { typeCategory } from "../../types/typeCategory";
+import { GET_ALL_CATEGORIES } from "../../../constants/api";
+import { typeCategory } from "../../../types/typeCategory";
 import { useLocation } from "react-router-dom";
 
 const Collections = () => {

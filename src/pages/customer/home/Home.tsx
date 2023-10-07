@@ -3,7 +3,7 @@ import { Box, Button, Card, CardActions, Grid, Modal, Typography } from "@mui/ma
 import ClothesCard from "../../../components/clothesCard";
 import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
 import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/sliderCarosel";
@@ -73,8 +73,12 @@ export default function Home() {
   return (
     <div>
       <SliderCarosel />
-      <Box pt={2} />
-      <h2 style={{ textAlign: "center" }}>Sản phẩm mới</h2>
+      <Box pt={4} />
+      <h1 style={{ textAlign: "center" }}>
+        <Link to={"/collections/san-pham-moi"} style={{ textDecoration: "none", color: "inherit" }}>
+          Sản phẩm mới
+        </Link>
+      </h1>
       <Grid container padding={"0 25px 25px"}>
         {products.map((item: typeProduct, index) => (
           <Grid xs={3} md={3} lg={3} key={index}>
@@ -94,20 +98,19 @@ export default function Home() {
           </Grid>
         ))}
       </Grid>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box style={{ background: "white", width: "400px", margin: "auto", textAlign: "center" }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Bạn có chắc chắn muốn xóa
-          </Typography>
-          <Button onClick={handleDeleteConfirm}>ok</Button>
-          <Button>cancel</Button>
-        </Box>
-      </Modal>
+      <Box pt={4} />
+      <h1 style={{ textAlign: "center" }}>
+        <Link to={"/collections/san-pham-moi"} style={{ textDecoration: "none", color: "inherit" }}>
+          Sale
+        </Link>
+      </h1>
+      <Box pt={4} />
+      <h1 style={{ textAlign: "center" }}>
+        <Link to={"/blog"} style={{ textDecoration: "none", color: "inherit" }}>
+          Blog
+        </Link>
+      </h1>
+      <Box pb={4} />
     </div>
   );
 }
