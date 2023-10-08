@@ -32,8 +32,13 @@ const SidePath = ({ handdleAdd }: { handdleAdd: Function }) => {
         marginTop: "5px",
       }}
     >
-      <p>{renderName()}</p>
-      <Button onClick={() => handdleAdd()}>Thêm mới</Button>
+      <h3>{renderName()?.toUpperCase()}</h3>
+      <Button
+        onClick={() => handdleAdd()}
+        style={{ fontWeight: "bold", fontSize: "15px", color: "inherit" }}
+      >
+        Thêm mới
+      </Button>
     </Box>
   );
 };

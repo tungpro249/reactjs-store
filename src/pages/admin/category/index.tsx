@@ -10,6 +10,7 @@ import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
+import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -33,19 +34,19 @@ const Category = () => {
 
   const [open, setOpen] = useState(false);
   const handleDeleteCategory = (categoryId: number) => {
-    setType("DELETE");
+    setType(DELETE_TYPE);
     setOpen(true);
     setCategoryId(categoryId);
   };
 
   const handleEditCategory = (categoryId: number) => {
-    setType("UPDATE");
+    setType(UPDATE_TYPE);
     setOpen(true);
     setCategoryId(categoryId);
   };
 
   const handleAddCategory = () => {
-    setType("ADD");
+    setType(ADD_TYPE);
     setOpen(true);
   };
 
@@ -87,21 +88,39 @@ const Category = () => {
     <Box
       style={{
         background: "white",
-        margin: "auto",
-        width: "400px",
-        height: "300px",
+        margin: "30vh auto",
         textAlign: "center",
+        padding: "50px",
+        width: "400px",
+        borderRadius: "10px",
       }}
     >
       <h3>Thêm mới</h3>
-      <TextField
-        placeholder={"Tên danh muc"}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Box>
-        <Button onClick={handleAdd}>Thêm</Button>
-        <Button onClick={() => handleClose()}>Hủy</Button>
+      <br />
+      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+        <label>Tên danh muc</label>
+        <TextField
+          placeholder={"Tên danh muc"}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Box>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => handleAdd()}>
+          Xác nhận
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
       </Box>
     </Box>
   );
@@ -109,21 +128,39 @@ const Category = () => {
     <Box
       style={{
         background: "white",
-        margin: "auto",
-        width: "400px",
-        height: "300px",
+        margin: "30vh auto",
         textAlign: "center",
+        padding: "50px",
+        width: "400px",
+        borderRadius: "10px",
       }}
     >
       <h3>Sửa</h3>
-      <TextField
-        placeholder={"Tên danh muc"}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Box>
-        <Button onClick={handleUpdate}>Sửa</Button>
-        <Button onClick={() => handleClose()}>Hủy</Button>
+      <br />
+      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+        <label>Tên danh muc</label>
+        <TextField
+          placeholder={"Tên danh muc"}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Box>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleUpdate}>
+          Xác nhận
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
       </Box>
     </Box>
   );
@@ -131,16 +168,30 @@ const Category = () => {
     <Box
       style={{
         background: "white",
-        margin: "auto",
-        width: "400px",
-        height: "300px",
+        margin: "30vh auto",
         textAlign: "center",
+        padding: "50px",
+        width: "400px",
+        borderRadius: "10px",
       }}
     >
       <h3>Bạn có muốn xóa</h3>
-      <Box>
-        <Button onClick={handleDelete}>Xóa</Button>
-        <Button onClick={() => handleClose()}>Hủy</Button>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleDelete}>
+          Xác nhận
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
       </Box>
     </Box>
   );
@@ -152,9 +203,9 @@ const Category = () => {
   const [type, setType] = useState("");
 
   const showModalContent = () => {
-    if (type === "ADD") return formAdd(handleClose);
-    if (type === "UPDATE") return formUpdate(handleClose);
-    if (type === "DELETE") return formDelete(handleClose);
+    if (type === ADD_TYPE) return formAdd(handleClose);
+    if (type === UPDATE_TYPE) return formUpdate(handleClose);
+    if (type === DELETE_TYPE) return formDelete(handleClose);
     return <div />;
   };
 
