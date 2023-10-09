@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ADD_CATEGORY_API, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
-import { Box, Button, Grid, Modal, TextField } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid, Modal, TextField } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
@@ -74,40 +74,198 @@ export default function ProductAdmin() {
     }
   };
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.addEventListener("change", (event) => {
+      //@ts-ignore
+      const file = event.target?.files[0];
+      //@ts-ignore
+      setSelectedImage(URL.createObjectURL(file));
+    });
+    input.click();
+  };
+
   const formAdd = () => (
     <Box
       style={{
         background: "white",
-        margin: "auto",
-        width: "400px",
-        height: "300px",
+        margin: "15vh auto",
+        width: "800px",
         textAlign: "center",
+        padding: "50px",
+        borderRadius: "10px",
       }}
     >
-      <h3>Thêm mới</h3>
-      <TextField placeholder={"Tên sản phẩm"} value={""} onChange={(e) => {
-      }}/>
-      <Box>
-        <Button onClick={handleAddProductApi}>Thêm</Button>
-        <Button onClick={() => handleClose()}>Hủy</Button>
+      <Grid container p={3}>
+        <Grid item xs={6}>
+          <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
+            {selectedImage ? (
+              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
+            ) : (
+              <CardMedia
+                component="img"
+                height="450"
+                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg" // Đường dẫn ảnh mặc định hoặc placeholder
+                alt="Choose Image"
+              />
+            )}
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Tên sản phẩm</label>
+            <TextField placeholder={"Tên danh muc"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Mô tả</label>
+            <TextField placeholder={"Mô tả"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Giá tiền</label>
+            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Số lượng</label>
+            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
+          </Box>
+        </Grid>
+      </Grid>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleAddProductApi}
+        >
+          Thêm
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
       </Box>
     </Box>
   );
-  const formUpdate = () => <Box>San pham co id la</Box>;
+  const formUpdate = () => (
+    <Box
+      style={{
+        background: "white",
+        margin: "15vh auto",
+        width: "800px",
+        textAlign: "center",
+        padding: "50px",
+        borderRadius: "10px",
+      }}
+    >
+      <Grid container p={3}>
+        <Grid item xs={6}>
+          <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
+            {selectedImage ? (
+              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
+            ) : (
+              <CardMedia
+                component="img"
+                height="450"
+                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg" // Đường dẫn ảnh mặc định hoặc placeholder
+                alt="Choose Image"
+              />
+            )}
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Tên sản phẩm</label>
+            <TextField placeholder={"Tên danh muc"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Mô tả</label>
+            <TextField placeholder={"Mô tả"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Giá tiền</label>
+            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Số lượng</label>
+            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
+          </Box>
+        </Grid>
+      </Grid>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleAddProductApi}
+        >
+          Thêm
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
+      </Box>
+    </Box>
+  );
   const formDelete = () => (
     <Box
       style={{
         background: "white",
-        margin: "auto",
-        width: "400px",
-        height: "300px",
+        margin: "30vh auto",
         textAlign: "center",
+        padding: "50px",
+        width: "400px",
+        borderRadius: "10px",
       }}
     >
       <h3>Bạn có muốn xóa</h3>
-      <Box>
-        <Button onClick={handleDeleteProductApi}>Xóa</Button>
-        <Button onClick={() => handleClose()}>Hủy</Button>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleDeleteProductApi}
+        >
+          Xác nhận
+        </Button>
+        <Box sx={{ padding: "0 30px" }} />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color={"error"}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Quay lại
+        </Button>
       </Box>
     </Box>
   );
@@ -117,26 +275,27 @@ export default function ProductAdmin() {
     if (type === ADD_TYPE) return formAdd();
     if (type === UPDATE_TYPE) return formUpdate();
     if (type === DELETE_TYPE) return formDelete();
-    return <div/>;
+    return <div />;
   };
   const columns = [
-    {header: "Tên sản phẩm", field: "name"},
-    {header: "Mô tả", field: "description"},
-    {header: "Danh mục", field: "category"},
-    {header: "Số lượng", field: "quantity"},
-    {header: "Hình ảnh", field: "image"},
-    {header: "Giá tiền", field: "price"},
+    { header: "Tên sản phẩm", field: "name" },
+    { header: "Mô tả", field: "description" },
+    { header: "Danh mục", field: "category" },
+    { header: "Số lượng", field: "quantity" },
+    { header: "Hình ảnh", field: "image" },
+    { header: "Giá tiền", field: "price" },
   ];
 
   return (
     <>
-      <Toolbar/>
+      <Toolbar />
       <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
           <SidePath
             handdleAdd={() => {
               handleAddProduct();
             }}
+            showButton
           />
           <Box pt={5}>
             <TableForm

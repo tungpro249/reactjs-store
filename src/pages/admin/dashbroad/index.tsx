@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Grid } from "@mui/material";
 
 const Dashbroad = () => {
   return (
@@ -14,24 +15,14 @@ const Dashbroad = () => {
       }}
     >
       <Toolbar />
-      <Typography paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo
-        vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque
-        non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
-        morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est
-        ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu
-        scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa
-        tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum
-        varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-        sapien faucibus et molestie ac.
-      </Typography>
-      <Typography paragraph>
-        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-        facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt.
-        OrnIt seems that the code was cut off. If you need further assistance or have any additional
-        code, please provide it, and I'll be happy to help you further.
-      </Typography>
+      <Grid container>
+        <Grid item xs={9}>
+          bieu do
+        </Grid>
+        <Grid item xs={3}>
+          overall
+        </Grid>
+      </Grid>
     </Box>
   );
 };

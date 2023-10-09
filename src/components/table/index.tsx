@@ -13,7 +13,7 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
   const renderTableCell = (item: any, column: any) => {
     switch (column.field) {
       case "image":
-        return <img src={item[column.field]} alt="Product" width="50" height="50" />;
+        return <img src={item[column.field]} alt="Product" width="100" height="100" />;
       case "category":
         return item.category?.name;
       default:
@@ -22,17 +22,24 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
   };
 
   return (
-    <TableContainer>
+    <TableContainer style={{ borderRadius: "12px" }}>
       <Table
         style={{
           border: "1px solid rgba(0, 0, 0, 0.1)",
-          background: "#f5f5f5",
+          background: "#cfcccc",
         }}
       >
         <TableHead>
           <TableRow>
             {columns.map((column: any, index: number) => (
-              <TableCell key={index} style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }}>
+              <TableCell
+                key={index}
+                style={{
+                  border: "1px solid rgba(0, 0, 0, 0.1)",
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                }}
+              >
                 {column.header}
               </TableCell>
             ))}
@@ -49,6 +56,7 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                       border: "1px solid rgba(0, 0, 0, 0.1)",
                       textAlign: "left",
                       width: "80%",
+                      fontSize: "17px",
                     }}
                   >
                     {renderTableCell(item, columns[0])}
@@ -57,7 +65,11 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                   columns.slice(0, 10).map((column: any, columnIndex: number) => (
                     <TableCell
                       key={columnIndex}
-                      style={{ border: "1px solid rgba(0, 0, 0, 0.1)", width: "20%" }}
+                      style={{
+                        border: "1px solid rgba(0, 0, 0, 0.1)",
+                        width: "20%",
+                        fontSize: "17px",
+                      }}
                     >
                       {renderTableCell(item, column)}
                     </TableCell>

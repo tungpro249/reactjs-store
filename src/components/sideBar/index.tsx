@@ -11,6 +11,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CategoryIcon from "@mui/icons-material/Category";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
 import { Link, useNavigate } from "react-router-dom";
 import { ExitToApp } from "@mui/icons-material";
 
@@ -24,11 +25,12 @@ const SideBar = () => {
   return (
     <div
       style={{
-        background: "#f5f5f5",
+        background: "#cfcccc",
         padding: "25px",
         borderRadius: "10px",
         height: "90vh",
         marginTop: "5px",
+        marginLeft: "8px",
       }}
     >
       <h1 style={{ padding: "10px" }}>Dashboard</h1>
@@ -53,7 +55,7 @@ const SideBar = () => {
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/product">
             <ListItemIcon>
-              <CategoryIcon />
+              <CheckroomIcon />
             </ListItemIcon>
             <ListItemText primary="Sản phẩm" />
           </ListItemButton>

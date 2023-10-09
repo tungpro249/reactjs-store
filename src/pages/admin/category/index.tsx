@@ -216,7 +216,7 @@ const Category = () => {
       <Toolbar />
       <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
-          <SidePath handdleAdd={handleAddCategory} />
+          <SidePath handdleAdd={handleAddCategory} showButton />
           <Box pt={5}>
             <TableForm
               columns={columns}
