@@ -1,12 +1,19 @@
 import React, { createContext, useContext, useMemo, useReducer } from "react";
-import { GET_ALL_PRODUCT, GET_PRODUCT_DETAIL } from "../constants/action";
+import {
+  ADD_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_SUCCESS,
+  GET_ALL_PRODUCT,
+  GET_PRODUCT_DETAIL,
+  UPDATE_PRODUCT_SUCCESS,
+} from "../constants/action";
+import { typeProduct } from "../types/typeProduct";
 
 // @ts-ignore
 const ProductContext = createContext();
 ProductContext.displayName = "ProductContext";
 
 type ProductStateType = {
-  product: any;
+  products: Array<typeProduct>;
   productDetail: any;
 };
 
@@ -16,7 +23,7 @@ type ProductActionType = {
 };
 
 const initialState: ProductStateType = {
-  product: [],
+  products: [],
   productDetail: [],
 };
 
@@ -25,13 +32,38 @@ const reducer = (state: ProductStateType, action: ProductActionType) => {
     case GET_ALL_PRODUCT: {
       return {
         ...state,
-        product: action.payload,
+        products: action.payload,
       };
     }
     case GET_PRODUCT_DETAIL: {
       return {
         ...state,
         productDetail: action.payload,
+      };
+    }
+    case ADD_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        products: [...action.payload, ...state.products],
+      };
+    }
+    case UPDATE_PRODUCT_SUCCESS: {
+      const updateProduct = action.payload;
+      const updateProducts = state.products.map((product: typeProduct) => {
+        if (product.id === updateProduct.id) {
+          return updateProduct;
+        }
+        return product;
+      });
+      return {
+        ...state,
+        products: updateProducts,
+      };
+    }
+    case DELETE_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        products: state.products.filter((product) => product.id !== action.payload),
       };
     }
     default: {
@@ -63,9 +95,17 @@ const getAllProductSuccess = (dispatch: any, data: any) =>
 const getProductDetailSuccess = (dispatch: any, data: any) =>
   dispatch({ type: GET_PRODUCT_DETAIL, payload: data });
 
+const addProductSuccess = (dispatch: any, data: any) =>
+  dispatch({ type: ADD_PRODUCT_SUCCESS, payload: data });
+
+const updateProductSuccess = (dispatch: any, data: any) =>
+  dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data });
+
 export {
   ProductContextProvider,
   useProductController,
   getAllProductSuccess,
   getProductDetailSuccess,
+  addProductSuccess,
+  updateProductSuccess,
 };
