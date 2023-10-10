@@ -6,6 +6,8 @@ import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import AddProduct from "./add";
+import UpdateProduct from "./update";
 
 export default function ProductAdmin() {
   const [products, setProducts] = useState([]);
@@ -64,175 +66,9 @@ export default function ProductAdmin() {
       console.log(error);
     }
   };
-  const handleAddProductApi = async () => {
-    try {
-      const addResponseApi = await axios.post(ADD_CATEGORY_API);
-      alert("Thêm thành công");
-      window.location.reload();
-    } catch (error) {
-      console.log("Error deleting data:", error);
-    }
-  };
 
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageClick = () => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.addEventListener("change", (event) => {
-      //@ts-ignore
-      const file = event.target?.files[0];
-      //@ts-ignore
-      setSelectedImage(URL.createObjectURL(file));
-    });
-    input.click();
-  };
-
-  const formAdd = () => (
-    <Box
-      style={{
-        background: "white",
-        margin: "15vh auto",
-        width: "800px",
-        textAlign: "center",
-        padding: "50px",
-        borderRadius: "10px",
-      }}
-    >
-      <Grid container p={3}>
-        <Grid item xs={6}>
-          <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
-            {selectedImage ? (
-              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
-            ) : (
-              <CardMedia
-                component="img"
-                height="450"
-                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg" // Đường dẫn ảnh mặc định hoặc placeholder
-                alt="Choose Image"
-              />
-            )}
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Tên sản phẩm</label>
-            <TextField placeholder={"Tên danh muc"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Mô tả</label>
-            <TextField placeholder={"Mô tả"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Giá tiền</label>
-            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Số lượng</label>
-            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
-          </Box>
-        </Grid>
-      </Grid>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={handleAddProductApi}
-        >
-          Thêm
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
-    </Box>
-  );
-  const formUpdate = () => (
-    <Box
-      style={{
-        background: "white",
-        margin: "15vh auto",
-        width: "800px",
-        textAlign: "center",
-        padding: "50px",
-        borderRadius: "10px",
-      }}
-    >
-      <Grid container p={3}>
-        <Grid item xs={6}>
-          <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
-            {selectedImage ? (
-              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
-            ) : (
-              <CardMedia
-                component="img"
-                height="450"
-                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg" // Đường dẫn ảnh mặc định hoặc placeholder
-                alt="Choose Image"
-              />
-            )}
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Tên sản phẩm</label>
-            <TextField placeholder={"Tên danh muc"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Mô tả</label>
-            <TextField placeholder={"Mô tả"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Giá tiền</label>
-            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
-          </Box>
-          <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Số lượng</label>
-            <TextField placeholder={"Giá tiền"} value={""} onChange={(e) => {}} />
-          </Box>
-        </Grid>
-      </Grid>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={handleAddProductApi}
-        >
-          Thêm
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
-    </Box>
-  );
+  const formAdd = (handleClose: Function) => <AddProduct handleClose={handleClose} />;
+  const formUpdate = (handleClose: Function) => <UpdateProduct handleClose={handleClose} />;
   const formDelete = () => (
     <Box
       style={{
@@ -272,8 +108,8 @@ export default function ProductAdmin() {
   const [type, setType] = useState("");
 
   const showModalContent = () => {
-    if (type === ADD_TYPE) return formAdd();
-    if (type === UPDATE_TYPE) return formUpdate();
+    if (type === ADD_TYPE) return formAdd(handleClose);
+    if (type === UPDATE_TYPE) return formUpdate(handleClose);
     if (type === DELETE_TYPE) return formDelete();
     return <div />;
   };
