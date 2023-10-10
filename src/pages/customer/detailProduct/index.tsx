@@ -5,6 +5,7 @@ import axios from "axios";
 import { getProductDetail } from "../../../constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
+import ReactImageMagnify from "react-image-magnify";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -24,18 +25,26 @@ const DetailProduct = () => {
     fetchData();
   }, []);
 
+  const imageProps = {
+    smallImage: {
+      alt: productDetail?.name,
+      isFluidWidth: true,
+      src: productDetail?.image,
+    },
+    largeImage: {
+      src: productDetail?.image,
+      width: 550,
+      height: 800,
+    },
+    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
+  };
+
   return (
     <Grid container>
       {productDetail && (
         <Box style={{ display: "flex" }}>
           <Grid item xs={6} md={6} px={2}>
-            <CardMedia
-              image={productDetail.image}
-              title={productDetail.name}
-              component="img"
-              alt={""}
-              height="90%"
-            />
+            <ReactImageMagnify {...imageProps} isActivatedOnTouch />
           </Grid>
           <Grid item xs={6} md={6}>
             <CardContent>

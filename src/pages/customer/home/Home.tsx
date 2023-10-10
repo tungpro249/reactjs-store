@@ -33,21 +33,6 @@ export default function Home() {
   }, []);
 
   const [productId, setProductId] = useState<number | null>(null);
-  const handleDeleteConfirm = async () => {
-    try {
-      if (productId) {
-        await axios.delete(deleteProduct(productId));
-
-        // Cập nhật danh sách sản phẩm sau khi xóa thành công
-        const updatedProducts = products.filter((item: any) => item.id !== productId);
-        setProducts(updatedProducts);
-
-        handleClose();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleProductClick = (product: typeProduct) => {
     navigate(`/product/${product.id}`);
@@ -59,11 +44,6 @@ export default function Home() {
 
   const handleAddToCart = () => {
     alert("them gio hang");
-  };
-
-  const handleDeleteProduct = (id: number) => {
-    setOpen(true);
-    setProductId(id);
   };
 
   const handleClose = () => {

@@ -30,6 +30,7 @@ const initialState: ProductStateType = {
 const reducer = (state: ProductStateType, action: ProductActionType) => {
   switch (action.type) {
     case GET_ALL_PRODUCT: {
+      console.log(action.payload);
       return {
         ...state,
         products: action.payload,
