@@ -79,51 +79,55 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg" // Đường dẫn ảnh mặc định hoặc placeholder
+                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg"
                 alt="Choose Image"
               />
             )}
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Tên sản phẩm</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Tên sản phẩm</label>
             <TextField
-              placeholder={"Tên danh muc"}
+              placeholder="Tên sản phẩm"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Danh mục</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Danh mục</label>
             <CategoryAutocomplete handleChoose={setCategory} />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Giá tiền</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Giá tiền</label>
             <TextField
-              placeholder={"Giá tiền"}
+              placeholder="Giá tiền"
               value={productPrice}
               onChange={(e) => setProductPrice(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Số lượng</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Số lượng</label>
             <TextField
-              placeholder={"Số lượng"}
+              placeholder="Số lượng"
               value={productQuantity}
               onChange={(e) => setProductQuantity(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Mô tả</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Mô tả</label>
             <TextField
-              placeholder={"Mô tả"}
+              placeholder="Mô tả"
               value={productDescription}
               onChange={(e) => setProductDescription(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
         </Grid>
