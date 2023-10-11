@@ -11,7 +11,7 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState<typeCategory | null>(null);
 
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleImageClick = () => {
     const input = document.createElement("input");
@@ -20,8 +20,7 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
     input.addEventListener("change", (event) => {
       //@ts-ignore
       const file = event.target?.files[0];
-      //@ts-ignore
-      setSelectedImage(URL.createObjectURL(file));
+      setSelectedImage(file);
     });
     input.click();
   };
@@ -33,9 +32,12 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
       formData.append("description", description);
       formData.append("price", price);
       formData.append("quantity", quantity);
-      formData.append("image", selectedImage);
+      if (selectedImage) {
+        formData.append("image", selectedImage);
+      }
+      formData.append("category_id", "9");
 
-      const response = await axios.post(ADD_PRODUCT_API, { formData });
+      const response = await axios.post(ADD_PRODUCT_API, formData);
       console.log(response);
       handleClose();
     } catch (error) {
@@ -58,7 +60,12 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
         <Grid item xs={6}>
           <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
             {selectedImage ? (
-              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
+              <CardMedia
+                component="img"
+                height="450"
+                image={URL.createObjectURL(selectedImage)}
+                alt="Selected Image"
+              />
             ) : (
               <CardMedia
                 component="img"
