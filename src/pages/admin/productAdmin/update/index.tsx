@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import { Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
 import axios from "axios";
-import { ADD_CATEGORY_API } from "../../../../constants/api";
+import { updateProduct } from "../../../../constants/api";
+import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
+import { typeCategory } from "../../../../types/typeCategory";
 
-const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
+const UpdateProduct = ({
+  handleClose,
+  productId,
+}: {
+  handleClose: Function;
+  productId: number | null;
+}) => {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
+  const [category, setCategory] = useState<typeCategory | null>(null);
 
   const handleImageClick = () => {
     const input = document.createElement("input");
@@ -17,27 +26,31 @@ const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
     input.addEventListener("change", (event) => {
       //@ts-ignore
       const file = event.target?.files[0];
-      //@ts-ignore
-      setSelectedImage(URL.createObjectURL(file));
+      setSelectedImage(file);
     });
     input.click();
   };
 
-  const handleAddProductApi = async () => {
-    try {
-      const productData = {
-        productName,
-        productDescription,
-        productPrice,
-        productQuantity,
-        // Add other product data as needed
-      };
+  const handleUpdateProductApi = async () => {
+    if (productId) {
+      try {
+        const formData = new FormData();
+        formData.append("name", productName);
+        formData.append("description", productDescription);
+        formData.append("price", productPrice);
+        formData.append("quantity", productQuantity);
+        if (selectedImage) {
+          formData.append("image", selectedImage);
+        }
+        if (category) {
+          formData.append("category_id", category?.id.toString());
+        }
 
-      const addResponseApi = await axios.post(ADD_CATEGORY_API, productData);
-      alert("Thêm thành công");
-      // Update the product list or perform any other necessary actions
-    } catch (error) {
-      console.log("Error adding product:", error);
+        const updateResponseApi = await axios.put(updateProduct(productId), formData);
+        alert("Cập nhật thành công");
+      } catch (error) {
+        console.log("Error adding product:", error);
+      }
     }
   };
 
@@ -56,7 +69,12 @@ const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
         <Grid item xs={6}>
           <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
             {selectedImage ? (
-              <CardMedia component="img" height="450" image={selectedImage} alt="Selected Image" />
+              <CardMedia
+                component="img"
+                height="450"
+                image={URL.createObjectURL(selectedImage)}
+                alt="Selected Image"
+              />
             ) : (
               <CardMedia
                 component="img"
@@ -78,12 +96,8 @@ const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
           </Box>
           <br />
           <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Mô tả</label>
-            <TextField
-              placeholder={"Mô tả"}
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
-            />
+            <label>Danh mục</label>
+            <CategoryAutocomplete handleChoose={setCategory} />
           </Box>
           <br />
           <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
@@ -103,6 +117,15 @@ const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
               onChange={(e) => setProductQuantity(e.target.value)}
             />
           </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <label>Mô tả</label>
+            <TextField
+              placeholder={"Mô tả"}
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+            />
+          </Box>
         </Grid>
       </Grid>
       <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -110,9 +133,9 @@ const UpdateProduct = ({ handleClose }: { handleClose: Function }) => {
           type="button"
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          onClick={handleAddProductApi}
+          onClick={handleUpdateProductApi}
         >
-          Thêm
+          Sửa
         </Button>
         <Box sx={{ padding: "0 30px" }} />
         <Button

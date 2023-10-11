@@ -5,7 +5,7 @@ const CHANGE_PASSWORD_API = `${BASE}/auth/change-password`;
 
 const GET_ALL_PRODUCT_API = `${BASE}/products/get-products`;
 const ADD_PRODUCT_API = `${BASE}/products/add-product`;
-const updateProduct = (id: number) => `${BASE}/products//update-product/${id}`;
+const updateProduct = (id: number) => `${BASE}/products/update-product/${id}`;
 const getProductDetail = (id: number) => `${BASE}/products/products/${id}`;
 const deleteProduct = (id: number) => `${BASE}/products/delete-product/${id}`;
 

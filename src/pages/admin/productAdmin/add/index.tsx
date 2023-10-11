@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ADD_PRODUCT_API } from "../../../../constants/api";
 import { typeCategory } from "../../../../types/typeCategory";
+import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
 
 const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   const [name, setName] = useState("");
@@ -10,7 +11,6 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState<typeCategory | null>(null);
-
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleImageClick = () => {
@@ -35,8 +35,9 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
       if (selectedImage) {
         formData.append("image", selectedImage);
       }
-      formData.append("category_id", "9");
-
+      if (category) {
+        formData.append("category_id", category?.id.toString());
+      }
       const response = await axios.post(ADD_PRODUCT_API, formData);
       console.log(response);
       handleClose();
@@ -77,50 +78,48 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Tên sản phẩm</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Tên sản phẩm</label>
             <TextField
-              placeholder={"Tên sản phẩm"}
+              placeholder="Tên sản phẩm"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Danh mục</label>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={[1, 2, 3, 4]}
-              sx={{ width: 100 }}
-              renderInput={(params) => <TextField {...params} label="Movie" />}
-            />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Danh mục</label>
+            <CategoryAutocomplete handleChoose={setCategory} />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Giá tiền</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Giá tiền</label>
             <TextField
-              placeholder={"Giá tiền"}
+              placeholder="Giá tiền"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Số lượng</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Số lượng</label>
             <TextField
-              placeholder={"Số lượng"}
+              placeholder="Số lượng"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <label>Mô tả</label>
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={{ marginRight: "10px" }}>Mô tả</label>
             <TextField
-              placeholder={"Mô tả"}
+              placeholder="Mô tả"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              style={{ width: "250px" }}
             />
           </Box>
         </Grid>

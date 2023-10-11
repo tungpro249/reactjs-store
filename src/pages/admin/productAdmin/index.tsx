@@ -68,7 +68,9 @@ export default function ProductAdmin() {
   };
 
   const formAdd = (handleClose: Function) => <AddProduct handleClose={handleClose} />;
-  const formUpdate = (handleClose: Function) => <UpdateProduct handleClose={handleClose} />;
+  const formUpdate = (handleClose: Function) => (
+    <UpdateProduct handleClose={handleClose} productId={productId} />
+  );
   const formDelete = () => (
     <Box
       style={{
