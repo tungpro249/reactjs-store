@@ -11,12 +11,12 @@ import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import AddCategory from "./add";
+import UpdateCategory from "./update";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState<number | null>(null);
-
-  const [name, setName] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,107 +62,9 @@ const Category = () => {
     }
   };
 
-  const handleAdd = async () => {
-    try {
-      const response = await axios.post(ADD_CATEGORY_API, { name });
-      alert("Thêm thành công");
-      window.location.reload();
-    } catch (error) {
-      console.log("Error deleting data:", error);
-    }
-  };
-
-  const handleUpdate = async () => {
-    if (categoryId) {
-      try {
-        const response = await axios.put(updateCategory(categoryId), { name });
-        alert("Thêm thành công");
-        window.location.reload();
-      } catch (error) {
-        console.log("Error deleting data:", error);
-      }
-    }
-  };
-
-  const formAdd = (closeForm: Function) => (
-    <Box
-      style={{
-        background: "white",
-        margin: "30vh auto",
-        textAlign: "center",
-        padding: "50px",
-        width: "400px",
-        borderRadius: "10px",
-      }}
-    >
-      <h3>Thêm mới</h3>
-      <br />
-      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-        <label>Tên danh muc</label>
-        <TextField
-          placeholder={"Tên danh muc"}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Box>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => handleAdd()}>
-          Xác nhận
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
-    </Box>
-  );
+  const formAdd = (closeForm: Function) => <AddCategory handleClose={closeForm} />;
   const formUpdate = (closeForm: Function) => (
-    <Box
-      style={{
-        background: "white",
-        margin: "30vh auto",
-        textAlign: "center",
-        padding: "50px",
-        width: "400px",
-        borderRadius: "10px",
-      }}
-    >
-      <h3>Sửa</h3>
-      <br />
-      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-        <label>Tên danh muc</label>
-        <TextField
-          placeholder={"Tên danh muc"}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Box>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleUpdate}>
-          Xác nhận
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
-    </Box>
+    <UpdateCategory handleClose={closeForm} categoryId={categoryId} />
   );
   const formDelete = (closeForm: Function) => (
     <Box
