@@ -5,8 +5,9 @@ import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
-import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { addToCart, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/sliderCarosel";
+import { loginSuccess, useAppController } from "../../../contexts/app";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -15,22 +16,26 @@ export default function Home() {
   // @ts-ignore
   const [, productDispatch] = useProductController();
 
-  const [open, setOpen] = useState(false);
+  // @ts-ignore
+  const [userController, userDispatch] = useAppController();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
-        if (getAllProduct.data) {
-          setProducts(getAllProduct.data);
-          getAllProductSuccess(productDispatch, getAllProduct.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
-  }, []);
+  }, [userController]);
+
+  const [open, setOpen] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
+      if (getAllProduct.data) {
+        setProducts(getAllProduct.data);
+        getAllProductSuccess(productDispatch, getAllProduct.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [productId, setProductId] = useState<number | null>(null);
 
@@ -39,11 +44,28 @@ export default function Home() {
   };
 
   const handleBuy = () => {
-    alert("mua hang");
+    const isLoggedIn = false;
+
+    if (isLoggedIn) {
+      alert("Mua hàng");
+    } else {
+      navigate("/checkout-form");
+    }
   };
 
-  const handleAddToCart = () => {
-    alert("them gio hang");
+  const handleAddToCart = async () => {
+    try {
+      const response = await axios.post(addToCart(2), {
+        productId: productId,
+        quantity: 1,
+      });
+      if (response.status === 200) {
+        alert("Sản phẩm đã được thêm vào giỏ hàng!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+    }
   };
 
   const handleClose = () => {
@@ -70,7 +92,7 @@ export default function Home() {
                 <Button size="small" color="primary" onClick={handleBuy}>
                   Mua
                 </Button>
-                <Button size="small" color="secondary">
+                <Button size="small" color="secondary" onClick={handleAddToCart}>
                   Thêm vào giỏ hàng
                 </Button>
               </CardActions>

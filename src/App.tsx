@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/customer/home/Home";
 import About from "./pages/customer/about/About";
@@ -22,6 +22,8 @@ import Category from "./pages/admin/category";
 import VerticalTabs from "./pages/customer/tabs";
 import ChangePassword from "./pages/auth/ChangePassword";
 import Order from "./pages/admin/order";
+import CheckoutForm from "./pages/customer/checkoutForm";
+import { loginSuccess, useAppController } from "./contexts/app";
 
 function App() {
   const location = useLocation();
@@ -31,41 +33,52 @@ function App() {
   const isAdmin = storedUser && storedUser.currentUser?.data?.isAdmin;
   const checkRole = isAdmin || "";
 
+  // @ts-ignore
+  const [userController, userDispatch] = useAppController();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      loginSuccess(userDispatch, JSON.parse(user));
+    }
+  }, [localStorage.getItem("user")]);
+
   return (
-    <Box sx={{ display: checkRole ? "flex" : "" }}>
-      {checkRole ? <SideBar /> : <Navbar />}
+    <Box sx={{display: checkRole ? "flex" : ""}}>
+      {checkRole ? <SideBar/> : <Navbar/>}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/account/login" element={<SignIn />} />
-          <Route path="/account/register" element={<Register />} />
-          <Route path="/account/change-password" element={<ChangePassword />} />
-          <Route path={"/forget-password"} element={<ForgetPassword />} />
-          <Route path={"/order"} element={<Order />} />
+          <Route path="/account/login" element={<SignIn/>}/>
+          <Route path="/account/register" element={<Register/>}/>
+          <Route path="/account/change-password" element={<ChangePassword/>}/>
+          <Route path="/forget-password" element={<ForgetPassword/>}/>
+          <Route path="/order" element={<Order/>}/>
           {checkRole ? (
             // admin page*
             <>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/product" element={<ProductAdmin />} />
-              <Route path="/category" element={<Category />} />
+              <Route path="/" element={<Dashboard/>}/>
+              <Route path="/product" element={<ProductAdmin/>}/>
+              <Route path="/category" element={<Category/>}/>
             </>
           ) : (
             //customer page
             <>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/collections/san-pham-moi" element={<Collections />} />
-              <Route path="/collections/sale" element={<Collections />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/product/:id" element={<DetailProduct />} />
-              <Route path={"/shipping-policy"} element={<VerticalTabs />} />
+              <Route path="/" element={<Home/>}/>
+              <Route path="/about" element={<About/>}/>
+              <Route path="/collections/san-pham-moi" element={<Collections/>}/>
+              <Route path="/collections/sale" element={<Collections/>}/>
+              <Route path="/cart" element={<Cart/>}/>
+              <Route path="/blog" element={<Blog/>}/>
+              <Route path="/product/:id" element={<DetailProduct/>}/>
+              <Route path="/shipping-policy" element={<VerticalTabs/>}/>
+              <Route path="/checkout-form" element={<CheckoutForm/>}/>
             </>
           )}
-          <Route path={"*"} element={<NotFound />} />
+          <Route path={"*"} element={<NotFound/>}/>
         </Routes>
       </Suspense>
-      {showReceiveNotifyEmail && !checkRole && <ReceiveNotifyEmail />}
-      {!checkRole && <Foodter />}
+      {showReceiveNotifyEmail && !checkRole && <ReceiveNotifyEmail/>}
+      {!checkRole && <Foodter/>}
     </Box>
   );
 }

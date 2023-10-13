@@ -22,7 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // @ts-ignore
-  const [controller, dispatch] = useAppController();
+  const [userController, userDispatch] = useAppController();
 
   const handleLogin = () => {
     if (isValid()) {

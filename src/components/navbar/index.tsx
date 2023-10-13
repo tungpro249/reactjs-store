@@ -16,11 +16,15 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import Link from "@mui/material/Link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
+import { useAppController } from "../../contexts/app";
 
 const Navbar = () => {
   const [name, setName] = useState(null);
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // @ts-ignore
+  const [userController] = useAppController();
 
   const links = [
     { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
@@ -85,7 +89,7 @@ const Navbar = () => {
           ))}
         </Box>
 
-        <Link href="/customer/cart" sx={{ color: "black", textDecoration: "none" }}>
+        <Link href="/cart" sx={{ color: "black", textDecoration: "none" }}>
           <Box style={{ display: "flex", alignItems: "center" }}>
             <ShoppingCartIcon />
             <Box pr={1} />

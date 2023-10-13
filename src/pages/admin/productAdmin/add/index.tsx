@@ -39,7 +39,6 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
         formData.append("category_id", category?.id.toString());
       }
       const response = await axios.post(ADD_PRODUCT_API, formData);
-      console.log(response);
       handleClose();
     } catch (error) {
       console.error(error);

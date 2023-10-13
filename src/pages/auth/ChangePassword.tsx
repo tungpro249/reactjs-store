@@ -12,7 +12,6 @@ const ChangePassword = () => {
 
   // @ts-ignore
   const email = JSON.parse(localStorage.getItem("user")).currentUser.data.email || "";
-  console.log(email);
 
   const navigate = useNavigate();
 

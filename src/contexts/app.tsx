@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useMemo, useReducer } from "react";
 import { LOGIN_SUCCESS } from "../constants/action";
+import { typeUser } from "../types/typeUser";
 
 // @ts-ignore
 const AppContext = createContext();
@@ -7,7 +8,7 @@ AppContext.displayName = "AppContext";
 
 type AppStateType = {
   isLogin: boolean;
-  user: any;
+  user: Array<typeUser>;
 };
 
 type AppActionType = {
@@ -26,6 +27,7 @@ const reducer = (state: AppStateType, action: AppActionType) => {
       return {
         ...state,
         user: action.payload,
+        isLogin: true,
       };
     }
     default: {
