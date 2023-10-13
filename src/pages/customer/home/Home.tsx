@@ -23,8 +23,6 @@ export default function Home() {
     fetchData();
   }, [userController]);
 
-  const [open, setOpen] = useState(false);
-
   const fetchData = async () => {
     try {
       const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
@@ -36,8 +34,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
-  const [productId, setProductId] = useState<number | null>(null);
 
   const handleProductClick = (product: typeProduct) => {
     navigate(`/product/${product.id}`);
@@ -53,23 +49,22 @@ export default function Home() {
     }
   };
 
-  const handleAddToCart = async () => {
-    try {
-      const response = await axios.post(addToCart(2), {
-        productId: productId,
-        quantity: 1,
-      });
-      if (response.status === 200) {
-        alert("Sản phẩm đã được thêm vào giỏ hàng!");
+  const handleAddToCart = async (id: number) => {
+    const userId = userController?.user?.currentUser?.data.id;
+    if (userId) {
+      try {
+        const response = await axios.post(addToCart(userId), {
+          productId: id,
+          quantity: 1,
+        });
+        if (response.status === 200) {
+          alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
     }
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -92,7 +87,7 @@ export default function Home() {
                 <Button size="small" color="primary" onClick={handleBuy}>
                   Mua
                 </Button>
-                <Button size="small" color="secondary" onClick={handleAddToCart}>
+                <Button size="small" color="secondary" onClick={() => handleAddToCart(item.id)}>
                   Thêm vào giỏ hàng
                 </Button>
               </CardActions>
