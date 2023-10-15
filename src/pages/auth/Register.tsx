@@ -88,9 +88,9 @@ const Register = () => {
     try {
       const response = await axios.post(REGISTER_API, {
         user_name: userName,
-        // last_name: lastName,
-        // first_name: firstName,
-        // pass_word: password,
+        last_name: lastName,
+        first_name: firstName,
+        pass_word: password,
         email,
         phone,
       });

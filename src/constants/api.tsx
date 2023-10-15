@@ -16,8 +16,8 @@ const deleteCategory = (id: number) => `${BASE}/categories/delete-category/${id}
 
 const getAllCart = (userId: number) => `${BASE}/carts/cart/${userId}`;
 const addToCart = (userId: number) => `${BASE}/carts//cart/${userId}/add`;
-const updateCart = (cartItemId: number) => `${BASE}/carts/cart/items/${cartItemId}`;
-const deleteCart = (cartItemId: number) => `${BASE}/carts/cart/items/${cartItemId}`;
+const updateCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
+const deleteCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
 
 export {
   LOGIN_API,

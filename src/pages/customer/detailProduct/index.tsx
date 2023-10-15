@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { GET_ALL_PRODUCT_API, getProductDetail } from "../../../constants/api";
+import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
 import ReactImageMagnify from "react-image-magnify";
 import ClothesCard from "../../../components/clothesCard";
+import { useAppController } from "../../../contexts/app";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState<typeProduct>();
   const [products, setProducts] = useState<Array<typeProduct>>([]);
+  const navigate = useNavigate();
+
+  // @ts-ignore
+  const [userController, userDispatch] = useAppController();
 
   const fetchData = async () => {
     try {
@@ -33,7 +38,25 @@ const DetailProduct = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
+
+  const handleAddToCart = async (id: number) => {
+    const userId = userController?.user?.currentUser?.data.id;
+    if (userId) {
+      try {
+        const response = await axios.post(addToCart(userId), {
+          productId: id,
+          quantity: 1,
+        });
+        if (response.status === 200) {
+          alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+      }
+    }
+  };
 
   const imageProps = {
     smallImage: {
@@ -53,6 +76,10 @@ const DetailProduct = () => {
   useEffect(() => {
     setShow(true);
   }, [products]);
+
+  const handleProductClick = async (product: typeProduct) => {
+    await navigate(`/product/${product.id}`);
+  };
 
   return (
     <>
@@ -81,7 +108,11 @@ const DetailProduct = () => {
                 <Button size="small" color="primary">
                   Mua
                 </Button>
-                <Button size="small" color="secondary">
+                <Button
+                  size="small"
+                  color="secondary"
+                  onClick={() => handleAddToCart(productDetail?.id)}
+                >
                   Thêm vào giỏ hàng
                 </Button>
               </CardActions>
@@ -97,14 +128,20 @@ const DetailProduct = () => {
             .map((item) => (
               <Grid item xs={3} md={3} lg={3}>
                 <Card style={{ padding: "25px", margin: "10px" }}>
-                  <Box onClick={() => {}}>
+                  <Box onClick={() => handleProductClick(item)}>
                     <ClothesCard item={item} />
                   </Box>
                   <CardActions>
                     <Button size="small" color="primary" onClick={() => {}}>
                       Mua
                     </Button>
-                    <Button size="small" color="secondary" onClick={() => {}}>
+                    <Button
+                      size="small"
+                      color="secondary"
+                      onClick={() => {
+                        handleAddToCart(item?.id);
+                      }}
+                    >
                       Thêm vào giỏ hàng
                     </Button>
                   </CardActions>
