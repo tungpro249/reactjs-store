@@ -44,41 +44,48 @@ function App() {
   }, [localStorage.getItem("user")]);
 
   return (
-    <Box sx={{display: checkRole ? "flex" : ""}}>
-      {checkRole ? <SideBar/> : <Navbar/>}
+    <Box sx={{ display: checkRole ? "flex" : "" }}>
+      {checkRole ? <SideBar /> : <Navbar />}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/account/login" element={<SignIn/>}/>
-          <Route path="/account/register" element={<Register/>}/>
-          <Route path="/account/change-password" element={<ChangePassword/>}/>
-          <Route path="/forget-password" element={<ForgetPassword/>}/>
-          <Route path="/order" element={<Order/>}/>
+          <Route path="/account/login" element={<SignIn />} />
+          <Route path="/account/register" element={<Register />} />
+          <Route path="/account/change-password" element={<ChangePassword />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/order" element={<Order />} />
           {checkRole ? (
             // admin page*
             <>
-              <Route path="/" element={<Dashboard/>}/>
-              <Route path="/product" element={<ProductAdmin/>}/>
-              <Route path="/category" element={<Category/>}/>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/product" element={<ProductAdmin />} />
+              <Route path="/category" element={<Category />} />
             </>
           ) : (
             //customer page
             <>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/about" element={<About/>}/>
-              <Route path="/collections/san-pham-moi" element={<Collections/>}/>
-              <Route path="/collections/sale" element={<Collections/>}/>
-              <Route path="/cart" element={<Cart/>}/>
-              <Route path="/blog" element={<Blog/>}/>
-              <Route path="/product/:id" element={<DetailProduct/>}/>
-              <Route path="/shipping-policy" element={<VerticalTabs/>}/>
-              <Route path="/checkout-form" element={<CheckoutForm/>}/>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/collections/san-pham-moi" element={<Collections />} />
+              <Route path="/collections/sale" element={<Collections />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/product/:id" element={<DetailProduct />} />
+              {/*tab rows*/}
+              <Route path="/shipping-policy" element={<VerticalTabs />} />
+              <Route path="/payment-guide" element={<VerticalTabs />} />
+              <Route path="/privacy-policy" element={<VerticalTabs />} />
+              <Route path="/size-guide" element={<VerticalTabs />} />
+              <Route path="/return-policy" element={<VerticalTabs />} />
+              <Route path="/warranty-policy" element={<VerticalTabs />} />
+
+              <Route path="/checkout-form" element={<CheckoutForm />} />
             </>
           )}
-          <Route path={"*"} element={<NotFound/>}/>
+          <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>
-      {showReceiveNotifyEmail && !checkRole && <ReceiveNotifyEmail/>}
-      {!checkRole && <Foodter/>}
+      {showReceiveNotifyEmail && !checkRole && <ReceiveNotifyEmail />}
+      {!checkRole && <Foodter />}
     </Box>
   );
 }
