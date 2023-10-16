@@ -58,7 +58,7 @@ const Cart = () => {
   };
 
   const handleDecreaseQuantity = async (item: typeProduct) => {
-    if (quantity) {
+    if (quantity && item.quantity > 1) {
       try {
         const updateQuantityResponse = await axios.put(updateCart(item.id), {
           quantity: item.quantity - 1,
@@ -100,7 +100,12 @@ const Cart = () => {
               <TableRow key={key} className={"table-border"}>
                 <TableCell className={"table-border"}>{item.name}</TableCell>
                 <TableCell className={"table-border"}>
-                  <img src={item.image} alt={item.name} width={150} height={200} />
+                  <img
+                    src={"http://localhost:1000/" + item?.image.replace(/\\/g, "/")}
+                    alt={item.name}
+                    width={150}
+                    height={200}
+                  />
                 </TableCell>
                 <TableCell className={"table-border"}>{item.price} VNĐ</TableCell>
                 <TableCell className={"table-border"}>
@@ -125,7 +130,7 @@ const Cart = () => {
                     +
                   </Button>
                 </TableCell>
-                <TableCell className={"table-border"}>{item.price * item.quantity}</TableCell>
+                <TableCell className={"table-border"}>{item.price * item.quantity} VNĐ</TableCell>
                 <TableCell className={"table-border"}>
                   <IconButton
                     onClick={() => handleRemoveItem(item.id)}

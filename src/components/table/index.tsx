@@ -13,7 +13,14 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
   const renderTableCell = (item: any, column: any) => {
     switch (column.field) {
       case "image":
-        return <img src={item[column.field]} alt="Product" width="100" height="100" />;
+        return (
+          <img
+            src={`http://localhost:1000/${item[column.field].replace(/\\\\/g, "/")}`}
+            alt="Product"
+            width="100"
+            height="100"
+          />
+        );
       case "category":
         return item.category?.name;
       default:

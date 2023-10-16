@@ -1,9 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function ClothesCard({ item }: { item: any }) {
-  const imageUrlForDisplay = item?.image.replace(/\\/g, "/");
+  const imageUrlForDisplay = "http://localhost:1000/" + item?.image.replace(/\\/g, "/");
   return (
-    <>
+    <Box height={450}>
       <CardMedia
         component="img"
         alt={""}
@@ -20,7 +20,7 @@ function ClothesCard({ item }: { item: any }) {
           {item?.description}
         </Typography>
       </CardContent>
-    </>
+    </Box>
   );
 }
 

@@ -62,12 +62,12 @@ const DetailProduct = () => {
     smallImage: {
       alt: productDetail?.name,
       isFluidWidth: true,
-      src: productDetail?.image,
+      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
     },
     largeImage: {
-      src: productDetail?.image,
-      width: 550,
-      height: 800,
+      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
+      width: 1200,
+      height: 1800,
     },
     enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
   };
@@ -87,7 +87,7 @@ const DetailProduct = () => {
         {productDetail && (
           <Box style={{ display: "flex" }} p={5}>
             <Grid item xs={6} md={6} px={2}>
-              <Box width={"50%"}>
+              <Box width={"100%"}>
                 <ReactImageMagnify {...imageProps} isActivatedOnTouch />
               </Box>
             </Grid>

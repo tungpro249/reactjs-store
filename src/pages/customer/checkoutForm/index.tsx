@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Autocomplete, Box, Grid, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const CheckoutForm = () => {
@@ -33,24 +33,45 @@ const CheckoutForm = () => {
   ];
   return (
     <Grid container p={5}>
-      <Grid item xs={6} md={6}>
-        <h3>Thông tin thanh toán</h3>
-        <TextField placeholder={"Họ và tên"} />
-        <TextField placeholder={"email"} />
-        <TextField placeholder={"số điện thoại"} />
-        <TextField placeholder={"số điện thoại"} />
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={top100Films}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Movie" />}
-        />
-        <p>
-          Bạn đã có tài khoản? <Link to={"/account/login"}>Đăng nhập</Link>
-        </p>
+      <Grid item xs={5.5} md={5.5}>
+        <Box height={700}>
+          <h3>Thông tin thanh toán</h3>
+          <p>
+            Bạn đã có tài khoản? <Link to={"/account/login"}>Đăng nhập</Link>
+          </p>
+          <br />
+          <Box>
+            <TextField placeholder={"Họ và tên"} fullWidth />
+          </Box>
+          <br />
+          <Box display={"flex"}>
+            <TextField placeholder={"email"} fullWidth />
+            <Box pr={1} />
+            <TextField placeholder={"số điện thoại"} fullWidth />
+          </Box>
+          <br />
+          <TextField placeholder={"Địa chỉ"} fullWidth />
+          <Box>
+            <br />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={top100Films}
+              renderInput={(params) => <TextField {...params} label="Movie" />}
+              fullWidth
+            />
+          </Box>
+          <Box>
+            <Button>Phương thức thanh toán</Button>
+          </Box>
+        </Box>
       </Grid>
-      <Grid item xs={6} md={6}></Grid>
+      <Grid item xs={1} md={1}>
+        <Box sx={{ border: "1px solid #ddd", height: "100%", width: "0px", margin: "auto" }} />
+      </Grid>
+      <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
+        <Box>fuck</Box>
+      </Grid>
     </Grid>
   );
 };

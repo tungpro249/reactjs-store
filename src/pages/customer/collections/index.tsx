@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import { typeCategory } from "../../../types/typeCategory";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
@@ -58,6 +58,11 @@ const Collections = () => {
     fetchData();
   }, []);
 
+  const navigate = useNavigate();
+  const handleProductClick = (product: typeProduct) => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
     <>
       <Grid container p={5}>
@@ -68,23 +73,24 @@ const Collections = () => {
           ))}
         </Grid>
         <Grid item xs={9} md={10}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{display: "flex", justifyContent: "space-between"}}>
             <h3>{renderName()}</h3>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{display: "flex"}}>
               <p>Kích cỡ</p>
-              <Box sx={{ padding: "0 10px" }} />
+              <Box sx={{padding: "0 10px"}}/>
               <p>Giá cả</p>
             </Box>
           </Box>
           <Grid container pt={3}>
             {products.map((item: typeProduct, index) => (
               <Grid xs={3} md={3} lg={3} key={index}>
-                <Card style={{ padding: "25px", margin: "10px" }}>
-                  <Box onClick={() => {}}>
-                    <ClothesCard item={item} />
+                <Card style={{padding: "25px", margin: "10px"}}>
+                  <Box onClick={() => handleProductClick(item)}>
+                    <ClothesCard item={item}/>
                   </Box>
                   <CardActions>
-                    <Button size="small" color="primary" onClick={() => {}}>
+                    <Button size="small" color="primary" onClick={() => {
+                    }}>
                       Mua
                     </Button>
                     <Button size="small" color="secondary">
