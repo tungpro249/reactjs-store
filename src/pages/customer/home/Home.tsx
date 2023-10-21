@@ -8,6 +8,7 @@ import { getAllProductSuccess, useProductController } from "../../../contexts/pr
 import { addToCart, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/sliderCarosel";
 import { loginSuccess, useAppController } from "../../../contexts/app";
+import { addCartSuccess } from "../../../contexts/cartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -39,12 +40,13 @@ export default function Home() {
     navigate(`/product/${product.id}`);
   };
 
-  const handleBuy = () => {
-    const isLoggedIn = false;
+  const handleBuy = (item: typeProduct) => {
+    const isLoggedIn = userController.isLogin;
 
     if (isLoggedIn) {
       alert("Mua hàng");
     } else {
+      localStorage.setItem("cart", JSON.stringify({ cart: item }));
       navigate("/checkout-form");
     }
   };
@@ -84,8 +86,8 @@ export default function Home() {
                 <ClothesCard item={item} />
               </Box>
               <CardActions>
-                <Button size="small" color="primary" onClick={handleBuy}>
-                  Mua
+                <Button size="small" color="primary" onClick={() => handleBuy(item)}>
+                  Mua ngay
                 </Button>
                 <Button size="small" color="secondary" onClick={() => handleAddToCart(item.id)}>
                   Thêm vào giỏ hàng

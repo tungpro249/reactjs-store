@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { typeProduct } from "../../../types/typeProduct";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [productInCart, setProductInCart] = useState<typeProduct | null>(null);
+
+  useEffect(() => {
+    // @ts-ignore
+    setProductInCart(JSON.parse(localStorage.getItem("cart")).cart);
+  }, [localStorage.getItem("cart")]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -62,7 +70,11 @@ const CheckoutForm = () => {
             />
           </Box>
           <Box>
-            <Button>Phương thức thanh toán</Button>
+            <Button
+              style={{ background: "#3e80c1", float: "right", color: "white", marginTop: "15px" }}
+            >
+              Phương thức thanh toán
+            </Button>
           </Box>
         </Box>
       </Grid>
@@ -70,7 +82,11 @@ const CheckoutForm = () => {
         <Box sx={{ border: "1px solid #ddd", height: "100%", width: "0px", margin: "auto" }} />
       </Grid>
       <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
-        <Box>fuck</Box>
+        {productInCart && (
+          <Box>
+            <img src={"http://localhost:1000/" + productInCart.image} width={100} height={100} />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );

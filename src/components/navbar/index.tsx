@@ -124,7 +124,7 @@ const Navbar = () => {
               <MenuList>
                 <MenuItem onClick={handleMenuClose}>
                   <Link
-                    href={"/account/change-password"}
+                    href={"/account/information"}
                     style={{ textDecoration: "none", display: "flex", color: "inherit" }}
                   >
                     <ListItemIcon>

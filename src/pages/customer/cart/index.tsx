@@ -1,4 +1,4 @@
-import { Badge, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Badge, Box, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import { deleteCart, getAllCart, updateCart } from "../../../constants/api";
@@ -151,6 +151,13 @@ const Cart = () => {
             </TableRow>
           </TableBody>
         </Table>
+        <Box sx={{ float: "right" }}>
+          <Button
+            style={{ background: "blueviolet", padding: "10px", marginTop: "20px", color: "white" }}
+          >
+            Thanh toán
+          </Button>
+        </Box>
       </Grid>
     </Grid>
   );

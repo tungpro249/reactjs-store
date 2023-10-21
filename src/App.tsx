@@ -24,6 +24,7 @@ import ChangePassword from "./pages/auth/ChangePassword";
 import Order from "./pages/admin/order";
 import CheckoutForm from "./pages/customer/checkoutForm";
 import { loginSuccess, useAppController } from "./contexts/app";
+import Information from "./pages/auth/Information";
 
 function App() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/account/register" element={<Register />} />
           <Route path="/account/change-password" element={<ChangePassword />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="//account/information" element={<Information />} />
           <Route path="/order" element={<Order />} />
           {checkRole ? (
             // admin page*
