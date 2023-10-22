@@ -2,6 +2,7 @@ const BASE = `http://localhost:8000/api`;
 const LOGIN_API = `${BASE}/auth/login`;
 const REGISTER_API = `${BASE}/auth/register`;
 const CHANGE_PASSWORD_API = `${BASE}/auth/change-password`;
+const updateInformation = (id: number) => `${BASE}/auth/change-info/${id}`;
 
 const GET_ALL_PRODUCT_API = `${BASE}/products/get-products`;
 const ADD_PRODUCT_API = `${BASE}/products/add-product`;
@@ -19,10 +20,13 @@ const addToCart = (userId: number) => `${BASE}/carts//cart/${userId}/add`;
 const updateCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
 const deleteCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
 
+const payment = `${BASE}/orders/payment`;
+
 export {
   LOGIN_API,
   REGISTER_API,
   CHANGE_PASSWORD_API,
+  updateInformation,
   GET_ALL_PRODUCT_API,
   ADD_PRODUCT_API,
   updateProduct,
@@ -36,4 +40,5 @@ export {
   addToCart,
   deleteCart,
   updateCart,
+  payment,
 };

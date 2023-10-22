@@ -1,7 +1,7 @@
 import { Badge, Box, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
-import { deleteCart, getAllCart, updateCart } from "../../../constants/api";
+import { deleteCart, getAllCart, payment, updateCart } from "../../../constants/api";
 import axios from "axios";
 import { useAppController } from "../../../contexts/app";
 import IconButton from "@mui/material/IconButton";
@@ -80,6 +80,16 @@ const Cart = () => {
     }
   };
 
+  const handleBuyCart = async () => {
+    const buyCartResponse = await axios.post(payment, {
+      user_id: userId,
+      items: cartItems,
+    });
+    if (buyCartResponse) {
+      alert("Thanh toán đơn hàng thành công.");
+    }
+  };
+
   return (
     <Grid container p={5}>
       <Grid item xs={12}>
@@ -154,6 +164,7 @@ const Cart = () => {
         <Box sx={{ float: "right" }}>
           <Button
             style={{ background: "blueviolet", padding: "10px", marginTop: "20px", color: "white" }}
+            onClick={handleBuyCart}
           >
             Thanh toán
           </Button>
