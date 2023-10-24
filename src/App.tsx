@@ -25,6 +25,7 @@ import Order from "./pages/admin/order";
 import CheckoutForm from "./pages/customer/checkoutForm";
 import { loginSuccess, useAppController } from "./contexts/app";
 import Information from "./pages/auth/Information";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,8 @@ function App() {
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const isAdmin = storedUser && storedUser.currentUser?.data?.isAdmin;
   const checkRole = isAdmin || "";
+
+  const isResetPasswordPage = location.pathname === "/reset-password";
 
   // @ts-ignore
   const [userController, userDispatch] = useAppController();
@@ -53,7 +56,11 @@ function App() {
           <Route path="/account/register" element={<Register />} />
           <Route path="/account/change-password" element={<ChangePassword />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="//account/information" element={<Information />} />
+          <Route
+            path="/reset-password"
+            element={isResetPasswordPage ? <ResetPassword /> : <NotFound />}
+          />
+          <Route path="/account/information" element={<Information />} />
           <Route path="/order" element={<Order />} />
           {checkRole ? (
             // admin page*

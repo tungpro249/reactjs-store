@@ -8,7 +8,6 @@ import { getAllProductSuccess, useProductController } from "../../../contexts/pr
 import { addToCart, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/sliderCarosel";
 import { loginSuccess, useAppController } from "../../../contexts/app";
-import { addCartSuccess } from "../../../contexts/cartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -40,11 +39,23 @@ export default function Home() {
     navigate(`/product/${product.id}`);
   };
 
-  const handleBuy = (item: typeProduct) => {
+  const handleBuy = async (item: typeProduct) => {
     const isLoggedIn = userController.isLogin;
 
     if (isLoggedIn) {
-      alert("Mua hàng");
+      const userId = userController?.user?.currentUser?.data.id;
+      if (userId) {
+        try {
+          const response = await axios.post(addToCart(userId), {
+            productId: item.id,
+            quantity: 1,
+          });
+        } catch (error) {
+          console.error(error);
+          alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+        }
+      }
+      navigate("/cart");
     } else {
       localStorage.setItem("cart", JSON.stringify({ cart: item }));
       navigate("/checkout-form");
@@ -86,10 +97,26 @@ export default function Home() {
                 <ClothesCard item={item} />
               </Box>
               <CardActions>
-                <Button size="small" color="primary" onClick={() => handleBuy(item)}>
+                <Button
+                  style={{
+                    background: "#e11467de",
+                    padding: "9px",
+                    fontWeight: "bold",
+                    color: "aliceblue",
+                  }}
+                  onClick={() => handleBuy(item)}
+                >
                   Mua ngay
                 </Button>
-                <Button size="small" color="secondary" onClick={() => handleAddToCart(item.id)}>
+                <Button
+                  style={{
+                    background: "rgb(45 155 236)",
+                    padding: "9px",
+                    fontWeight: "bold",
+                    color: "aliceblue",
+                  }}
+                  onClick={() => handleAddToCart(item.id)}
+                >
                   Thêm vào giỏ hàng
                 </Button>
               </CardActions>

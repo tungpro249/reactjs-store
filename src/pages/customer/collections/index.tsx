@@ -1,18 +1,23 @@
 import { Box, Button, Card, CardActions, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import { typeCategory } from "../../../types/typeCategory";
 import { useLocation, useNavigate } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
+import { useAppController } from "../../../contexts/app";
 
 const Collections = () => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
   const [categoryId, setCategoryId] = useState<number | null>(null);
   //@ts-ignore
-  const [productController, productDispatch] = useProductController();
+  const [, productDispatch] = useProductController();
+
+  // @ts-ignore
+  const [userController, userDispatch] = useAppController();
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -63,6 +68,24 @@ const Collections = () => {
     navigate(`/product/${product.id}`);
   };
 
+  const handleAddToCart = async (id: number) => {
+    const userId = userController?.user?.currentUser?.data.id;
+    if (userId) {
+      try {
+        const response = await axios.post(addToCart(userId), {
+          productId: id,
+          quantity: 1,
+        });
+        if (response.status === 200) {
+          alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+      }
+    }
+  };
+
   return (
     <>
       <Grid container p={5}>
@@ -73,27 +96,44 @@ const Collections = () => {
           ))}
         </Grid>
         <Grid item xs={9} md={10}>
-          <Box sx={{display: "flex", justifyContent: "space-between"}}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <h3>{renderName()}</h3>
-            <Box sx={{display: "flex"}}>
+            <Box sx={{ display: "flex" }}>
               <p>Kích cỡ</p>
-              <Box sx={{padding: "0 10px"}}/>
+              <Box sx={{ padding: "0 10px" }} />
               <p>Giá cả</p>
             </Box>
           </Box>
           <Grid container pt={3}>
             {products.map((item: typeProduct, index) => (
               <Grid xs={3} md={3} lg={3} key={index}>
-                <Card style={{padding: "25px", margin: "10px"}}>
+                <Card style={{ padding: "25px", margin: "10px" }}>
                   <Box onClick={() => handleProductClick(item)}>
-                    <ClothesCard item={item}/>
+                    <ClothesCard item={item} />
                   </Box>
                   <CardActions>
-                    <Button size="small" color="primary" onClick={() => {
-                    }}>
+                    <Button
+                      style={{
+                        background: "#e11467de",
+                        padding: "9px",
+                        fontWeight: "bold",
+                        color: "aliceblue",
+                      }}
+                      onClick={() => {}}
+                    >
                       Mua
                     </Button>
-                    <Button size="small" color="secondary">
+                    <Button
+                      style={{
+                        background: "rgb(45 155 236)",
+                        padding: "9px",
+                        fontWeight: "bold",
+                        color: "aliceblue",
+                      }}
+                      onClick={() => {
+                        handleAddToCart(item?.id);
+                      }}
+                    >
                       Thêm vào giỏ hàng
                     </Button>
                   </CardActions>

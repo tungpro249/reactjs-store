@@ -23,6 +23,8 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
         );
       case "category":
         return item.category?.name;
+      case "date_created":
+        return <div>{new Date(item?.date_created).toLocaleString()}</div>;
       default:
         return item[column.field];
     }

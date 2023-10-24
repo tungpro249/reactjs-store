@@ -29,6 +29,12 @@ const Login = () => {
       fetchData();
     }
   };
+  
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
 
   const resetError = () => {
     setEmailError("");
@@ -68,7 +74,7 @@ const Login = () => {
 
   return (
     <>
-      <Grid container component="main">
+      <Grid container component="main" onKeyDown={(event: any) => handleKeyDown(event)}>
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} sx={{ margin: "auto" }}>
           <Box

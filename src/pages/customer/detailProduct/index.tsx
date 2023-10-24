@@ -94,9 +94,9 @@ const DetailProduct = () => {
             <Grid item xs={6} md={6}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {productDetail?.name}
+                  {productDetail?.name.toUpperCase()}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography variant="body1" color="textSecondary" component="p">
                   {productDetail.description}
                 </Typography>
                 <Typography variant="h6" color="secondary" component="p">
@@ -105,12 +105,23 @@ const DetailProduct = () => {
               </CardContent>
 
               <CardActions>
-                <Button size="small" color="primary">
+                <Button
+                  style={{
+                    background: "#e11467de",
+                    padding: "9px",
+                    fontWeight: "bold",
+                    color: "aliceblue",
+                  }}
+                >
                   Mua
                 </Button>
                 <Button
-                  size="small"
-                  color="secondary"
+                  style={{
+                    background: "rgb(45 155 236)",
+                    padding: "9px",
+                    fontWeight: "bold",
+                    color: "aliceblue",
+                  }}
                   onClick={() => handleAddToCart(productDetail?.id)}
                 >
                   Thêm vào giỏ hàng
@@ -120,8 +131,8 @@ const DetailProduct = () => {
           </Box>
         )}
       </Grid>
-      <h1>Sản phẩm tương tự</h1>
-      <Grid container>
+      <h1 style={{ paddingLeft: "50px" }}>Sản phẩm tương tự</h1>
+      <Grid container padding={"50px"}>
         {show &&
           products
             .filter((item) => item.category?.id === productDetail?.category?.id)
@@ -132,12 +143,24 @@ const DetailProduct = () => {
                     <ClothesCard item={item} />
                   </Box>
                   <CardActions>
-                    <Button size="small" color="primary" onClick={() => {}}>
+                    <Button
+                      style={{
+                        background: "#e11467de",
+                        padding: "9px",
+                        fontWeight: "bold",
+                        color: "aliceblue",
+                      }}
+                      onClick={() => {}}
+                    >
                       Mua
                     </Button>
                     <Button
-                      size="small"
-                      color="secondary"
+                      style={{
+                        background: "rgb(45 155 236)",
+                        padding: "9px",
+                        fontWeight: "bold",
+                        color: "aliceblue",
+                      }}
                       onClick={() => {
                         handleAddToCart(item?.id);
                       }}

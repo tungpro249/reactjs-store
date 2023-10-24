@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Grid, CssBaseline, Avatar, Typography, Link } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CHANGE_PASSWORD_API } from "../../constants/api";
@@ -10,19 +10,27 @@ const ChangePassword = () => {
   const [newPass, setNewPass] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 
-  // @ts-ignore
-  const email = JSON.parse(localStorage.getItem("user")).currentUser.data.email || "";
+  //@ts-ignore
+  const email = (JSON.parse(localStorage.getItem("user"))?.currentUser.data.email || "") as string;
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      navigate("/");
+    }
+  }, [localStorage.getItem("user")]);
+
   const handleChangePassword = async () => {
-    const response = await axios.post(CHANGE_PASSWORD_API, {
-      email,
-      old_password: oldPass,
-      new_password: newPass,
-    });
-    if (response) {
-      alert("Thay đổi mật khẩu thành công");
+    if (email !== "") {
+      const response = await axios.post(CHANGE_PASSWORD_API, {
+        email,
+        old_password: oldPass,
+        new_password: newPass,
+      });
+      if (response) {
+        alert("Thay đổi mật khẩu thành công");
+      }
     }
   };
 
