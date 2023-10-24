@@ -23,7 +23,11 @@ const Collections = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getAllProduct = await axios.get(GET_ALL_PRODUCT_API);
+        let url = GET_ALL_PRODUCT_API;
+        if (categoryId) {
+          url += `?category=${categoryId}`;
+        }
+        const getAllProduct = await axios.get(url);
         if (getAllProduct.data) {
           setProducts(getAllProduct.data);
           getAllProductSuccess(productDispatch, getAllProduct.data);
@@ -37,6 +41,10 @@ const Collections = () => {
 
   const location = useLocation();
   const renderName = () => {
+    const selectedCategory = categories.find((category) => category.id === categoryId);
+    if (selectedCategory) {
+      return selectedCategory.name.toUpperCase();
+    }
     switch (location.pathname) {
       case "/collections/san-pham-moi": {
         return "Sản phẩm mới";
@@ -86,13 +94,27 @@ const Collections = () => {
     }
   };
 
+  const handleCategoryClick = (categoryId: number) => {
+    setCategoryId(categoryId);
+  };
+
+  const filteredProducts = categoryId
+    ? products.filter((product: typeProduct) => product.category.id === categoryId)
+    : products;
+
   return (
     <>
       <Grid container p={5}>
         <Grid item xs={3} md={2}>
           <h3>Danh mục</h3>
           {categories.map((item) => (
-            <p>{item.name}</p>
+            <p
+              key={item.id}
+              onClick={() => handleCategoryClick(item.id)}
+              className={categoryId === item.id ? "selected-category" : ""}
+            >
+              {item.name}
+            </p>
           ))}
         </Grid>
         <Grid item xs={9} md={10}>
@@ -105,7 +127,7 @@ const Collections = () => {
             </Box>
           </Box>
           <Grid container pt={3}>
-            {products.map((item: typeProduct, index) => (
+            {filteredProducts.map((item: typeProduct, index) => (
               <Grid xs={3} md={3} lg={3} key={index}>
                 <Card style={{ padding: "25px", margin: "10px" }}>
                   <Box onClick={() => handleProductClick(item)}>
