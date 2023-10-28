@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
+import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -57,18 +58,12 @@ const CheckoutForm = () => {
             <Box pr={1} />
             <TextField placeholder={"số điện thoại"} fullWidth />
           </Box>
-          <br />
-          <TextField placeholder={"Địa chỉ"} fullWidth />
           <Box>
             <br />
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={top100Films}
-              renderInput={(params) => <TextField {...params} label="Movie" />}
-              fullWidth
-            />
+            <VietnamLocalSelect />
           </Box>
+          <br />
+          <TextField placeholder={"Địa chỉ"} fullWidth />
           <Box>
             <Button
               style={{ background: "#3e80c1", float: "right", color: "white", marginTop: "15px" }}
@@ -83,8 +78,11 @@ const CheckoutForm = () => {
       </Grid>
       <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
         {productInCart && (
-          <Box>
+          <Box p={5}>
             <img src={"http://localhost:1000/" + productInCart.image} width={100} height={100} />
+            <Box>{productInCart.name.toUpperCase()}</Box>
+            <Box>{productInCart.quantity}</Box>
+            <Box>{productInCart.price} Vnđ</Box>
           </Box>
         )}
       </Grid>
