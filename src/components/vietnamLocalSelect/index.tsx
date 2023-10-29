@@ -3,7 +3,15 @@ import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-const VietnamLocalSelect = () => {
+const VietnamLocalSelect = ({
+  handleChooseCity,
+  handleChooseDistrict,
+  handleChooseWard,
+}: {
+  handleChooseCity: Function;
+  handleChooseDistrict: Function;
+  handleChooseWard: Function;
+}) => {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [districts, setDistricts] = useState([]);
@@ -25,23 +33,33 @@ const VietnamLocalSelect = () => {
     fetchData();
   }, []);
 
-  const handleCityChange = (event, value) => {
+  const handleCityChange = (event: any, value: any) => {
     setSelectedCity(value?.Id || "");
     setSelectedDistrict("");
     setSelectedWard("");
 
-    const selectedCityData = cities.find((city) => city.Id === value?.Id);
+    handleChooseCity(value?.Name || "");
+    handleChooseDistrict("");
+    handleChooseWard("");
+    // @ts-ignore
+    const selectedCityData = cities.find((city) => city?.Id === value?.Id);
+    // @ts-ignore
     setDistricts(selectedCityData ? selectedCityData.Districts : []);
     setWards([]);
   };
 
-  const handleDistrictChange = (event, value) => {
+  const handleDistrictChange = (event: any, value: any) => {
     setSelectedDistrict(value?.Id || "");
     setSelectedWard("");
 
-    const selectedCityData = cities.find((city) => city.Id === selectedCity);
+    handleChooseDistrict(value?.Name || "");
+    handleChooseWard("");
+    // @ts-ignore
+    const selectedCityData = cities.find((city) => city?.Id === selectedCity);
     const selectedDistrictData =
-      selectedCityData && selectedCityData.Districts.find((district) => district.Id === value?.Id);
+      // @ts-ignore
+      selectedCityData && selectedCityData.Districts.find((district) => district?.Id === value?.Id);
+    // @ts-ignore
     setWards(selectedDistrictData ? selectedDistrictData.Wards : []);
   };
 
@@ -49,8 +67,10 @@ const VietnamLocalSelect = () => {
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Autocomplete
         options={cities}
-        getOptionLabel={(city) => city.Name}
-        value={cities.find((city) => city.Id === selectedCity) || null}
+        // @ts-ignore
+        getOptionLabel={(city) => city?.Name}
+        // @ts-ignore
+        value={cities.find((city) => city?.Id === selectedCity) || null}
         onChange={handleCityChange}
         renderInput={(params) => (
           <TextField {...params} label="Chọn tỉnh thành" variant="outlined" />
@@ -60,8 +80,10 @@ const VietnamLocalSelect = () => {
 
       <Autocomplete
         options={districts}
-        getOptionLabel={(district) => district.Name}
-        value={districts.find((district) => district.Id === selectedDistrict) || null}
+        // @ts-ignore
+        getOptionLabel={(district) => district?.Name}
+        // @ts-ignore
+        value={districts.find((district) => district?.Id === selectedDistrict) || null}
         onChange={handleDistrictChange}
         renderInput={(params) => (
           <TextField {...params} label="Chọn quận huyện" variant="outlined" />
@@ -69,12 +91,17 @@ const VietnamLocalSelect = () => {
         fullWidth
         sx={{ margin: "0 8px" }}
       />
-
       <Autocomplete
         options={wards}
-        getOptionLabel={(ward) => ward.Name}
-        value={wards.find((ward) => ward.Id === selectedWard) || null}
-        onChange={(event, value) => setSelectedWard(value?.Id || "")}
+        // @ts-ignore
+        getOptionLabel={(ward) => ward?.Name}
+        // @ts-ignore
+        value={wards.find((ward) => ward?.Id === selectedWard) || null}
+        onChange={(event: any, value: any) => {
+          // @ts-ignore
+          setSelectedWard(value?.Id || "");
+          handleChooseWard(value?.Name || "");
+        }}
         renderInput={(params) => (
           <TextField {...params} label="Chọn phường xã" variant="outlined" />
         )}

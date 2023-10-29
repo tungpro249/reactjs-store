@@ -62,21 +62,27 @@ export default function Home() {
     }
   };
 
-  const handleAddToCart = async (id: number) => {
-    const userId = userController?.user?.currentUser?.data.id;
-    if (userId) {
-      try {
-        const response = await axios.post(addToCart(userId), {
-          productId: id,
-          quantity: 1,
-        });
-        if (response.status === 200) {
-          alert("Sản phẩm đã được thêm vào giỏ hàng!");
+  const handleAddToCart = async (item: typeProduct) => {
+    const isLoggedIn = userController.isLogin;
+
+    if (isLoggedIn) {
+      const userId = userController?.user?.currentUser?.data.id;
+      if (userId) {
+        try {
+          const response = await axios.post(addToCart(userId), {
+            productId: item.id,
+            quantity: 1,
+          });
+          if (response.status === 200) {
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
         }
-      } catch (error) {
-        console.error(error);
-        alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
       }
+    } else {
+      localStorage.setItem("cart", JSON.stringify({ cart: item }));
     }
   };
 
@@ -115,7 +121,7 @@ export default function Home() {
                     fontWeight: "bold",
                     color: "aliceblue",
                   }}
-                  onClick={() => handleAddToCart(item.id)}
+                  onClick={() => handleAddToCart(item)}
                 >
                   Thêm vào giỏ hàng
                 </Button>

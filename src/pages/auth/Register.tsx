@@ -10,13 +10,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Copyright from "../../components/copyRight";
 import { REGISTER_API } from "../../constants/api";
-import Navbar from "../../components/navbar";
-import Foodter from "../../components/foodter";
+import VietnamLocalSelect from "../../components/vietnamLocalSelect";
 
 const Register = () => {
-  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [lastName, setLastName] = useState("");
@@ -26,6 +23,11 @@ const Register = () => {
   const [rePassword, setRePassword] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
 
   const [errorLastName, setErrorLastName] = useState("");
   const [errorFirstName, setErrorFirstName] = useState("");
@@ -34,9 +36,10 @@ const Register = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
   const [errorRePassword, setErrorRePassword] = useState("");
+  const [errorAddress, setErrorAddress] = useState("");
 
   const handleSubmit = () => {
-    if (!isValid()) {
+    if (isValid()) {
       fetchData();
     }
   };
@@ -49,29 +52,38 @@ const Register = () => {
     setErrorEmail("");
     setErrorPhone("");
     setErrorRePassword("");
+    setErrorAddress("");
   };
 
   const isValid = () => {
+    let check = true;
     resetError();
     if (lastName.trim() === "") {
       setErrorLastName("Họ không được để trống");
+      check = false;
     }
     if (firstName.trim() === "") {
       setErrorFirstName("Tên không được để trống");
+      check = false;
     }
     if (userName.trim() === "") {
       setErrorUserName("Tên tài khoản không được để trống");
+      check = false;
     }
     if (password.trim() === "") {
       setErrorPassword("Mật khẩu không được để trống");
+      check = false;
     }
     if (rePassword.trim() === "") {
       setErrorRePassword("Nhập lại mật khẩu không được để trống");
+      check = false;
     } else if (password !== rePassword) {
       setErrorRePassword("Mật khẩu nhập lại không khớp với mật khẩu đã nhập");
+      check = false;
     }
     if (email.trim() === "") {
       setErrorEmail("Email không được để trống");
+      check = false;
     }
     // } else if (!isValidEmail(email)) {
     //     setErrorEmail("Email không đúng định dạng");
@@ -81,7 +93,11 @@ const Register = () => {
     // } else if (!isValidPhone(phone)) {
     //     setErrorPhone("Số điện thoại không đúng định dạng");
     // }
-    return null;
+    if (address.trim() === "") {
+      setErrorAddress("Địa chỉ không được để trống");
+      check = false;
+    }
+    return check;
   };
 
   const fetchData = async () => {
@@ -93,6 +109,7 @@ const Register = () => {
         pass_word: password,
         email,
         phone,
+        address: `${city}-${district}-${ward}-${address}`,
       });
       if (response.data !== null) {
         alert("Tạo tài khoản thành công");
@@ -215,6 +232,23 @@ const Register = () => {
                 autoComplete="email"
                 error={!!errorEmail}
                 helperText={errorEmail ? errorEmail : ""}
+              />
+              <VietnamLocalSelect
+                handleChooseCity={setCity}
+                handleChooseDistrict={setDistrict}
+                handleChooseWard={setWard}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="address"
+                label="Địa chỉ"
+                name="address"
+                onChange={(e) => setAddress(e.target.value)}
+                autoComplete="address"
+                error={!!errorAddress}
+                helperText={errorAddress ? errorAddress : ""}
               />
               <Button
                 type="button"

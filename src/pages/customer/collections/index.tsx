@@ -57,17 +57,18 @@ const Collections = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(GET_ALL_CATEGORIES);
-        if (response.data) {
-          setCategories(response.data);
-        }
-      } catch (error) {
-        console.log("Error fetching categories:", error);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(GET_ALL_CATEGORIES);
+      if (response.data) {
+        setCategories(response.data);
       }
-    };
+    } catch (error) {
+      console.log("Error fetching categories:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -106,15 +107,17 @@ const Collections = () => {
     <>
       <Grid container p={5}>
         <Grid item xs={3} md={2}>
-          <h3>Danh mục</h3>
+          {/*@ts-ignore*/}
+          <h3 onClick={() => handleCategoryClick()}>Danh mục</h3>
           {categories.map((item) => (
-            <p
+            <Box
               key={item.id}
               onClick={() => handleCategoryClick(item.id)}
               className={categoryId === item.id ? "selected-category" : ""}
+              style={{ padding: "5px", width: "70%" }}
             >
               {item.name}
-            </p>
+            </Box>
           ))}
         </Grid>
         <Grid item xs={9} md={10}>

@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Modal,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
@@ -9,6 +21,12 @@ const CheckoutForm = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   const [productInCart, setProductInCart] = useState<typeProduct | null>(null);
 
@@ -31,62 +49,125 @@ const CheckoutForm = () => {
     // Gọi API để xử lý đơn hàng
     // ...
   };
-  const top100Films = [
-    { label: "The Shawshank Redemption", year: 1994 },
-    { label: "The Godfather", year: 1972 },
-    { label: "The Godfather: Part II", year: 1974 },
-    { label: "The Dark Knight", year: 2008 },
-    { label: "12 Angry Men", year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: "Pulp Fiction", year: 1994 },
-  ];
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Grid container p={5}>
-      <Grid item xs={5.5} md={5.5}>
-        <Box height={700}>
-          <h3>Thông tin thanh toán</h3>
-          <p>
-            Bạn đã có tài khoản? <Link to={"/account/login"}>Đăng nhập</Link>
-          </p>
-          <br />
-          <Box>
-            <TextField placeholder={"Họ và tên"} fullWidth />
-          </Box>
-          <br />
-          <Box display={"flex"}>
-            <TextField placeholder={"email"} fullWidth />
-            <Box pr={1} />
-            <TextField placeholder={"số điện thoại"} fullWidth />
-          </Box>
-          <Box>
+    <>
+      <Grid container p={5}>
+        <Grid item xs={5.5} md={5.5}>
+          <Box height={700}>
+            <h3>Thông tin thanh toán</h3>
+            <p>
+              Bạn đã có tài khoản? <Link to={"/account/login"}>Đăng nhập</Link>
+            </p>
             <br />
-            <VietnamLocalSelect />
+            <Box>
+              <TextField placeholder={"Họ và tên"} fullWidth />
+            </Box>
+            <br />
+            <Box display={"flex"}>
+              <TextField placeholder={"email"} fullWidth />
+              <Box pr={1} />
+              <TextField placeholder={"số điện thoại"} fullWidth />
+            </Box>
+            <Box>
+              <br />
+              <VietnamLocalSelect
+                handleChooseCity={setCity}
+                handleChooseDistrict={setDistrict}
+                handleChooseWard={setWard}
+              />
+            </Box>
+            <br />
+            <TextField placeholder={"Địa chỉ"} fullWidth />
+            <Box>
+              <Button
+                style={{ background: "#3e80c1", float: "right", color: "white", marginTop: "15px" }}
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
+                Phương thức thanh toán
+              </Button>
+            </Box>
           </Box>
-          <br />
-          <TextField placeholder={"Địa chỉ"} fullWidth />
-          <Box>
-            <Button
-              style={{ background: "#3e80c1", float: "right", color: "white", marginTop: "15px" }}
+        </Grid>
+        <Grid item xs={1} md={1}>
+          <Box sx={{ border: "1px solid #ddd", height: "100%", width: "0px", margin: "auto" }} />
+        </Grid>
+        <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
+          {productInCart && (
+            <Box p={5} display={"flex"}>
+              <img src={"http://localhost:1000/" + productInCart.image} width={200} height={200} />
+              <Box ml={3} lineHeight={2}>
+                <Box>
+                  <strong>Tên sản phẩm:</strong>
+                  {productInCart.name.toUpperCase()}
+                </Box>
+                <Box>
+                  <strong>Số lượng:</strong>1
+                </Box>
+                <Box>
+                  <strong>Giá tiền:</strong> {productInCart.price} Vnđ
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </Grid>
+      </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          style={{
+            background: "white",
+            margin: "30vh auto",
+            textAlign: "center",
+            padding: "50px",
+            width: "400px",
+            borderRadius: "10px",
+          }}
+        >
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">Kiểu thanh toán</FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="radio-buttons-group"
             >
-              Phương thức thanh toán
+              <FormControlLabel value="money" control={<Radio />} label="Thanh toán tiền mặt" />
+              <FormControlLabel
+                value="banking"
+                control={<Radio />}
+                label="Thanh toán chuyển khoản"
+              />
+            </RadioGroup>
+          </FormControl>
+          <Box style={{ display: "flex", justifyContent: "center" }}>
+            <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => {}}>
+              Đặt hàng
+            </Button>
+            <Box sx={{ padding: "0 30px" }} />
+            <Button
+              type="button"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color={"error"}
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              Hủy
             </Button>
           </Box>
         </Box>
-      </Grid>
-      <Grid item xs={1} md={1}>
-        <Box sx={{ border: "1px solid #ddd", height: "100%", width: "0px", margin: "auto" }} />
-      </Grid>
-      <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
-        {productInCart && (
-          <Box p={5}>
-            <img src={"http://localhost:1000/" + productInCart.image} width={100} height={100} />
-            <Box>{productInCart.name.toUpperCase()}</Box>
-            <Box>{productInCart.quantity}</Box>
-            <Box>{productInCart.price} Vnđ</Box>
-          </Box>
-        )}
-      </Grid>
-    </Grid>
+      </Modal>
+    </>
   );
 };
 
