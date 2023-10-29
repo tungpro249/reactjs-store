@@ -81,6 +81,29 @@ const DetailProduct = () => {
     await navigate(`/product/${product.id}`);
   };
 
+  const handleBuy = async (item: typeProduct) => {
+    const isLoggedIn = userController.isLogin;
+
+    if (isLoggedIn) {
+      const userId = userController?.user?.currentUser?.data.id;
+      if (userId) {
+        try {
+          const response = await axios.post(addToCart(userId), {
+            productId: item.id,
+            quantity: 1,
+          });
+        } catch (error) {
+          console.error(error);
+          alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+        }
+      }
+      navigate("/cart");
+    } else {
+      localStorage.setItem("cart", JSON.stringify({ cart: item }));
+      navigate("/checkout-form");
+    }
+  };
+
   return (
     <>
       <Grid container>
@@ -111,6 +134,9 @@ const DetailProduct = () => {
                     padding: "9px",
                     fontWeight: "bold",
                     color: "aliceblue",
+                  }}
+                  onClick={() => {
+                    handleBuy(productDetail);
                   }}
                 >
                   Mua
@@ -150,7 +176,7 @@ const DetailProduct = () => {
                         fontWeight: "bold",
                         color: "aliceblue",
                       }}
-                      onClick={() => {}}
+                      onClick={() => handleBuy(item)}
                     >
                       Mua
                     </Button>
