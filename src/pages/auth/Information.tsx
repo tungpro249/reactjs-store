@@ -1,10 +1,13 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, Tabs, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
-import { updateInformation } from "../../constants/api";
+import { getOrderUser, updateInformation } from "../../constants/api";
 import axios from "axios";
+import Tab from "@mui/material/Tab";
+import * as React from "react";
+import TableForm from "../../components/table";
 
-const Information = () => {
+const ProfileTab = () => {
   const [surname, setSurname] = useState("");
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
@@ -40,7 +43,7 @@ const Information = () => {
   return (
     <Box
       sx={{
-        padding: "50px 0px 190px 0",
+        padding: "50px 0px 50px 0",
         width: "50%",
         margin: "auto",
         textAlign: "center",
@@ -119,6 +122,77 @@ const Information = () => {
         </Button>
       </Box>
     </Box>
+  );
+};
+
+const OrdersTab = () => {
+  const [orders, setOrders] = useState("");
+  // @ts-ignore
+  const [userController, userDispatch] = useAppController();
+  useEffect(() => {
+    const userId = userController.user?.currentUser?.data.id;
+    if (userId) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(getOrderUser(userId));
+          if (response.data?.orderDetails) {
+            setOrders(response.data?.orderDetails);
+          }
+        } catch (error) {
+          console.log("Error fetching categories:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [orders.length]);
+
+  const columns = [
+    { header: "Tên sản phẩm", field: "phone_number" },
+    { header: "Người đặt", field: "user_name" },
+    { header: "Số lượng", field: "quantity" },
+    { header: "Giá tiền", field: "price" },
+    { header: "Thời gian", field: "date_created" },
+    { header: "Trạng thái", field: "status" },
+  ];
+
+  return (
+    <Box
+      sx={{
+        padding: "50px 0px 190px 0",
+        width: "90%",
+        margin: "auto",
+        textAlign: "center",
+      }}
+    >
+      <h1 style={{ fontSize: "40px" }}>Đơn hàng</h1>
+      <TableForm columns={columns} data={orders} handleDelete={() => {}} handleEdit={() => {}} />
+    </Box>
+  );
+};
+
+const Information = () => {
+  const [activeTab, setActiveTab] = useState("profile");
+
+  const handleTabChange = (event: any, newValue: string) => {
+    setActiveTab(newValue);
+  };
+
+  return (
+    <>
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={activeTab}
+        onChange={handleTabChange}
+      >
+        <Tab label="Hồ sơ của tôi" value="profile" sx={{ marginRight: "auto" }} />
+        <Tab label="Đơn hàng" value="orders" sx={{ marginRight: "auto" }} />
+        <Box>
+          {activeTab === "profile" && <ProfileTab />}
+          {activeTab === "orders" && <OrdersTab />}
+        </Box>
+      </Tabs>
+    </>
   );
 };
 

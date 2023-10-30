@@ -23,6 +23,8 @@ const deleteCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId
 
 const payment = `${BASE}/orders/payment`;
 const GET_ALL_ORDER_ITEMS_API = `${BASE}/orders/orders`;
+const getAllOrderDetail = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
+const getOrderUser = (userId: number) => `${BASE}/orders/order/${userId}`;
 
 export {
   LOGIN_API,
@@ -45,4 +47,6 @@ export {
   updateCart,
   payment,
   GET_ALL_ORDER_ITEMS_API,
+  getAllOrderDetail,
+  getOrderUser,
 };
