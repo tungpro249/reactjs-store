@@ -13,10 +13,12 @@ import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
 import AddCategory from "./add";
 import UpdateCategory from "./update";
+import { typeCategory } from "../../../types/typeCategory";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState<number | null>(null);
+  const [category, setCategory] = useState<typeCategory | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,10 +41,11 @@ const Category = () => {
     setCategoryId(categoryId);
   };
 
-  const handleEditCategory = (categoryId: number) => {
+  const handleEditCategory = (category: typeCategory) => {
     setType(UPDATE_TYPE);
     setOpen(true);
-    setCategoryId(categoryId);
+    setCategoryId(category.id);
+    setCategory(category);
   };
 
   const handleAddCategory = () => {
@@ -64,7 +67,8 @@ const Category = () => {
 
   const formAdd = (closeForm: Function) => <AddCategory handleClose={closeForm} />;
   const formUpdate = (closeForm: Function) => (
-    <UpdateCategory handleClose={closeForm} categoryId={categoryId} />
+    // @ts-ignore
+    <UpdateCategory handleClose={closeForm} categoryId={categoryId} category={category} />
   );
   const formDelete = (closeForm: Function) => (
     <Box

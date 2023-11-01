@@ -4,7 +4,13 @@ import { typeCategory } from "../../../../types/typeCategory";
 import axios from "axios";
 import { GET_ALL_CATEGORIES } from "../../../../constants/api";
 
-const CategoryAutocomplete = ({ handleChoose }: { handleChoose: any }) => {
+const CategoryAutocomplete = ({
+  handleChoose,
+  defaultData,
+}: {
+  handleChoose: any;
+  defaultData?: any;
+}) => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
 
   useEffect(() => {
@@ -33,6 +39,7 @@ const CategoryAutocomplete = ({ handleChoose }: { handleChoose: any }) => {
 
   return (
     <Autocomplete
+      defaultValue={defaultData}
       disablePortal
       id="combo-box-demo"
       options={categories}

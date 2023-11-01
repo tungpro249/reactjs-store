@@ -4,20 +4,23 @@ import axios from "axios";
 import { updateProduct } from "../../../../constants/api";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
 import { typeCategory } from "../../../../types/typeCategory";
+import { typeProduct } from "../../../../types/typeProduct";
 
 const UpdateProduct = ({
   handleClose,
   productId,
+  product,
 }: {
   handleClose: Function;
   productId: number | null;
+  product: typeProduct;
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [productName, setProductName] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const [category, setCategory] = useState<typeCategory | null>(null);
+  const [productName, setProductName] = useState(product.name);
+  const [productDescription, setProductDescription] = useState(product.description);
+  const [productPrice, setProductPrice] = useState(product.price);
+  const [productQuantity, setProductQuantity] = useState(product.quantity);
+  const [category, setCategory] = useState<typeCategory | null>(product.category);
 
   const handleImageClick = () => {
     const input = document.createElement("input");
@@ -32,13 +35,13 @@ const UpdateProduct = ({
   };
 
   const handleUpdateProductApi = async () => {
-    if (productId) {
+    if (productId && selectedImage) {
       try {
         const formData = new FormData();
         formData.append("name", productName);
         formData.append("description", productDescription);
-        formData.append("price", productPrice);
-        formData.append("quantity", productQuantity);
+        formData.append("price", productPrice.toString());
+        formData.append("quantity", productQuantity.toString());
         if (selectedImage) {
           formData.append("image", selectedImage);
         }
@@ -48,6 +51,7 @@ const UpdateProduct = ({
 
         const updateResponseApi = await axios.put(updateProduct(productId), formData);
         alert("Cập nhật thành công");
+        window.location.reload();
       } catch (error) {
         console.log("Error adding product:", error);
       }
@@ -79,7 +83,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg"
+                image={`http://localhost:1000/${product.image}`}
                 alt="Choose Image"
               />
             )}
@@ -98,7 +102,7 @@ const UpdateProduct = ({
           <br />
           <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <label style={{ marginRight: "10px" }}>Danh mục</label>
-            <CategoryAutocomplete handleChoose={setCategory} />
+            <CategoryAutocomplete handleChoose={setCategory} defaultData={category} />
           </Box>
           <br />
           <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -106,7 +110,7 @@ const UpdateProduct = ({
             <TextField
               placeholder="Giá tiền"
               value={productPrice}
-              onChange={(e) => setProductPrice(e.target.value)}
+              onChange={(e) => setProductPrice(parseFloat(e.target.value))}
               style={{ width: "250px" }}
             />
           </Box>
@@ -116,7 +120,7 @@ const UpdateProduct = ({
             <TextField
               placeholder="Số lượng"
               value={productQuantity}
-              onChange={(e) => setProductQuantity(e.target.value)}
+              onChange={(e) => setProductQuantity(parseFloat(e.target.value))}
               style={{ width: "250px" }}
             />
           </Box>

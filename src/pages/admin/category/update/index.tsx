@@ -3,15 +3,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import { updateCategory } from "../../../../constants/api";
 import { CATEGORY_NAME_IS_EMPTY } from "../../../../constants/message";
+import { typeCategory } from "../../../../types/typeCategory";
 
 const UpdateCategory = ({
   handleClose,
   categoryId,
+  category,
 }: {
   handleClose: Function;
   categoryId: number | null;
+  category: typeCategory;
 }) => {
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(category.name);
   const [errorCategoryName, setErrorCategoryName] = useState("");
 
   const isValid = () => {

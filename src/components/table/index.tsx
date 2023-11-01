@@ -85,7 +85,7 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                   ))
                 )}
                 <TableCell style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }} colSpan={1}>
-                  <IconButton onClick={() => handleEdit(item.id)} aria-label="edit" color="primary">
+                  <IconButton onClick={() => handleEdit(item)} aria-label="edit" color="primary">
                     <EditIcon />
                     <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Sửa</p>
                   </IconButton>

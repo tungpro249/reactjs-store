@@ -8,6 +8,7 @@ import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
 import AddProduct from "./add";
 import UpdateProduct from "./update";
+import { typeProduct } from "../../../types/typeProduct";
 
 export default function ProductAdmin() {
   const [products, setProducts] = useState([]);
@@ -29,6 +30,7 @@ export default function ProductAdmin() {
   const [open, setOpen] = useState(false);
 
   const [productId, setProductId] = useState<number | null>(null);
+  const [product, setProduct] = useState<typeProduct | null>(null);
 
   const handleAddProduct = () => {
     setType(ADD_TYPE);
@@ -41,10 +43,11 @@ export default function ProductAdmin() {
     setProductId(productId);
   };
 
-  const editProduct = (productId: number) => {
+  const editProduct = (product: typeProduct) => {
     setType(UPDATE_TYPE);
     setOpen(true);
-    setProductId(productId);
+    setProductId(product.id);
+    setProduct(product);
   };
 
   const handleClose = () => {
@@ -69,7 +72,8 @@ export default function ProductAdmin() {
 
   const formAdd = (handleClose: Function) => <AddProduct handleClose={handleClose} />;
   const formUpdate = (handleClose: Function) => (
-    <UpdateProduct handleClose={handleClose} productId={productId} />
+    // @ts-ignore
+    <UpdateProduct handleClose={handleClose} productId={productId} product={product} />
   );
   const formDelete = () => (
     <Box

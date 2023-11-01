@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
+import { VerticalBarChart } from "./components/VerticalBarChart";
 
 const Dashbroad = () => {
   return (
@@ -16,11 +17,17 @@ const Dashbroad = () => {
     >
       <Toolbar />
       <Grid container>
-        <Grid item xs={9}>
-          bieu do
+        <Grid item xs={9} pr={5}>
+          <VerticalBarChart />
         </Grid>
         <Grid item xs={3}>
-          overall
+          <p>Overall</p>
+          <Box>
+            <Box>Đơn hàng</Box>
+            <Box>Khách hàng</Box>
+            <Box>Sản phẩm</Box>
+            <Box>Doanh thu</Box>
+          </Box>
         </Grid>
       </Grid>
     </Box>
