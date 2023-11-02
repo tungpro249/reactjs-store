@@ -2,12 +2,45 @@ import { Box, Button, TextField, Grid, CssBaseline, Avatar, Typography, Link } f
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { forgotPassword } from "../../constants/api";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 
   const navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.post(forgotPassword(), {
+        email: email,
+      });
+      if (response.data !== null) {
+        alert("Vui lòng truy cập vào đường link trong mail của bạn.");
+        localStorage.setItem("user", JSON.stringify({ currentUser: response.data }));
+        navigate("/");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isValid = () => {
+    let check = true;
+    if (email.trim() === "") {
+      setErrorEmail("Vui lòng nhập email");
+      check = false;
+    }
+    return check;
+  };
+
+  const handleForgetPassword = () => {
+    if (isValid()) {
+      fetchData();
+    }
+  };
 
   return (
     <>
@@ -46,7 +79,12 @@ const ForgetPassword = () => {
                 helperText={errorEmail ? errorEmail : ""}
               />
               <Box style={{ display: "flex" }}>
-                <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => {}}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={handleForgetPassword}
+                >
                   Gửi email
                 </Button>
                 <Box sx={{ padding: "0 30px" }} />

@@ -4,6 +4,7 @@ const REGISTER_API = `${BASE}/auth/register`;
 const CHANGE_PASSWORD_API = `${BASE}/auth/change-password`;
 const updateInformation = (id: number) => `${BASE}/auth/change-info/${id}`;
 const resetPassword = () => `${BASE}/auth/reset-password`;
+const forgotPassword = () => `${BASE}/auth/forgot-password`;
 
 const GET_ALL_PRODUCT_API = `${BASE}/products/get-products`;
 const ADD_PRODUCT_API = `${BASE}/products/add-product`;
@@ -49,4 +50,5 @@ export {
   GET_ALL_ORDER_ITEMS_API,
   getAllOrderDetail,
   getOrderUser,
+  forgotPassword,
 };
