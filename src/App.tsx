@@ -26,6 +26,7 @@ import CheckoutForm from "./pages/customer/checkoutForm";
 import { loginSuccess, useAppController } from "./contexts/app";
 import Information from "./pages/auth/Information";
 import ResetPassword from "./pages/auth/ResetPassword";
+import LoyalCustomer from "./pages/admin/loyalCustomer";
 
 function App() {
   const location = useLocation();
@@ -56,6 +57,7 @@ function App() {
           <Route path="/account/register" element={<Register />} />
           <Route path="/account/change-password" element={<ChangePassword />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/customer" element={<LoyalCustomer />} />
           <Route
             path="/reset-password"
             element={isResetPasswordPage ? <ResetPassword /> : <NotFound />}

@@ -1,11 +1,23 @@
-import { Box, Button, Grid, Tabs, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tabs,
+  TextField,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
 import { getOrderUser, updateInformation } from "../../constants/api";
 import axios from "axios";
 import Tab from "@mui/material/Tab";
 import * as React from "react";
-import TableForm from "../../components/table";
+import { typeOder } from "../../types/typeOrder";
 
 const ProfileTab = () => {
   const [surname, setSurname] = useState("");
@@ -126,7 +138,7 @@ const ProfileTab = () => {
 };
 
 const OrdersTab = () => {
-  const [orders, setOrders] = useState("");
+  const [orders, setOrders] = useState<Array<typeOder>>([]);
   // @ts-ignore
   const [userController, userDispatch] = useAppController();
   useEffect(() => {
@@ -135,8 +147,8 @@ const OrdersTab = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(getOrderUser(userId));
-          if (response.data?.orderDetails) {
-            setOrders(response.data?.orderDetails);
+          if (response.data.orderDetails) {
+            setOrders(response.data.orderDetails);
           }
         } catch (error) {
           console.log("Error fetching categories:", error);
@@ -145,15 +157,6 @@ const OrdersTab = () => {
       fetchData();
     }
   }, [orders.length]);
-
-  const columns = [
-    { header: "Tên sản phẩm", field: "phone_number" },
-    { header: "Người đặt", field: "user_name" },
-    { header: "Số lượng", field: "quantity" },
-    { header: "Giá tiền", field: "price" },
-    { header: "Thời gian", field: "date_created" },
-    { header: "Trạng thái", field: "status" },
-  ];
 
   return (
     <Box
@@ -165,7 +168,32 @@ const OrdersTab = () => {
       }}
     >
       <h1 style={{ fontSize: "40px" }}>Đơn hàng</h1>
-      <TableForm columns={columns} data={orders} handleDelete={() => {}} handleEdit={() => {}} />
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Tên sản phẩm</TableCell>
+              <TableCell>Người đặt</TableCell>
+              <TableCell>Số lượng</TableCell>
+              <TableCell>Giá tiền</TableCell>
+              <TableCell>Thời gian</TableCell>
+              <TableCell>Trạng thái</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orders.map((order, index) => (
+              <TableRow key={index}>
+                <TableCell>{order?.phone_number}</TableCell>
+                <TableCell>{order?.user_name}</TableCell>
+                <TableCell>{order?.quantity}</TableCell>
+                <TableCell>{order?.price}</TableCell>
+                <TableCell>{order?.date_created}</TableCell>
+                <TableCell>{order?.status}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };
