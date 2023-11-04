@@ -5,6 +5,7 @@ const CHANGE_PASSWORD_API = `${BASE}/auth/change-password`;
 const updateInformation = (id: number) => `${BASE}/auth/change-info/${id}`;
 const resetPassword = () => `${BASE}/auth/reset-password`;
 const forgotPassword = () => `${BASE}/auth/forgot-password`;
+const REGISTER_LOYAL_CUSTOMER = `${BASE}/loyal/register-loyal-customer`;
 
 const GET_ALL_PRODUCT_API = `${BASE}/products/get-products`;
 const ADD_PRODUCT_API = `${BASE}/products/add-product`;
@@ -33,6 +34,7 @@ export {
   CHANGE_PASSWORD_API,
   updateInformation,
   resetPassword,
+  REGISTER_LOYAL_CUSTOMER,
   GET_ALL_PRODUCT_API,
   ADD_PRODUCT_API,
   updateProduct,
