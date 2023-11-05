@@ -9,10 +9,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LOGIN_API } from "../../constants/api";
 import { useNavigate } from "react-router-dom";
-import { loginSuccess, useAppController } from "../../contexts/app";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,15 +20,12 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
 
-  // @ts-ignore
-  const [userController, userDispatch] = useAppController();
-
   const handleLogin = () => {
     if (isValid()) {
       fetchData();
     }
   };
-  
+
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       handleLogin();

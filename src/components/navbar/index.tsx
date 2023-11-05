@@ -135,6 +135,17 @@ const Navbar = () => {
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                   <Link
+                    href={"/account/my-order"}
+                    style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                  >
+                    <ListItemIcon>
+                      <AccountCircle />
+                    </ListItemIcon>
+                    <ListItemText primary="Đơn hàng" />
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Link
                     href={"/account/change-password"}
                     style={{ textDecoration: "none", display: "flex", color: "inherit" }}
                   >

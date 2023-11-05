@@ -12,29 +12,45 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useAppController } from "../../contexts/app";
-import { getOrderUser, updateInformation } from "../../constants/api";
+import { loginSuccess, useAppController } from "../../contexts/app";
+import { getInfoUser, getOrderUser, updateInformation } from "../../constants/api";
 import axios from "axios";
-import Tab from "@mui/material/Tab";
 import * as React from "react";
-import { typeOder } from "../../types/typeOrder";
+import { typeUser } from "../../types/typeUser";
 
-const ProfileTab = () => {
+const Information = () => {
   const [surname, setSurname] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<number | null>(null);
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [user, setUser] = useState<typeUser | null>(null);
 
   // @ts-ignore
   const [userController, userDispatch] = useAppController();
 
   useEffect(() => {
-    if (userController.user) {
-      setSurname(userController?.user?.currentUser?.data?.last_name);
-      setFirstName(userController?.user?.currentUser?.data?.first_name);
-      setEmail(userController?.user?.currentUser?.data?.email);
-      setPhone(userController?.user?.currentUser?.data?.phone);
+    if (user) {
+      setSurname(user.lastName);
+      setFirstName(user.firstName);
+      setEmail(user.email);
+      setPhone(user.phone);
+      setAddress(user.address);
     }
+  }, [user]);
+
+  const getInformation = async () => {
+    const userId = userController.user?.currentUser?.data.id;
+    if (userId) {
+      const getInformationResponse = await axios.get(getInfoUser(userId));
+      if (getInformationResponse) {
+        setUser(getInformationResponse.data);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getInformation();
   }, [userController]);
 
   const handleUpdateInformation = async () => {
@@ -45,6 +61,7 @@ const ProfileTab = () => {
         first_name: firstName,
         last_name: surname,
         email,
+        address,
       });
       if (updateInformationResponse) {
         alert("Cập nhật thành công");
@@ -87,7 +104,9 @@ const ProfileTab = () => {
             fullWidth
             sx={{ marginBottom: 2 }}
             value={firstName}
-            onChange={(e: any) => setFirstName(e.target.value)}
+            onChange={(e: any) => {
+              setFirstName(e.target.value);
+            }}
           />
         </Grid>
 
@@ -116,6 +135,19 @@ const ProfileTab = () => {
             onChange={(e: any) => setPhone(e.target.value)}
           />
         </Grid>
+
+        <Grid item xs={2} display={"flex"}>
+          <p>Địa chỉ</p>
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            label=""
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={address}
+            onChange={(e: any) => setAddress(e.target.value)}
+          />
+        </Grid>
       </Grid>
       <Box style={{ display: "flex", justifyContent: "center" }}>
         <Button
@@ -134,93 +166,6 @@ const ProfileTab = () => {
         </Button>
       </Box>
     </Box>
-  );
-};
-
-const OrdersTab = () => {
-  const [orders, setOrders] = useState<Array<typeOder>>([]);
-  // @ts-ignore
-  const [userController, userDispatch] = useAppController();
-  useEffect(() => {
-    const userId = userController.user?.currentUser?.data.id;
-    if (userId) {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(getOrderUser(userId));
-          if (response.data.orderDetails) {
-            setOrders(response.data.orderDetails);
-          }
-        } catch (error) {
-          console.log("Error fetching categories:", error);
-        }
-      };
-      fetchData();
-    }
-  }, [orders.length]);
-
-  return (
-    <Box
-      sx={{
-        padding: "50px 0px 190px 0",
-        width: "90%",
-        margin: "auto",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ fontSize: "40px" }}>Đơn hàng</h1>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Tên sản phẩm</TableCell>
-              <TableCell>Người đặt</TableCell>
-              <TableCell>Số lượng</TableCell>
-              <TableCell>Giá tiền</TableCell>
-              <TableCell>Thời gian</TableCell>
-              <TableCell>Trạng thái</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders.map((order, index) => (
-              <TableRow key={index}>
-                <TableCell>{order?.phone_number}</TableCell>
-                <TableCell>{order?.user_name}</TableCell>
-                <TableCell>{order?.quantity}</TableCell>
-                <TableCell>{order?.price}</TableCell>
-                <TableCell>{order?.date_created}</TableCell>
-                <TableCell>{order?.status}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
-  );
-};
-
-const Information = () => {
-  const [activeTab, setActiveTab] = useState("profile");
-
-  const handleTabChange = (event: any, newValue: string) => {
-    setActiveTab(newValue);
-  };
-
-  return (
-    <>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={activeTab}
-        onChange={handleTabChange}
-      >
-        <Tab label="Hồ sơ của tôi" value="profile" sx={{ marginRight: "auto" }} />
-        <Tab label="Đơn hàng" value="orders" sx={{ marginRight: "auto" }} />
-        <Box>
-          {activeTab === "profile" && <ProfileTab />}
-          {activeTab === "orders" && <OrdersTab />}
-        </Box>
-      </Tabs>
-    </>
   );
 };
 

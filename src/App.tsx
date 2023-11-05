@@ -27,6 +27,7 @@ import { loginSuccess, useAppController } from "./contexts/app";
 import Information from "./pages/auth/Information";
 import ResetPassword from "./pages/auth/ResetPassword";
 import LoyalCustomer from "./pages/admin/loyalCustomer";
+import OrderCustomer from "./pages/customer/order";
 
 function App() {
   const location = useLocation();
@@ -81,6 +82,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/product/:id" element={<DetailProduct />} />
+              <Route path={"/account/my-order"} element={<OrderCustomer />} />
               {/*tab rows*/}
               <Route path="/shipping-policy" element={<VerticalTabs />} />
               <Route path="/payment-guide" element={<VerticalTabs />} />

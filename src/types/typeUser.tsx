@@ -5,4 +5,5 @@ export interface typeUser {
   phone: number;
   password: string;
   email: string;
+  address: string;
 }

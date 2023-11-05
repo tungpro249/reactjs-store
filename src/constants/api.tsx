@@ -6,6 +6,7 @@ const updateInformation = (id: number) => `${BASE}/auth/change-info/${id}`;
 const resetPassword = () => `${BASE}/auth/reset-password`;
 const forgotPassword = () => `${BASE}/auth/forgot-password`;
 const REGISTER_LOYAL_CUSTOMER = `${BASE}/loyal/register-loyal-customer`;
+const getInfoUser = (id: number) => `${BASE}/auth/get-info/${id}`;
 
 const GET_ALL_PRODUCT_API = `${BASE}/products/get-products`;
 const ADD_PRODUCT_API = `${BASE}/products/add-product`;
@@ -53,4 +54,5 @@ export {
   getAllOrderDetail,
   getOrderUser,
   forgotPassword,
+  getInfoUser,
 };
