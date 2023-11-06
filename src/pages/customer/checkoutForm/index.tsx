@@ -15,6 +15,8 @@ import {
 import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
+import axios from "axios";
+import { payment } from "../../../constants/api";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -35,10 +37,7 @@ const CheckoutForm = () => {
     setProductInCart(JSON.parse(localStorage.getItem("cart")).cart);
   }, [localStorage.getItem("cart")]);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    // Gửi dữ liệu thông tin mua hàng qua API để xử lý đơn hàng
+  const handleSubmit = () => {
     const orderData = {
       name: name,
       address: address,
@@ -46,9 +45,18 @@ const CheckoutForm = () => {
       phone: phone,
     };
 
-    // Gọi API để xử lý đơn hàng
-    // ...
+    axios
+      .post(payment, orderData)
+      .then((response) => {
+        // Xử lý kết quả thành công
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Xử lý lỗi
+        console.error(error);
+      });
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -149,7 +157,14 @@ const CheckoutForm = () => {
             </RadioGroup>
           </FormControl>
           <Box style={{ display: "flex", justifyContent: "center" }}>
-            <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => {}}>
+            <Button
+              type="button"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
               Đặt hàng
             </Button>
             <Box sx={{ padding: "0 30px" }} />

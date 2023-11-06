@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, Grid } from "@mui/material";
+import { Box, Button, Card, CardActions, Grid, Slider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
@@ -14,6 +14,8 @@ const Collections = () => {
   const [categoryId, setCategoryId] = useState<number | null>(null);
   //@ts-ignore
   const [, productDispatch] = useProductController();
+
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
 
   // @ts-ignore
   const [userController, userDispatch] = useAppController();
@@ -123,9 +125,28 @@ const Collections = () => {
   };
 
   const filteredProducts = categoryId
-    ? products.filter((product: typeProduct) => product.category.id === categoryId)
-    : products;
+    ? products.filter(
+        (product: typeProduct) =>
+          product.category.id === categoryId &&
+          product.price >= priceRange.min &&
+          product.price <= priceRange.max
+      )
+    : products.filter(
+        (product: typeProduct) => product.price >= priceRange.min && product.price <= priceRange.max
+      );
 
+  const handlePriceRangeChange = (event: any, newValue: any) => {
+    setPriceRange({ min: newValue[0], max: newValue[1] });
+  };
+  useEffect(() => {
+    products.map((item: typeProduct) => {
+      console.log(item.price, priceRange.min, item.price, priceRange.max);
+      if (item.price > priceRange.min && item.price < priceRange.max) {
+        console.log("item", item);
+        return item;
+      }
+    });
+  }, [priceRange]);
   return (
     <>
       <Grid container p={5}>
@@ -146,10 +167,18 @@ const Collections = () => {
         <Grid item xs={9} md={10}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <h3>{renderName()}</h3>
-            <Box sx={{ display: "flex" }}>
-              <p>Kích cỡ</p>
-              <Box sx={{ padding: "0 10px" }} />
-              <p>Giá cả</p>
+            <Box>
+              <p>Giá tiền</p>
+              <Box sx={{ display: "flex", width: "100px" }}>
+                <Slider
+                  value={[priceRange.min, priceRange.max]}
+                  onChange={handlePriceRangeChange}
+                  min={0}
+                  max={100000000}
+                  step={10000}
+                  valueLabelDisplay="auto"
+                />
+              </Box>
             </Box>
           </Box>
           <Grid container pt={3}>
