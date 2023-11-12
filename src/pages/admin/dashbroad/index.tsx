@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { VerticalBarChart } from "./components/VerticalBarChart";
+import axios from "axios";
+import { GET_STATISTICAL } from "../../../constants/api";
 
 const Dashbroad = () => {
+  const [statistical, setStatisticalResponse] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const statisticalResponse = await axios.get(GET_STATISTICAL);
+        if (statisticalResponse.data) {
+          setStatisticalResponse(statisticalResponse.data);
+        }
+      } catch (error) {
+        console.log("Error fetching cart items:", error);
+      }
+    };
+    fetchCartItems();
+  }, []);
+
   return (
     <Box
       component="main"
@@ -21,12 +39,12 @@ const Dashbroad = () => {
           <VerticalBarChart />
         </Grid>
         <Grid item xs={3}>
-          <p>Overall</p>
+          <h3>TỔNG QUAN</h3>
           <Box>
-            <Box>Đơn hàng</Box>
-            <Box>Khách hàng</Box>
-            <Box>Sản phẩm</Box>
-            <Box>Doanh thu</Box>
+            <Box>Đơn hàng: {statistical?.totalOrders}</Box>
+            <Box>Khách hàng: {statistical?.totalUsers}</Box>
+            <Box>Sản phẩm: {statistical?.totalProducts}</Box>
+            <Box>Doanh thu: {statistical?.totalRevenue} VNĐ</Box>
           </Box>
         </Grid>
       </Grid>

@@ -120,10 +120,13 @@ const DetailProduct = () => {
                   {productDetail?.name.toUpperCase()}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" component="p">
-                  {productDetail.description}
+                  Mô tả: {productDetail.description}
                 </Typography>
                 <Typography variant="h6" color="secondary" component="p">
-                  {productDetail.price}đ
+                  Giá tiền: {productDetail.price}đ
+                </Typography>
+                <Typography variant="body1" color="textSecondary" component="p">
+                  Sô lượng trong kho: {productDetail.quantity}
                 </Typography>
               </CardContent>
 

@@ -7,26 +7,11 @@ const SliderCarosel = () => (
     <div>
       <img
         alt=""
-        src="https://file.hstatic.net/200000182297/file/banner_web_15_02_23_bc417e51b3bb4665845c5e80fa268e1c.jpg"
+        src="https://theme.hstatic.net/200000690725/1001078549/14/slide_1_img.jpg?v=202"
       />
     </div>
     <div>
-      <img
-        alt=""
-        src="https://file.hstatic.net/200000182297/file/sacc_3ac903271d5a4ea0b08e55159bbabfd0.jpg"
-      />
-    </div>
-    <div>
-      <img
-        alt=""
-        src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840"
-      />
-    </div>
-    <div>
-      <img
-        alt=""
-        src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840"
-      />
+      <img alt="" src="https://360.com.vn/wp-content/uploads/2023/11/BANNER-WEB-1350X490.jpg" />
     </div>
     <div>
       <img

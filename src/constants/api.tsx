@@ -29,6 +29,8 @@ const GET_ALL_ORDER_ITEMS_API = `${BASE}/orders/orders`;
 const getAllOrderDetail = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
 const getOrderUser = (userId: number) => `${BASE}/orders/order/${userId}`;
 
+const GET_STATISTICAL = `${BASE}/stats`;
+
 export {
   LOGIN_API,
   REGISTER_API,
@@ -55,4 +57,5 @@ export {
   getOrderUser,
   forgotPassword,
   getInfoUser,
+  GET_STATISTICAL,
 };
