@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,24 +25,24 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: labels.map(() => 300),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => 300),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
-
 export function VerticalBarChart() {
-  return <Bar options={options} data={data} />;
+  const [chartData, setChartData] = useState(null);
+
+  useEffect(() => {
+    // Gọi API để lấy dữ liệu
+    fetch("http://localhost:8000/api/total-incomes")
+      .then((response) => response.json())
+      .then((data) => {
+        setChartData(data);
+      })
+      .catch((error) => {
+        console.error("Lỗi khi lấy dữ liệu từ API: ", error);
+      });
+  }, []);
+
+  if (!chartData) {
+    return null;
+  }
+
+  return <Bar options={options} data={chartData} />;
 }
