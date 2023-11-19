@@ -5,6 +5,8 @@ import TableForm from "../../../components/table";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_ALL_ORDER_ITEMS_API } from "../../../constants/api";
+import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import { typeOder } from "../../../types/typeOrder";
 
 const Order = () => {
   const [open, setOpen] = useState(false);
@@ -27,6 +29,30 @@ const Order = () => {
     };
     fetchData();
   }, []);
+
+  const [type, setType] = useState("");
+  const [orderId, setOrderId] = useState<number | null>(null);
+  const [order, setOrder] = useState<typeOder | null>(null);
+
+  // const showModalContent = () => {
+  //   if (type === ADD_TYPE) return formAdd(handleClose);
+  //   if (type === UPDATE_TYPE) return formUpdate(handleClose);
+  //   if (type === DELETE_TYPE) return formDelete(handleClose);
+  //   return <div />;
+  // };
+
+  const handleDeleteOrder = (orderId: number) => {
+    setType(DELETE_TYPE);
+    setOpen(true);
+    setOrderId(orderId);
+  };
+
+  const handleEditOrder = (orderItem: typeOder) => {
+    setType(UPDATE_TYPE);
+    setOpen(true);
+    setOrderId(orderItem.id);
+    setOrder(orderItem);
+  };
 
   const columns = [
     { header: "Tên sản phẩm", field: "product_name" },

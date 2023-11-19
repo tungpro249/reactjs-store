@@ -20,7 +20,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
+      text: "Thống kê số tiền qua các tháng",
     },
   },
 };

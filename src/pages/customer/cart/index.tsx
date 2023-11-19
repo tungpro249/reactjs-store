@@ -16,7 +16,13 @@ import {
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
-import { deleteCart, getAllCart, payment, updateCart } from "../../../constants/api";
+import {
+  decreaseItemCart,
+  deleteCart,
+  getAllCart,
+  payment,
+  updateCart,
+} from "../../../constants/api";
 import axios from "axios";
 import { useAppController } from "../../../contexts/app";
 import IconButton from "@mui/material/IconButton";
@@ -75,7 +81,7 @@ const Cart = () => {
   const handleDecreaseQuantity = async (item: typeProduct) => {
     if (quantity && item.quantity > 1) {
       try {
-        const updateQuantityResponse = await axios.put(updateCart(item.id), {
+        const updateQuantityResponse = await axios.put(decreaseItemCart(item.id), {
           quantity: item.quantity - 1,
         });
         if (updateQuantityResponse.data) {
