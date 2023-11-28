@@ -93,6 +93,7 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                     onClick={() => handleDelete(item.id)}
                     aria-label="delete"
                     color="error"
+                    style={{ display: window.location.pathname === "/order" ? "none" : "" }}
                   >
                     <DeleteIcon />
                     <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Xóa</p>

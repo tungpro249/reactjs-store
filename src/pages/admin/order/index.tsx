@@ -1,12 +1,13 @@
 import Toolbar from "@mui/material/Toolbar";
-import { Box, Grid, Modal } from "@mui/material";
+import { Box, Button, Grid, Modal, TextField } from "@mui/material";
 import SidePath from "../../../components/sidePath";
 import TableForm from "../../../components/table";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_ALL_ORDER_ITEMS_API } from "../../../constants/api";
-import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../constants/api";
+import { DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
 import { typeOder } from "../../../types/typeOrder";
+import StatusAutocomplete from "./components/AutoComplete";
 
 const Order = () => {
   const [open, setOpen] = useState(false);
@@ -14,7 +15,7 @@ const Order = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const [orders, setOrders] = useState("");
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,17 +35,75 @@ const Order = () => {
   const [orderId, setOrderId] = useState<number | null>(null);
   const [order, setOrder] = useState<typeOder | null>(null);
 
-  // const showModalContent = () => {
-  //   if (type === ADD_TYPE) return formAdd(handleClose);
-  //   if (type === UPDATE_TYPE) return formUpdate(handleClose);
-  //   if (type === DELETE_TYPE) return formDelete(handleClose);
-  //   return <div />;
-  // };
-
-  const handleDeleteOrder = (orderId: number) => {
-    setType(DELETE_TYPE);
-    setOpen(true);
-    setOrderId(orderId);
+  const [status, setStatus] = useState("");
+  const changeStatus = async () => {
+    // @ts-ignore
+    const changeStatusResponse = await axios.put(updateOrder(order?.id), { status: status });
+    handleClose();
+    window.location.reload();
+  };
+  const showModalContent = () => {
+    if (type === UPDATE_TYPE)
+      return (
+        <Box
+          style={{
+            background: "white",
+            margin: "20vh auto",
+            textAlign: "center",
+            padding: "50px",
+            width: "400px",
+            borderRadius: "10px",
+          }}
+        >
+          <h3>Sửa</h3>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <TextField placeholder={"Tên sản phẩm"} value={order?.product_name} disabled />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <TextField placeholder={"Tên tên người đặt"} value={order?.user_name} disabled />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <TextField placeholder={"Số lượng"} value={order?.quantity} disabled />
+          </Box>
+          <br />
+          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <TextField placeholder={"Giá tiền"} value={`${order?.price} VNĐ`} disabled />
+          </Box>
+          <br />
+          <Box width={"56%"} margin={"auto"}>
+            <StatusAutocomplete status={setStatus} />
+          </Box>
+          <Box style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              type="button"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                // @ts-ignore
+                changeStatus(order?.id);
+              }}
+            >
+              Xác nhận
+            </Button>
+            <Box sx={{ padding: "0 30px" }} />
+            <Button
+              type="button"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color={"error"}
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              Quay lại
+            </Button>
+          </Box>
+        </Box>
+      );
+    return <div />;
   };
 
   const handleEditOrder = (orderItem: typeOder) => {
@@ -71,9 +130,9 @@ const Order = () => {
           <Box pt={5}>
             <TableForm
               columns={columns}
-              data={orders}
+              data={orders.filter((item: any) => item?.status !== "Giao hàng thành công")}
               handleDelete={() => {}}
-              handleEdit={() => {}}
+              handleEdit={handleEditOrder}
             />
           </Box>
         </Grid>
@@ -84,7 +143,7 @@ const Order = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div />
+        {showModalContent()}
       </Modal>
     </>
   );

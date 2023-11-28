@@ -1,7 +1,6 @@
 export interface typeOder {
   id: number;
-  firstName: string;
-  lastName: string;
+  product_name: string;
   phone_number: number;
   user_name: string;
   date_created: string;

@@ -29,6 +29,7 @@ const payment = `${BASE}/orders/payment`;
 const GET_ALL_ORDER_ITEMS_API = `${BASE}/orders/orders`;
 const getAllOrderDetail = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
 const getOrderUser = (userId: number) => `${BASE}/orders/order/${userId}`;
+const updateOrder = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
 
 const GET_STATISTICAL = `${BASE}/stats`;
 
@@ -60,4 +61,5 @@ export {
   getInfoUser,
   GET_STATISTICAL,
   decreaseItemCart,
+  updateOrder,
 };

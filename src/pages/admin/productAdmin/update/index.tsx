@@ -16,6 +16,7 @@ const UpdateProduct = ({
   product: typeProduct;
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [existingImage, setExistingImage] = useState<string | null>(product.image);
   const [productName, setProductName] = useState(product.name);
   const [productDescription, setProductDescription] = useState(product.description);
   const [productPrice, setProductPrice] = useState(product.price);
@@ -35,18 +36,22 @@ const UpdateProduct = ({
   };
 
   const handleUpdateProductApi = async () => {
-    if (productId && selectedImage) {
+    if (productId) {
       try {
         const formData = new FormData();
         formData.append("name", productName);
         formData.append("description", productDescription);
         formData.append("price", productPrice.toString());
         formData.append("quantity", productQuantity.toString());
+
         if (selectedImage) {
           formData.append("image", selectedImage);
+        } else {
+          formData.append("image", existingImage || "");
         }
+
         if (category) {
-          formData.append("category_id", category?.id.toString());
+          formData.append("category_id", category.id.toString());
         }
 
         const updateResponseApi = await axios.put(updateProduct(productId), formData);
@@ -83,7 +88,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image={`http://localhost:1000/${product.image}`}
+                image={`http://localhost:1000/${existingImage}`}
                 alt="Choose Image"
               />
             )}
