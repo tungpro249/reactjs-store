@@ -79,7 +79,7 @@ const Cart = () => {
   };
 
   const handleDecreaseQuantity = async (item: typeProduct) => {
-    if (quantity && item.quantity > 1) {
+    if (item.quantity > 1) {
       try {
         const updateQuantityResponse = await axios.put(decreaseItemCart(item.id), {
           quantity: item.quantity - 1,

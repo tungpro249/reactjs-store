@@ -45,7 +45,7 @@ const OrderCustomer = () => {
         textAlign: "center",
       }}
     >
-      <h1 style={{fontSize: "40px"}}>Đơn hàng</h1>
+      <h1 style={{ fontSize: "40px" }}>Đơn hàng</h1>
       <TableContainer>
         <Table>
           <TableHead>
@@ -61,7 +61,7 @@ const OrderCustomer = () => {
           <TableBody>
             {orders.map((order, index) => (
               <TableRow key={index}>
-                <TableCell>{order?.phone_number}</TableCell>
+                <TableCell>{order?.product_name}</TableCell>
                 <TableCell>{order?.user_name}</TableCell>
                 <TableCell>{order?.quantity}</TableCell>
                 <TableCell>{order?.price}</TableCell>

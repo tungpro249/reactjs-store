@@ -174,8 +174,8 @@ const Collections = () => {
                   value={[priceRange.min, priceRange.max]}
                   onChange={handlePriceRangeChange}
                   min={0}
-                  max={100000000}
-                  step={10000}
+                  max={999999}
+                  step={100000}
                   valueLabelDisplay="auto"
                 />
               </Box>

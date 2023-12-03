@@ -32,7 +32,7 @@ const UpdateCategory = ({
     if (categoryId && isValid()) {
       try {
         const response = await axios.put(updateCategory(categoryId), { name });
-        alert("Thêm thành công");
+        alert("Sửa thành công");
         window.location.reload();
       } catch (error) {
         console.log("Error deleting data:", error);

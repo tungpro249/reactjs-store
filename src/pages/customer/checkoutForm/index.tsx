@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 import axios from "axios";
-import { payment } from "../../../constants/api";
+import { payment, paymentWithoutAccount } from "../../../constants/api";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -39,14 +39,22 @@ const CheckoutForm = () => {
 
   const handleSubmit = () => {
     const orderData = {
-      name: name,
-      address: address,
-      email: email,
-      phone: phone,
+      userData: {
+        email: email,
+        first_name: name.split(" ")[0],
+        last_name: name.split(" ")[1],
+      },
+      items: [
+        {
+          product_id: productInCart?.id,
+          quantity: 1,
+          price: productInCart?.price,
+        },
+      ],
     };
 
     axios
-      .post(payment, orderData)
+      .post(paymentWithoutAccount, orderData)
       .then((response) => {
         // Xử lý kết quả thành công
         console.log(response.data);
@@ -72,13 +80,28 @@ const CheckoutForm = () => {
             </p>
             <br />
             <Box>
-              <TextField placeholder={"Họ và tên"} fullWidth />
+              <TextField
+                placeholder={"Họ và tên"}
+                fullWidth
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </Box>
             <br />
             <Box display={"flex"}>
-              <TextField placeholder={"email"} fullWidth />
+              <TextField
+                placeholder={"email"}
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <Box pr={1} />
-              <TextField placeholder={"số điện thoại"} fullWidth />
+              <TextField
+                placeholder={"số điện thoại"}
+                fullWidth
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </Box>
             <Box>
               <br />

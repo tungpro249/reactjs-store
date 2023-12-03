@@ -40,6 +40,8 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
       }
       const response = await axios.post(ADD_PRODUCT_API, formData);
       handleClose();
+      alert("Thêm sản phẩm thành công");
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

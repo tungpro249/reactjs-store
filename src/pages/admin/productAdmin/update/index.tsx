@@ -47,7 +47,7 @@ const UpdateProduct = ({
         if (selectedImage) {
           formData.append("image", selectedImage);
         } else {
-          formData.append("image", existingImage || "");
+          formData.append("image", "");
         }
 
         if (category) {
@@ -88,7 +88,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image={`http://localhost:1000/${existingImage}`}
+                image={`http://localhost:1000/${product.image}`}
                 alt="Choose Image"
               />
             )}
