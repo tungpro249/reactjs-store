@@ -15,40 +15,40 @@ const ReceiveNotifyEmail = () => {
       check = false;
     }
     return check;
-  }
+  };
 
   const handleRegisterLoyalCustomer = () => {
     if (isValid()) {
       fetchData();
     }
-  }
+  };
 
   const fetchData = async () => {
     try {
       const response = await axios.post(REGISTER_LOYAL_CUSTOMER, {
-        email: email
+        email: email,
       });
       if (response.data !== null) {
         alert("Đăng kí thành công.");
-        localStorage.setItem("user", JSON.stringify({currentUser: response.data}));
+        localStorage.setItem("user", JSON.stringify({ currentUser: response.data }));
       }
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <Box style={{textAlign: "center", background: "#f5f5f5", lineHeight: "1.5"}} pt={8} pb={8}>
+    <Box style={{ textAlign: "center", background: "#f5f5f5", lineHeight: "1.5" }} pt={8} pb={8}>
       <h1>ĐĂNG KÝ BẢN TIN</h1>
-      <h3>Đăng ký nhận bản tin NEM để được cập nhật những mẫu thiết kế mới nhất</h3>
-      <br/>
+      <h3>Đăng ký nhận bản tin FASHION FRENZY để được cập nhật những mẫu thiết kế mới nhất</h3>
+      <br />
       <TextField
         id="outlined-basic"
         label=""
         placeholder={"your email"}
         variant="outlined"
-        sx={{width: "20%"}}
+        sx={{ width: "20%" }}
         onChange={(e: any) => {
-          setEmail(e.target.value)
+          setEmail(e.target.value);
         }}
         helperText={!!errorEmail}
         error={!!errorEmail}
@@ -62,7 +62,7 @@ const ReceiveNotifyEmail = () => {
           fontWeight: "700",
         }}
         onClick={() => {
-          handleRegisterLoyalCustomer()
+          handleRegisterLoyalCustomer();
         }}
       >
         Đăng ký

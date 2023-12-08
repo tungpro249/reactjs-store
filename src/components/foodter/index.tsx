@@ -9,7 +9,7 @@ const Foodter = () => {
         <Grid container color={"#fff"} padding={"0 150px"}>
           <Grid item xs={3} md={3} sm={3} lg={3} pr={3} pl={4}>
             <Box>
-              <h2>Shop thời trang TinTin</h2>
+              <h2>Shop thời trang FRENZY</h2>
               <address>
                 Địa chỉ: Lô 1+2, Ô quy hoạch E.2/NO7 đường Lâm Hạ phường Bồ Đề, quận Long Biên, Hà
                 Nội <br />

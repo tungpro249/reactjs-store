@@ -56,6 +56,7 @@ const OrderCustomer = () => {
               <TableCell>Giá tiền</TableCell>
               <TableCell>Thời gian</TableCell>
               <TableCell>Trạng thái</TableCell>
+              <TableCell>Hành động</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -67,6 +68,10 @@ const OrderCustomer = () => {
                 <TableCell>{order?.price}</TableCell>
                 <TableCell>{order?.date_created}</TableCell>
                 <TableCell>{order?.status}</TableCell>
+                <Box>
+                  <TableCell>Hủy</TableCell>
+                  <TableCell>Trả hàng</TableCell>
+                </Box>
               </TableRow>
             ))}
           </TableBody>
