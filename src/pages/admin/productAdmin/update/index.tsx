@@ -23,6 +23,27 @@ const UpdateProduct = ({
   const [productQuantity, setProductQuantity] = useState(product.quantity);
   const [category, setCategory] = useState<typeCategory | null>(product.category);
 
+  const [nameError, setNameError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [quantityError, setQuantityError] = useState("");
+
+  const validData = () => {
+    let check = true;
+    if (productName.trim() === "") {
+      setNameError("Tên không được để trống");
+      check = false;
+    }
+    // if (productPrice === "") {
+    //   setPriceError("Giá tiền không được để trống");
+    //   check = false;
+    // }
+    if (productQuantity === null) {
+      setQuantityError("Số lượng không được để trống");
+      check = false;
+    }
+    return check;
+  };
+
   const handleImageClick = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -36,7 +57,7 @@ const UpdateProduct = ({
   };
 
   const handleUpdateProductApi = async () => {
-    if (productId) {
+    if (productId && validData()) {
       try {
         const formData = new FormData();
         formData.append("name", productName);

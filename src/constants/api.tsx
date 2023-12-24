@@ -20,7 +20,7 @@ const updateCategory = (id: number) => `${BASE}/categories/update-category/${id}
 const deleteCategory = (id: number) => `${BASE}/categories/delete-category/${id}`;
 
 const getAllCart = (userId: number) => `${BASE}/carts/cart/${userId}`;
-const addToCart = (userId: number) => `${BASE}/carts//cart/${userId}/add`;
+const addToCart = (userId: number) => `${BASE}/carts/cart/${userId}/add`;
 const updateCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
 const decreaseItemCart = (cartItemId: number) => `${BASE}/carts/cart/item-decrease/${cartItemId}`;
 const deleteCart = (cartItemId: number) => `${BASE}/carts/cart/item/${cartItemId}`;
@@ -31,6 +31,7 @@ const getAllOrderDetail = (orderId: number) => `${BASE}/orders/orders/${orderId}
 const getOrderUser = (userId: number) => `${BASE}/orders/order/${userId}`;
 const updateOrder = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
 const paymentWithoutAccount = `${BASE}/orders/place-order`;
+const deleteOrder = (orderId: number) => `${BASE}/orders/orders/${orderId}`;
 
 const GET_STATISTICAL = `${BASE}/stats`;
 
@@ -64,4 +65,5 @@ export {
   decreaseItemCart,
   updateOrder,
   paymentWithoutAccount,
+  deleteOrder,
 };

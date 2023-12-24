@@ -13,6 +13,27 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   const [category, setCategory] = useState<typeCategory | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
+  const [nameError, setNameError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [quantityError, setQuantityError] = useState("");
+
+  const validData = () => {
+    let check = true;
+    if (name.trim() === "") {
+      setNameError("Tên không được để trống");
+      check = false;
+    }
+    if (price.trim() === "") {
+      setPriceError("Giá tiền không được để trống");
+      check = false;
+    }
+    if (quantity.trim() === "") {
+      setQuantityError("Số lượng không được để trống");
+      check = false;
+    }
+    return check;
+  };
+
   const handleImageClick = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -26,25 +47,30 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   };
 
   const handleAddProductApi = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("price", price);
-      formData.append("quantity", quantity);
-      if (selectedImage) {
-        formData.append("image", selectedImage);
+    if (validData())
+      try {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("price", price);
+        formData.append("quantity", quantity);
+        if (selectedImage) {
+          formData.append("image", selectedImage);
+        }
+        if (category) {
+          formData.append("category_id", category?.id.toString());
+        }
+        const response = await axios.post(ADD_PRODUCT_API, formData);
+        if (response !== null) {
+          handleClose();
+          alert("Thêm sản phẩm thành công");
+          window.location.reload();
+        } else {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error);
       }
-      if (category) {
-        formData.append("category_id", category?.id.toString());
-      }
-      const response = await axios.post(ADD_PRODUCT_API, formData);
-      handleClose();
-      alert("Thêm sản phẩm thành công");
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -86,6 +112,8 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               style={{ width: "250px" }}
+              error={!!nameError}
+              helperText={nameError}
             />
           </Box>
           <br />
@@ -101,6 +129,8 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               style={{ width: "250px" }}
+              error={!!priceError}
+              helperText={priceError}
             />
           </Box>
           <br />
@@ -111,6 +141,8 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               style={{ width: "250px" }}
+              error={!!quantityError}
+              helperText={quantityError}
             />
           </Box>
           <br />

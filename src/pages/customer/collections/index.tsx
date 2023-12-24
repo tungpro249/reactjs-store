@@ -98,25 +98,29 @@ const Collections = () => {
   };
 
   const handleBuy = async (item: typeProduct) => {
-    const isLoggedIn = userController.isLogin;
+    if (item.quantity > 0) {
+      const isLoggedIn = userController.isLogin;
 
-    if (isLoggedIn) {
-      const userId = userController?.user?.currentUser?.data.id;
-      if (userId) {
-        try {
-          const response = await axios.post(addToCart(userId), {
-            productId: item.id,
-            quantity: 1,
-          });
-        } catch (error) {
-          console.error(error);
-          alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+      if (isLoggedIn) {
+        const userId = userController?.user?.currentUser?.data.id;
+        if (userId) {
+          try {
+            const response = await axios.post(addToCart(userId), {
+              productId: item.id,
+              quantity: 1,
+            });
+          } catch (error) {
+            console.error(error);
+            alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+          }
         }
+        navigate("/cart");
+      } else {
+        localStorage.setItem("cart", JSON.stringify({ cart: item }));
+        navigate("/checkout-form");
       }
-      navigate("/cart");
     } else {
-      localStorage.setItem("cart", JSON.stringify({ cart: item }));
-      navigate("/checkout-form");
+      alert("Sản phẩm đang hết hàng");
     }
   };
 
@@ -208,7 +212,11 @@ const Collections = () => {
                         color: "aliceblue",
                       }}
                       onClick={() => {
-                        handleAddToCart(item?.id);
+                        if (item.quantity > 0) {
+                          handleAddToCart(item?.id);
+                        } else {
+                          alert("Sản phẩm đang hết hàng.");
+                        }
                       }}
                     >
                       Thêm vào giỏ hàng

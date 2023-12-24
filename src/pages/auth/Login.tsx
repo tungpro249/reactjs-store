@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,15 +10,16 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useState } from "react";
 import { LOGIN_API } from "../../constants/api";
 import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Track password visibility
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -65,7 +67,13 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
+      // @ts-ignore
+      setPasswordError(error.response.data.message);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -91,7 +99,7 @@ const Login = () => {
             <Typography component="h1" variant="h5">
               Đăng nhập
             </Typography>
-            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1, width: "500px" }}>
               <TextField
                 margin="normal"
                 required
@@ -105,19 +113,33 @@ const Login = () => {
                 error={!!emailError}
                 helperText={emailError !== "" ? emailError : ""}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                label="Mật khẩu"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                error={!!passwordError}
-                helperText={passwordError !== "" ? passwordError : ""}
-              />
+              <Box style={{ display: "flex" }}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  label="Mật khẩu"
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  autoComplete="current-password"
+                  error={!!passwordError}
+                  helperText={passwordError !== "" ? passwordError : ""}
+                />
+
+                <Button
+                  onClick={togglePasswordVisibility}
+                  style={{
+                    background: "unset",
+                    border: "1px solid",
+                    height: "57px",
+                    marginTop: "16px",
+                  }}
+                >
+                  <VisibilityIcon />
+                </Button>
+              </Box>
               <Button
                 type="button"
                 fullWidth
@@ -128,12 +150,12 @@ const Login = () => {
                 Đăng nhập
               </Button>
               <Grid container>
-                <Grid item xs>
+                <Grid item xs={6}>
                   <Link href="/forget-password" variant="body2">
                     Quên mật khẩu ?
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item xs={6}>
                   <Link href="/account/register" variant="body2">
                     {"Bạn chưa có tài khoản? Đăng ký"}
                   </Link>
@@ -146,4 +168,5 @@ const Login = () => {
     </>
   );
 };
+
 export default Login;

@@ -130,7 +130,7 @@ const Order = () => {
           <Box pt={5}>
             <TableForm
               columns={columns}
-              data={orders.filter((item: any) => item?.status !== "Giao hàng thành công")}
+              data={orders.filter((item: any) => item.status)}
               handleDelete={() => {}}
               handleEdit={handleEditOrder}
             />

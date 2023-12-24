@@ -68,22 +68,22 @@ const SideBar = () => {
             <ListItemText primary="Danh mục" />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/customer">
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Khách hàng" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/setting">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cài đặt" />
-          </ListItemButton>
-        </ListItem>
+        {/*<ListItem disablePadding>*/}
+        {/*  <ListItemButton component={Link} to="/customer">*/}
+        {/*    <ListItemIcon>*/}
+        {/*      <PersonIcon />*/}
+        {/*    </ListItemIcon>*/}
+        {/*    <ListItemText primary="Khách hàng" />*/}
+        {/*  </ListItemButton>*/}
+        {/*</ListItem>*/}
+        {/*<ListItem disablePadding>*/}
+        {/*  <ListItemButton component={Link} to="/setting">*/}
+        {/*    <ListItemIcon>*/}
+        {/*      <SettingsIcon />*/}
+        {/*    </ListItemIcon>*/}
+        {/*    <ListItemText primary="Cài đặt" />*/}
+        {/*  </ListItemButton>*/}
+        {/*</ListItem>*/}
       </List>
       <Divider />
       <List>
