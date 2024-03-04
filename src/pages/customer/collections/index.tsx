@@ -187,7 +187,7 @@ const Collections = () => {
           </Box>
           <Grid container pt={3}>
             {filteredProducts.map((item: typeProduct, index) => (
-              <Grid xs={3} md={3} lg={3} key={index}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                 <Card style={{ padding: "25px", margin: "10px" }}>
                   <Box onClick={() => handleProductClick(item)}>
                     <ClothesCard item={item} />

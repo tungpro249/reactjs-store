@@ -6,7 +6,7 @@ import { typeProduct } from "../../../types/typeProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
 import { addToCart, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
-import SliderCarosel from "../../../components/sliderCarosel";
+import SliderCarosel from "../../../components/slider/sliderCarosel";
 import { loginSuccess, useAppController } from "../../../contexts/app";
 
 export default function Home() {
@@ -105,12 +105,12 @@ export default function Home() {
       </h1>
       <Grid container padding={"0 25px 25px"}>
         {products.map((item: typeProduct, index) => (
-          <Grid xs={3} md={3} lg={3} key={index}>
+          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
             <Card style={{ padding: "25px", margin: "10px" }}>
               <Box onClick={() => handleProductClick(item)}>
                 <ClothesCard item={item} />
               </Box>
-              <CardActions>
+              <CardActions style={{ justifyContent: "space-around" }}>
                 <Button
                   style={{
                     background: "#e11467de",

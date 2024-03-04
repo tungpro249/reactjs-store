@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  TextareaAutosize,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../constants/api";
@@ -8,6 +18,8 @@ import Box from "@mui/material/Box";
 import ReactImageMagnify from "react-image-magnify";
 import ClothesCard from "../../../components/clothesCard";
 import { useAppController } from "../../../contexts/app";
+import { Carousel } from "react-responsive-carousel";
+import { Comment } from "../../../components/comment";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -25,7 +37,6 @@ const DetailProduct = () => {
         axios.get(GET_ALL_PRODUCT_API),
       ]);
       if (productDetailResponse.data) {
-        console.log(productDetailResponse.data);
         setProductDetail(productDetailResponse.data);
       }
       if (productListResponse.data) {
@@ -123,15 +134,23 @@ const DetailProduct = () => {
                 <Typography gutterBottom variant="h5" component="h2">
                   {productDetail?.name.toUpperCase()}
                 </Typography>
-                <Typography variant="body1" color="textSecondary" component="p">
-                  Mô tả: {productDetail.description}
-                </Typography>
                 <Typography variant="h6" color="secondary" component="p">
                   Giá tiền: {productDetail.price}đ
+                </Typography>
+                <Typography variant="h6" color="black" component="p">
+                  Màu sắc: đen vàng đỏ
+                </Typography>
+                <Typography variant="h6" color="black" component="p">
+                  Kích cỡ: X XL XXL
                 </Typography>
                 <Typography variant="body1" color="textSecondary" component="p">
                   Sô lượng trong kho: {productDetail.quantity}
                 </Typography>
+                {productDetail.description !== "" && (
+                  <Typography variant="body1" color="textSecondary" component="p">
+                    Mô tả: {productDetail.description}
+                  </Typography>
+                )}
               </CardContent>
 
               <CardActions>
@@ -170,13 +189,29 @@ const DetailProduct = () => {
           </Box>
         )}
       </Grid>
+      <Grid
+        container
+        spacing={1}
+        style={{ display: "grid", gridTemplateRows: "auto 12fr", paddingLeft: "50px" }}
+      >
+        <Grid item xs={12}>
+          <Comment />
+        </Grid>
+        <Grid item xs={12}>
+          <TextareaAutosize
+            placeholder="Bình luận của bạn"
+            minRows={8}
+            style={{ width: "95%", resize: "none" }}
+          />
+        </Grid>
+      </Grid>
       <h1 style={{ paddingLeft: "50px" }}>Sản phẩm tương tự</h1>
       <Grid container padding={"50px"}>
         {show &&
           products
             .filter((item) => item.category?.id === productDetail?.category?.id)
             .map((item) => (
-              <Grid item xs={3} md={3} lg={3}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
                 <Card style={{ padding: "25px", margin: "10px" }}>
                   <Box onClick={() => handleProductClick(item)}>
                     <ClothesCard item={item} />

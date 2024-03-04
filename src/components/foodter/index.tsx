@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Foodter = () => {
   return (
     <>
-      <Box sx={{ background: "#000", padding: "60px" }}>
-        <Grid container color={"#fff"} padding={"0 150px"}>
+      <Box sx={{ background: "#000", padding: "60px", maxHeight: "100vw" }}>
+        <Grid container color={"#fff"}>
           <Grid item xs={3} md={3} sm={3} lg={3} pr={3} pl={4}>
             <Box>
               <h2>Shop thời trang FRENZY</h2>

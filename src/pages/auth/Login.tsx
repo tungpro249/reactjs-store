@@ -13,13 +13,15 @@ import axios from "axios";
 import { LOGIN_API } from "../../constants/api";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { BACKGROUND_COLOR_LOCK } from "../../constants/app";
+import MDBox from "../../components/bases/MDBox";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Track password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -80,7 +82,16 @@ const Login = () => {
     <>
       <Grid container component="main" onKeyDown={(event: any) => handleKeyDown(event)}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} sx={{ margin: "auto" }}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          sx={{
+            margin: "auto",
+            background: "#edeaea77",
+          }}
+        >
           <Box
             sx={{
               my: 8,
@@ -90,16 +101,15 @@ const Login = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              background: "#edeaea77",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: BACKGROUND_COLOR_LOCK }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Đăng nhập
             </Typography>
-            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1, width: "500px" }}>
+            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1, width: "90%" }}>
               <TextField
                 margin="normal"
                 required
