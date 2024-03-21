@@ -124,12 +124,12 @@ const DetailProduct = () => {
       <Grid container>
         {productDetail && (
           <Box style={{ display: "flex" }} p={5}>
-            <Grid item xs={6} md={6} px={2}>
+            <Grid item xs={12} md={6} px={2}>
               <Box width={"100%"}>
                 <ReactImageMagnify {...imageProps} isActivatedOnTouch />
               </Box>
             </Grid>
-            <Grid item xs={6} md={6}>
+            <Grid item xs={12} md={6}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {productDetail?.name.toUpperCase()}
@@ -153,7 +153,7 @@ const DetailProduct = () => {
                 )}
               </CardContent>
 
-              <CardActions>
+              <CardActions style={{ justifyContent: "space-around" }}>
                 <Button
                   style={{
                     background: "#e11467de",
@@ -216,7 +216,7 @@ const DetailProduct = () => {
                   <Box onClick={() => handleProductClick(item)}>
                     <ClothesCard item={item} />
                   </Box>
-                  <CardActions>
+                  <CardActions style={{ justifyContent: "space-around" }}>
                     <Button
                       style={{
                         background: "#e11467de",

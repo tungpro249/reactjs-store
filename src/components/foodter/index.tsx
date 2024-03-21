@@ -7,7 +7,7 @@ const Foodter = () => {
     <>
       <Box sx={{ background: "#000", padding: "60px", maxHeight: "100vw" }}>
         <Grid container color={"#fff"}>
-          <Grid item xs={3} md={3} sm={3} lg={3} pr={3} pl={4}>
+          <Grid item xs={12} sm={6} md={3} lg={3} pr={3} pl={4}>
             <Box>
               <h2>Shop thời trang FRENZY</h2>
               <address>
@@ -19,7 +19,7 @@ const Foodter = () => {
               </address>
             </Box>
           </Grid>
-          <Grid item xs={3} md={3} sm={3} lg={3} pr={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3} pr={3}>
             <Link to="/about" className="link-style">
               Giới thiệu
             </Link>{" "}
@@ -36,7 +36,7 @@ const Foodter = () => {
               Liên hệ
             </Link>
           </Grid>
-          <Grid item xs={3} md={3} sm={3} lg={3} pr={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3} pr={3}>
             <Link to="/shipping-policy" className="link-style">
               Chính sách giao nhận - Vận chuyển
             </Link>{" "}
@@ -62,7 +62,7 @@ const Foodter = () => {
             </Link>
           </Grid>
 
-          <Grid item xs={3} md={3} sm={3} lg={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <p>Phương thức thanh toán</p>
             <p style={{ paddingTop: "10px" }}>
               <img

@@ -260,12 +260,12 @@ const Register = () => {
                 Đăng ký
               </Button>
               <Grid container>
-                <Grid item xs>
+                <Grid item xs={12} md={6}>
                   <Link href="/forget-password" variant="body2">
                     Quên mật khẩu ?
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} md={6}>
                   <Link href="/account/login" variant="body2">
                     {"Bạn đã có tài khoản? Đăng nhập"}
                   </Link>

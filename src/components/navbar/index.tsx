@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
 import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
@@ -21,6 +20,10 @@ import {
 } from "@mui/material";
 
 import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import Drawer from "@mui/material/Drawer";
 
 const links = [
   { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
@@ -28,6 +31,14 @@ const links = [
   { href: "/collections/sale", label: "Sale" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+function InboxIcon() {
+  return null;
+}
+
+function MailIcon() {
+  return null;
+}
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -76,6 +87,23 @@ function Navbar() {
     setUser(null);
     window.location.reload();
   };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation">
+      <List>
+        {links.map((link, index) => (
+          <ListItem key={link.label} disablePadding>
+            <Link
+              href={link.href}
+              sx={{ color: "black", textDecoration: "none", width: "100%", padding: "0 10px" }}
+            >
+              <ListItemText primary={link.label} />
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <>
@@ -147,13 +175,7 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {links.map((link) => (
-                <MenuItem key={link.label} onClick={handleCloseNavMenu}>
-                  <Link href={link.href} sx={{ color: "black", textDecoration: "none" }}>
-                    <Typography textAlign="center">{link.label}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              {DrawerList}
             </Menu>
           </Box>
           <Box>
