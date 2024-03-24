@@ -5,15 +5,13 @@ import { BrowserRouter } from "react-router-dom";
 import { AppContextProvider } from "./contexts/app";
 import { ProductContextProvider } from "./contexts/productContext";
 
-// @ts-ignore
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AppContextProvider>
-        <ProductContextProvider>
-          <App />
-        </ProductContextProvider>
-      </AppContextProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <BrowserRouter>
+    <AppContextProvider>
+      <ProductContextProvider>
+        <App />
+      </ProductContextProvider>
+    </AppContextProvider>
+  </BrowserRouter>
 );
