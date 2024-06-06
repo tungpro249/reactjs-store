@@ -1,16 +1,16 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const BundleAnalyzerPlugin =
-//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.tsx", // Dẫn tới file index.js ta đã tạo
-  // output: {
-  //   path: path.join(__dirname, "/build"), // Thư mục chứa file được build ra
-  //   filename: "bundle.js", // Tên file được build ra
-  // },
+  output: {
+    path: path.join(__dirname, "/build"), // Thư mục chứa file được build ra
+    filename: "bundle.js", // Tên file được build ra
+  },
   stats: {
     errorDetails: true,
   },
@@ -42,6 +42,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: "react",
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 };

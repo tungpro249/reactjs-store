@@ -211,7 +211,7 @@ const DetailProduct = () => {
           products
             .filter((item) => item.category?.id === productDetail?.category?.id)
             .map((item) => (
-              <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
                 <Card style={{ padding: "25px", margin: "10px" }}>
                   <Box onClick={() => handleProductClick(item)}>
                     <ClothesCard item={item} />
