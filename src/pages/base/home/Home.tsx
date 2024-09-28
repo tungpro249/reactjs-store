@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Card, CardActions, Grid, Modal, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import ClothesCard from "../../../components/clothesCard";
 import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
-import { addToCart, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { addToCart, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/slider/sliderCarosel";
-import { loginSuccess, useAppController } from "../../../contexts/app";
+import { useAppController } from "../../../contexts/app";
+import FormCardComponent from "../../../components/form/formCardComponent";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ export default function Home() {
   const [, productDispatch] = useProductController();
 
   // @ts-ignore
-  const [userController, userDispatch] = useAppController();
+  const [userController] = useAppController();
 
   useEffect(() => {
     fetchData();
@@ -47,7 +48,7 @@ export default function Home() {
         const userId = userController?.user?.currentUser?.data.id;
         if (userId) {
           try {
-            const response = await axios.post(addToCart(userId), {
+            await axios.post(addToCart(userId), {
               productId: item.id,
               quantity: 1,
             });
@@ -94,9 +95,15 @@ export default function Home() {
     }
   };
 
+  const images = [
+    "https://theme.hstatic.net/200000690725/1001078549/14/slide_1_img.jpg?v=202",
+    "https://360.com.vn/wp-content/uploads/2023/11/BANNER-WEB-1350X490.jpg",
+    "https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840",
+  ];
+
   return (
     <div>
-      <SliderCarosel />
+      <SliderCarosel images={images} />
       <Box pt={4} />
       <h1 style={{ textAlign: "center" }}>
         <Link to={"/collections/san-pham-moi"} style={{ textDecoration: "none", color: "inherit" }}>
@@ -106,35 +113,14 @@ export default function Home() {
       <Grid container padding={"0 25px 25px"}>
         {products.map((item: typeProduct, index) => (
           <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-            <Card style={{ padding: "25px", margin: "10px" }}>
+            <FormCardComponent
+              handleClickBuyItem={() => handleBuy(item)}
+              handleAddToCard={() => handleAddToCart(item)}
+            >
               <Box onClick={() => handleProductClick(item)}>
                 <ClothesCard item={item} />
               </Box>
-              <CardActions style={{ justifyContent: "space-around" }}>
-                <Button
-                  style={{
-                    background: "#e11467de",
-                    padding: "9px",
-                    fontWeight: "bold",
-                    color: "aliceblue",
-                  }}
-                  onClick={() => handleBuy(item)}
-                >
-                  Mua ngay
-                </Button>
-                <Button
-                  style={{
-                    background: "rgb(45 155 236)",
-                    padding: "9px",
-                    fontWeight: "bold",
-                    color: "aliceblue",
-                  }}
-                  onClick={() => handleAddToCart(item)}
-                >
-                  Thêm vào giỏ hàng
-                </Button>
-              </CardActions>
-            </Card>
+            </FormCardComponent>
           </Grid>
         ))}
       </Grid>

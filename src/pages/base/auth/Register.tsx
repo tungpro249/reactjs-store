@@ -143,7 +143,7 @@ const Register = () => {
             <Typography component="h1" variant="h5">
               Đăng ký
             </Typography>
-            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <Box style={{ display: "flex" }}>
                 <TextField
                   margin="normal"

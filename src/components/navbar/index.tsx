@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
+// @ts-ignore
+import Logo from "assets/image/logo.jpg";
 import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -16,14 +17,12 @@ import {
   MenuItem,
   MenuList,
   Toolbar,
-  Typography,
 } from "@mui/material";
 
 import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import Drawer from "@mui/material/Drawer";
+import MDAvatar from "../ui/MDAvatar";
 
 const links = [
   { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
@@ -32,17 +31,8 @@ const links = [
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function InboxIcon() {
-  return null;
-}
-
-function MailIcon() {
-  return null;
-}
-
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const [name, setName] = useState(null);
   const [user, setUser] = useState(localStorage.getItem("user"));
@@ -62,16 +52,9 @@ function Navbar() {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const handleAvatarClick = () => {
@@ -127,24 +110,7 @@ function Navbar() {
       <AppBar position="static" style={{ background: "#fff", padding: "0 20px" }}>
         <Toolbar disableGutters>
           <Link href="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Frenzy
-            </IconButton>
+            <MDAvatar alt="logo" src={Logo} size={"100px"} />
           </Link>
 
           <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 0.6 }}>
@@ -157,30 +123,10 @@ function Navbar() {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {DrawerList}
-            </Menu>
           </Box>
           <Box>
             <Link href="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-              <AdbIcon sx={{ display: { xs: "flex", md: "none" } }} />
+              {/*<AdbIcon sx={{ display: { xs: "flex", md: "none" } }} />*/}
               <IconButton
                 size="large"
                 edge="start"
@@ -196,7 +142,7 @@ function Navbar() {
                   textDecoration: "none",
                 }}
               >
-                Frenzy
+                <Avatar alt="logo" src={Logo} />
               </IconButton>
             </Link>
           </Box>
@@ -206,6 +152,7 @@ function Navbar() {
               <Link
                 href={link.href}
                 sx={{ mr: 2, display: "block", color: "black", textDecoration: "none" }}
+                key={link.label}
               >
                 {link.label}
               </Link>

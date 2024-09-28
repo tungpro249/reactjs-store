@@ -1,14 +1,16 @@
 import { Button, Card, CardActions } from "@mui/material";
 import React from "react";
 
-const FormCardComponent = ({
+interface FormCardComponentProps {
+  handleClickBuyItem: () => void; // Kiểu trả về void
+  handleAddToCard: () => void; // Kiểu trả về void
+  children: React.ReactNode; // Kiểu của children
+}
+
+const FormCardComponent: React.FC<FormCardComponentProps> = ({
   handleClickBuyItem,
   handleAddToCard,
   children,
-}: {
-  handleClickBuyItem: () => Function;
-  handleAddToCard: () => Function;
-  children: any;
 }) => {
   return (
     <Card style={{ padding: "25px", margin: "10px" }}>

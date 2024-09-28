@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,6 +22,12 @@ const SideBar = () => {
     navigate("/");
     window.location.reload();
   };
+  const [weight, setWeight] = useState(0);
+
+  window.addEventListener("resize", () => {
+    setWeight(window.innerWidth);
+  });
+
   return (
     <div
       style={{

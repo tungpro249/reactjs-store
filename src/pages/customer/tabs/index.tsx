@@ -33,11 +33,23 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const routes = [
+    "/payment-guide",
+    "/shipping-policy",
+    "/privacy-policy",
+    "/size-guide",
+    "/return-policy",
+    "/warranty-policy",
+  ];
+  const currentTab = routes.indexOf(location.pathname);
+  const [value, setValue] = React.useState(currentTab === -1 ? 0 : currentTab);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    navigate(routes[newValue]);
   };
 
   return (

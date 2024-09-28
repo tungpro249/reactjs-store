@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Card,
   CardActions,
   CardContent,
-  CardMedia,
   Grid,
   TextareaAutosize,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,8 +15,9 @@ import Box from "@mui/material/Box";
 import ReactImageMagnify from "react-image-magnify";
 import ClothesCard from "../../../components/clothesCard";
 import { useAppController } from "../../../contexts/app";
-import { Carousel } from "react-responsive-carousel";
 import { Comment } from "../../../components/comment";
+import FormCardComponent from "../../../components/form/formCardComponent";
+import SimilarProducts from "../SimilarProduct";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -69,25 +67,6 @@ const DetailProduct = () => {
     }
   };
 
-  const imageProps = {
-    smallImage: {
-      alt: productDetail?.name,
-      isFluidWidth: true,
-      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
-    },
-    largeImage: {
-      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
-      width: 1200,
-      height: 1800,
-    },
-    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
-  };
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setShow(true);
-  }, [products]);
-
   const handleProductClick = async (product: typeProduct) => {
     await navigate(`/product/${product.id}`);
   };
@@ -117,6 +96,20 @@ const DetailProduct = () => {
     } else {
       alert("Sản phẩm đang hết hàng");
     }
+  };
+
+  const imageProps = {
+    smallImage: {
+      alt: productDetail?.name,
+      isFluidWidth: true,
+      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
+    },
+    largeImage: {
+      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
+      width: 1200,
+      height: 1800,
+    },
+    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
   };
 
   return (
@@ -153,6 +146,7 @@ const DetailProduct = () => {
                 )}
               </CardContent>
 
+              {/* Buttons for Add to Cart and Buy */}
               <CardActions style={{ justifyContent: "space-around" }}>
                 <Button
                   style={{
@@ -161,9 +155,7 @@ const DetailProduct = () => {
                     fontWeight: "bold",
                     color: "aliceblue",
                   }}
-                  onClick={() => {
-                    handleBuy(productDetail);
-                  }}
+                  onClick={() => handleBuy(productDetail)}
                 >
                   Mua
                 </Button>
@@ -189,67 +181,15 @@ const DetailProduct = () => {
           </Box>
         )}
       </Grid>
-      <Grid
-        container
-        spacing={1}
-        style={{ display: "grid", gridTemplateRows: "auto 12fr", paddingLeft: "50px" }}
-      >
-        <Grid item xs={12}>
-          <Comment message={""} avatar={""} userName={"Thanh Tung"} createTime={"12-10-2023"} />
-        </Grid>
-        <Grid item xs={12}>
-          <TextareaAutosize
-            placeholder="Bình luận của bạn"
-            minRows={8}
-            style={{ width: "95%", resize: "none" }}
-          />
-        </Grid>
-      </Grid>
+
       <h1 style={{ paddingLeft: "50px" }}>Sản phẩm tương tự</h1>
-      <Grid container padding={"50px"}>
-        {show &&
-          products
-            .filter((item) => item.category?.id === productDetail?.category?.id)
-            .map((item) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                <Card style={{ padding: "25px", margin: "10px" }}>
-                  <Box onClick={() => handleProductClick(item)}>
-                    <ClothesCard item={item} />
-                  </Box>
-                  <CardActions style={{ justifyContent: "space-around" }}>
-                    <Button
-                      style={{
-                        background: "#e11467de",
-                        padding: "9px",
-                        fontWeight: "bold",
-                        color: "aliceblue",
-                      }}
-                      onClick={() => handleBuy(item)}
-                    >
-                      Mua
-                    </Button>
-                    <Button
-                      style={{
-                        background: "rgb(45 155 236)",
-                        padding: "9px",
-                        fontWeight: "bold",
-                        color: "aliceblue",
-                      }}
-                      onClick={() => {
-                        if (item.quantity > 0) {
-                          handleAddToCart(item?.id);
-                        } else {
-                          alert("Sản phẩm đang hết hàng.");
-                        }
-                      }}
-                    >
-                      Thêm vào giỏ hàng
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-      </Grid>
+      <SimilarProducts
+        products={products}
+        productDetail={productDetail}
+        handleProductClick={handleProductClick}
+        handleBuy={handleBuy}
+        handleAddToCart={handleAddToCart}
+      />
     </>
   );
 };

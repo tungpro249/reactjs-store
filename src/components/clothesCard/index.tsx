@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 
 function ClothesCard({ item }: { item: any }) {
   const imageUrlForDisplay = "http://localhost:1000/" + item?.image.replace(/\\/g, "/");

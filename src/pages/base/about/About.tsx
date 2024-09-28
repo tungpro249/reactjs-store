@@ -24,8 +24,8 @@ const About = () => {
             <br />
             Frenzy mang đến bốn dòng sản phẩm chính: NEM New, NEM Luxury Limited, Homewear, mỗi dòng
             sản phẩm đều có những nét đặc trưng riêng trong thiết kế. Thông qua sự đa dạng này,
-            Frenzy tự tin đáp ứng "giải pháp" thời trang phù hợp với nhiều độ tuổi, phong cách ăn
-            mặc và hoàn cảnh sử dụng khác nhau của khách hàng.
+            Frenzy tự tin đáp ứng giải pháp thời trang phù hợp với nhiều độ tuổi, phong cách ăn mặc
+            và hoàn cảnh sử dụng khác nhau của khách hàng.
             <br />
             <br />
             Với sự cam kết về chất lượng và phong cách, Frenzy đã xây dựng được một danh tiếng vững

@@ -53,7 +53,7 @@ const ResetPassword = () => {
             <Typography component="h1" variant="h5">
               Reset Mật khẩu
             </Typography>
-            <Box component="form" noValidate onSubmit={() => {}} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
