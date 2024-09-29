@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, Grid, Slider } from "@mui/material";
+import { Box, Button, Card, CardActions, Grid, Slider, Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
@@ -12,69 +12,85 @@ import { useAppController } from "../../../contexts/app";
 const Collections = () => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
   const [categoryId, setCategoryId] = useState<number | null>(null);
-  //@ts-ignore
-  const [, productDispatch] = useProductController();
-
+  const [products, setProducts] = useState<typeProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<typeProduct[]>([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 6;
 
+  // @ts-ignore
+  const [, productDispatch] = useProductController();
   // @ts-ignore
   const [userController, userDispatch] = useAppController();
 
-  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url = GET_ALL_PRODUCT_API;
-        if (categoryId) {
-          url += `?category=${categoryId}`;
-        }
-        const getAllProduct = await axios.get(url);
-        if (getAllProduct.data) {
-          setProducts(getAllProduct.data);
-          getAllProductSuccess(productDispatch, getAllProduct.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+    fetchCategories();
+    fetchProducts();
+  }, [categoryId, priceRange]);
 
-  const location = useLocation();
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(GET_ALL_CATEGORIES);
+      if (response.data) setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      let url = GET_ALL_PRODUCT_API;
+      if (categoryId) url += `?category=${categoryId}`;
+
+      const response = await axios.get(url);
+      if (response.data) {
+        const filtered = response.data.filter(
+          (product: typeProduct) =>
+            product.price >= priceRange.min && product.price <= priceRange.max
+        );
+        setProducts(filtered);
+        setFilteredProducts(filtered.slice(0, itemsPerPage)); // Initial pagination
+        getAllProductSuccess(productDispatch, response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleCategoryClick = (categoryId: number | null) => {
+    setCategoryId(categoryId);
+    setPage(1);
+  };
+
+  const handlePriceRangeChange = (event: any, newValue: any) => {
+    setPriceRange({ min: newValue[0], max: newValue[1] });
+    setPage(1);
+  };
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    const startIndex = (value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    setFilteredProducts(products.slice(startIndex, endIndex));
+  };
+
   const renderName = () => {
     const selectedCategory = categories.find((category) => category.id === categoryId);
-    if (selectedCategory) {
-      return selectedCategory.name.toUpperCase();
-    }
+    if (selectedCategory) return selectedCategory.name.toUpperCase();
+
     switch (location.pathname) {
-      case "/collections/san-pham-moi": {
+      case "/collections/san-pham-moi":
         return "Sản phẩm mới";
-      }
-      case "/collections/sale": {
+      case "/collections/sale":
         return "Sale";
-      }
       default:
         return null;
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(GET_ALL_CATEGORIES);
-      if (response.data) {
-        setCategories(response.data);
-      }
-    } catch (error) {
-      console.log("Error fetching categories:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const navigate = useNavigate();
   const handleProductClick = (product: typeProduct) => {
     navigate(`/product/${product.id}`);
   };
@@ -83,15 +99,10 @@ const Collections = () => {
     const userId = userController?.user?.currentUser?.data.id;
     if (userId) {
       try {
-        const response = await axios.post(addToCart(userId), {
-          productId: id,
-          quantity: 1,
-        });
-        if (response.status === 200) {
-          alert("Sản phẩm đã được thêm vào giỏ hàng!");
-        }
+        const response = await axios.post(addToCart(userId), { productId: id, quantity: 1 });
+        if (response.status === 200) alert("Sản phẩm đã được thêm vào giỏ hàng!");
       } catch (error) {
-        console.error(error);
+        console.error("Error adding to cart:", error);
         alert("Đã xảy ra lỗi khi thêm vào giỏ hàng!");
       }
     }
@@ -100,7 +111,6 @@ const Collections = () => {
   const handleBuy = async (item: typeProduct) => {
     if (item.quantity > 0) {
       const isLoggedIn = userController.isLogin;
-
       if (isLoggedIn) {
         const userId = userController?.user?.currentUser?.data.id;
         if (userId) {
@@ -124,111 +134,81 @@ const Collections = () => {
     }
   };
 
-  const handleCategoryClick = (categoryId: number) => {
-    setCategoryId(categoryId);
-  };
-
-  const filteredProducts = categoryId
-    ? products.filter(
-        (product: typeProduct) =>
-          product.category.id === categoryId &&
-          product.price >= priceRange.min &&
-          product.price <= priceRange.max
-      )
-    : products.filter(
-        (product: typeProduct) => product.price >= priceRange.min && product.price <= priceRange.max
-      );
-
-  const handlePriceRangeChange = (event: any, newValue: any) => {
-    setPriceRange({ min: newValue[0], max: newValue[1] });
-  };
-  useEffect(() => {
-    products.map((item: typeProduct) => {
-      console.log(item.price, priceRange.min, item.price, priceRange.max);
-      if (item.price > priceRange.min && item.price < priceRange.max) {
-        console.log("item", item);
-        return item;
-      }
-    });
-  }, [priceRange]);
   return (
-    <>
-      <Grid container p={5}>
-        <Grid item xs={3} md={2}>
-          {/*@ts-ignore*/}
-          <h3 onClick={() => handleCategoryClick()}>Danh mục</h3>
-          {categories.map((item) => (
-            <Box
-              key={item.id}
-              onClick={() => handleCategoryClick(item.id)}
-              className={categoryId === item.id ? "selected-category" : ""}
-              style={{ padding: "5px", width: "70%" }}
-            >
-              {item.name}
-            </Box>
-          ))}
-        </Grid>
-        <Grid item xs={9} md={10}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>{renderName()}</h3>
-            <Box>
-              <p>Giá tiền</p>
-              <Box sx={{ display: "flex", width: "100px" }}>
-                <Slider
-                  value={[priceRange.min, priceRange.max]}
-                  onChange={handlePriceRangeChange}
-                  min={0}
-                  max={999999}
-                  step={100000}
-                  valueLabelDisplay="auto"
-                />
-              </Box>
+    <Grid container p={5}>
+      <Grid item xs={3} md={2}>
+        <h3 onClick={() => handleCategoryClick(null)}>Danh mục</h3>
+        {categories.map((item) => (
+          <Box
+            key={item.id}
+            onClick={() => handleCategoryClick(item.id)}
+            className={categoryId === item.id ? "selected-category" : ""}
+            style={{ padding: "5px", width: "70%" }}
+          >
+            {item.name}
+          </Box>
+        ))}
+      </Grid>
+      <Grid item xs={9} md={10}>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <h3>{renderName()}</h3>
+          <Box>
+            <p>Giá tiền</p>
+            <Box sx={{ display: "flex", width: "100px" }}>
+              <Slider
+                value={[priceRange.min, priceRange.max]}
+                onChange={handlePriceRangeChange}
+                min={0}
+                max={999999}
+                step={100000}
+                valueLabelDisplay="auto"
+              />
             </Box>
           </Box>
-          <Grid container pt={3}>
-            {filteredProducts.map((item: typeProduct, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
-                <Card style={{ padding: "25px", margin: "10px" }}>
-                  <Box onClick={() => handleProductClick(item)}>
-                    <ClothesCard item={item} />
-                  </Box>
-                  <CardActions style={{ justifyContent: "space-around" }}>
-                    <Button
-                      style={{
-                        background: "#e11467de",
-                        padding: "9px",
-                        fontWeight: "bold",
-                        color: "aliceblue",
-                      }}
-                      onClick={() => handleBuy(item)}
-                    >
-                      Mua
-                    </Button>
-                    <Button
-                      style={{
-                        background: "rgb(45 155 236)",
-                        padding: "9px",
-                        fontWeight: "bold",
-                        color: "aliceblue",
-                      }}
-                      onClick={() => {
-                        if (item.quantity > 0) {
-                          handleAddToCart(item?.id);
-                        } else {
-                          alert("Sản phẩm đang hết hàng.");
-                        }
-                      }}
-                    >
-                      Thêm vào giỏ hàng
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+        </Box>
+        <Grid container pt={3}>
+          {filteredProducts.map((item: typeProduct, index) => (
+            <Grid item xs={12} md={6} lg={4} key={index}>
+              <Card style={{ padding: "25px", margin: "10px" }}>
+                <Box onClick={() => handleProductClick(item)}>
+                  <ClothesCard item={item} />
+                </Box>
+                <CardActions style={{ justifyContent: "space-around" }}>
+                  <Button
+                    style={{
+                      background: "#e11467de",
+                      padding: "9px",
+                      fontWeight: "bold",
+                      color: "aliceblue",
+                    }}
+                    onClick={() => handleBuy(item)}
+                  >
+                    Mua
+                  </Button>
+                  <Button
+                    style={{
+                      background: "rgb(45 155 236)",
+                      padding: "9px",
+                      fontWeight: "bold",
+                      color: "aliceblue",
+                    }}
+                    onClick={() => handleAddToCart(item?.id)}
+                  >
+                    Thêm vào giỏ hàng
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
+        <Pagination
+          count={Math.ceil(products.length / itemsPerPage)}
+          page={page}
+          onChange={handlePageChange}
+          sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+        />
       </Grid>
-    </>
+    </Grid>
   );
 };
 

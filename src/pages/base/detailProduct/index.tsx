@@ -16,7 +16,7 @@ import ReactImageMagnify from "react-image-magnify";
 import ClothesCard from "../../../components/clothesCard";
 import { useAppController } from "../../../contexts/app";
 import { Comment } from "../../../components/comment";
-import FormCardComponent from "../../../components/form/formCardComponent";
+import FormCardComponent from "../../../components/form/productActionCard";
 import SimilarProducts from "../SimilarProduct";
 
 const DetailProduct = () => {

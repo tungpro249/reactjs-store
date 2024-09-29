@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import TablePagination from "@mui/material/TablePagination";
+import ActionButtons from "./actionButtons";
 
 const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
+  // Pagination state
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  // Handle page change
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset page when rows per page change
+  };
+
   const renderTableCell = (item: any, column: any) => {
     switch (column.field) {
       case "image":
@@ -30,48 +44,51 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
     }
   };
 
+  // Slice the data according to pagination
+  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
   return (
-    <TableContainer style={{ borderRadius: "12px" }}>
-      <Table
-        style={{
-          border: "1px solid rgba(0, 0, 0, 0.1)",
-          background: "#cfcccc",
-        }}
-      >
-        <TableHead>
-          <TableRow>
-            {columns.map((column: any, index: number) => (
+    <>
+      <TableContainer style={{ borderRadius: "12px" }}>
+        <Table
+          style={{
+            border: "1px solid rgba(0, 0, 0, 0.1)",
+            background: "#cfcccc",
+          }}
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((column: any, index: number) => (
+                <TableCell
+                  key={index}
+                  style={{
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                  }}
+                >
+                  {column.header}
+                </TableCell>
+              ))}
+              {/* Add "Hành động" column */}
               <TableCell
-                key={index}
+                key="action-header"
                 style={{
                   border: "1px solid rgba(0, 0, 0, 0.1)",
                   fontWeight: "bold",
                   fontSize: "18px",
+                  textAlign: "center",
                 }}
               >
-                {column.header}
+                Hành động
               </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.length > 0 ? (
-            data.map((item: any, index: number) => (
-              <TableRow key={index}>
-                {columns.length === 1 ? (
-                  <TableCell
-                    colSpan={11}
-                    style={{
-                      border: "1px solid rgba(0, 0, 0, 0.1)",
-                      textAlign: "left",
-                      width: "80%",
-                      fontSize: "17px",
-                    }}
-                  >
-                    {renderTableCell(item, columns[0])}
-                  </TableCell>
-                ) : (
-                  columns.slice(0, 10).map((column: any, columnIndex: number) => (
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedData.length > 0 ? (
+              paginatedData.map((item: any, index: number) => (
+                <TableRow key={index}>
+                  {columns.map((column: any, columnIndex: number) => (
                     <TableCell
                       key={columnIndex}
                       style={{
@@ -82,35 +99,42 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                     >
                       {renderTableCell(item, column)}
                     </TableCell>
-                  ))
-                )}
-                <TableCell style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }} colSpan={1}>
-                  <IconButton onClick={() => handleEdit(item)} aria-label="edit" color="primary">
-                    <EditIcon />
-                    <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Sửa</p>
-                  </IconButton>
-                  <IconButton
-                    onClick={() => handleDelete(item.id)}
-                    aria-label="delete"
-                    color="error"
-                    style={{ display: window.location.pathname === "/order" ? "none" : "" }}
+                  ))}
+                  {/* Use ActionButtons for each row */}
+                  <TableCell
+                    style={{ border: "1px solid rgba(0, 0, 0, 0.1)", textAlign: "center" }}
+                    colSpan={1}
                   >
-                    <DeleteIcon />
-                    <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Xóa</p>
-                  </IconButton>
+                    <ActionButtons
+                      item={item}
+                      handleEdit={handleEdit}
+                      handleDelete={handleDelete}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length + 1} style={{ textAlign: "center" }}>
+                  Không có sản phẩm nào
                 </TableCell>
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length + 2} style={{ textAlign: "center" }}>
-                Không có sản phẩm nào
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* Pagination controls */}
+      <TablePagination
+        component="div"
+        count={data.length}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 25]}
+        labelRowsPerPage="Số hàng mỗi trang:"
+      />
+    </>
   );
 };
 

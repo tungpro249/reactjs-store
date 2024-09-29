@@ -8,7 +8,7 @@ import { getAllProductSuccess, useProductController } from "../../../contexts/pr
 import { addToCart, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/slider/sliderCarosel";
 import { useAppController } from "../../../contexts/app";
-import FormCardComponent from "../../../components/form/formCardComponent";
+import FormCardComponent from "../../../components/form/productActionCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);

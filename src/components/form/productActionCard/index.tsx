@@ -1,13 +1,13 @@
 import { Button, Card, CardActions } from "@mui/material";
 import React from "react";
 
-interface FormCardComponentProps {
+interface ProductActionCardComponentProps {
   handleClickBuyItem: () => void; // Kiểu trả về void
   handleAddToCard: () => void; // Kiểu trả về void
   children: React.ReactNode; // Kiểu của children
 }
 
-const FormCardComponent: React.FC<FormCardComponentProps> = ({
+const ProductActionCard: React.FC<ProductActionCardComponentProps> = ({
   handleClickBuyItem,
   handleAddToCard,
   children,
@@ -43,4 +43,4 @@ const FormCardComponent: React.FC<FormCardComponentProps> = ({
   );
 };
 
-export default FormCardComponent;
+export default ProductActionCard;

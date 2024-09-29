@@ -65,12 +65,12 @@ const Category = () => {
     }
   };
 
-  const formAdd = (closeForm: Function) => <AddCategory handleClose={closeForm} />;
-  const formUpdate = (closeForm: Function) => (
+  const formAdd = (closeForm: () => void) => <AddCategory handleClose={closeForm} />;
+  const formUpdate = (closeForm: () => void) => (
     // @ts-ignore
     <UpdateCategory handleClose={closeForm} categoryId={categoryId} category={category} />
   );
-  const formDelete = (closeForm: Function) => (
+  const formDelete = (closeForm: () => void) => (
     <Box
       style={{
         background: "white",

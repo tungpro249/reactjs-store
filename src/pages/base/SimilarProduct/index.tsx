@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
-import FormCardComponent from "../../../components/form/formCardComponent";
+import FormCardComponent from "../../../components/form/productActionCard";
 
 interface SimilarProductsProps {
   products: typeProduct[];
