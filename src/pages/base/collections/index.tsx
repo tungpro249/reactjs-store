@@ -8,6 +8,7 @@ import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
 import { useAppController } from "../../../contexts/app";
+import PriceFilter from "../filterForm";
 
 const Collections = () => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
@@ -148,24 +149,26 @@ const Collections = () => {
             {item.name}
           </Box>
         ))}
+
+        <PriceFilter onFilterChange={handlePriceRangeChange} />
       </Grid>
       <Grid item xs={9} md={10}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <h3>{renderName()}</h3>
-          <Box>
-            <p>Giá tiền</p>
-            <Box sx={{ display: "flex", width: "100px" }}>
-              <Slider
-                value={[priceRange.min, priceRange.max]}
-                onChange={handlePriceRangeChange}
-                min={0}
-                max={999999}
-                step={100000}
-                valueLabelDisplay="auto"
-              />
-            </Box>
-          </Box>
-        </Box>
+        {/*<Box sx={{ display: "flex", justifyContent: "space-between" }}>*/}
+        {/*  <h3>{renderName()}</h3>*/}
+        {/*  <Box>*/}
+        {/*    <p>Giá tiền</p>*/}
+        {/*    <Box sx={{ display: "flex", width: "100px" }}>*/}
+        {/*      <Slider*/}
+        {/*        value={[priceRange.min, priceRange.max]}*/}
+        {/*        onChange={handlePriceRangeChange}*/}
+        {/*        min={0}*/}
+        {/*        max={999999}*/}
+        {/*        step={100000}*/}
+        {/*        valueLabelDisplay="auto"*/}
+        {/*      />*/}
+        {/*    </Box>*/}
+        {/*  </Box>*/}
+        {/*</Box>*/}
         <Grid container pt={3}>
           {filteredProducts.map((item: typeProduct, index) => (
             <Grid item xs={12} md={6} lg={4} key={index}>

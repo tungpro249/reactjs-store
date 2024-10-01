@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import { VerticalBarChart } from "./components/VerticalBarChart";
 import axios from "axios";
 import { GET_STATISTICAL } from "../../../constants/api";
+import { formatNumber } from "../../../utils";
 
 const Dashbroad = () => {
   const [statistical, setStatisticalResponse] = useState<any>([]);
@@ -44,7 +45,7 @@ const Dashbroad = () => {
             <Box>Đơn hàng: {statistical?.totalOrders}</Box>
             <Box>Khách hàng: {statistical?.totalUsers}</Box>
             <Box>Sản phẩm: {statistical?.totalProducts}</Box>
-            <Box>Doanh thu: {statistical?.totalRevenue} VNĐ</Box>
+            <Box>Doanh thu: {formatNumber(statistical?.totalRevenue)} VNĐ</Box>
           </Box>
         </Grid>
       </Grid>

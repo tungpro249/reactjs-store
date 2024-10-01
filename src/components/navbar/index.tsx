@@ -35,6 +35,7 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const [name, setName] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -46,6 +47,7 @@ function Navbar() {
     if (storedUser !== null) {
       const parsedUser = JSON.parse(storedUser);
       setName(parsedUser.currentUser.data);
+      setAvatar(parsedUser.currentUser.data);
     }
   }, []);
 
@@ -166,7 +168,11 @@ function Navbar() {
                   style={{ display: "flex", alignItems: "center", marginRight: 0 }}
                   onClick={handleAvatarClick}
                 >
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar
+                    alt={`${name?.last_name} ${name?.first_name}`}
+                    src={`http://localhost:1000/${avatar?.avatar}`}
+                    sx={{ width: 50, height: 50 }}
+                  />
                   <Box pr={1} />
                   <span style={{ color: "#000" }}>
                     {/*@ts-ignore*/}
