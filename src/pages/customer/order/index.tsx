@@ -90,16 +90,19 @@ const OrderCustomer = () => {
                   <TableCell>{order?.price}</TableCell>
                   <TableCell>{order?.date_created}</TableCell>
                   <TableCell>{order?.status}</TableCell>
-                  <Box>
+                  <TableCell>
                     {/*<TableCell onClick={handleCancel}>Hủy</TableCell>*/}
-                    <TableCell
+                    <Button
                       onClick={() => {
                         handleReturns(order);
                       }}
                     >
                       Trả hàng
-                    </TableCell>
-                  </Box>
+                    </Button>
+                    <Button variant="contained" color="primary">
+                      Chi tiết
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

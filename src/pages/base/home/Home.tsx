@@ -5,10 +5,12 @@ import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
-import { addToCart, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
 import SliderCarosel from "../../../components/slider/sliderCarosel";
 import { useAppController } from "../../../contexts/app";
 import FormCardComponent from "../../../components/form/productActionCard";
+import CategoriesSection from "../../../components/categoriesSection";
+import { typeCategory } from "../../../types/typeCategory";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -22,6 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
+    fetchCategories();
   }, [userController]);
 
   const fetchData = async () => {
@@ -100,10 +103,21 @@ export default function Home() {
     "https://360.com.vn/wp-content/uploads/2023/11/BANNER-WEB-1350X490.jpg",
     "https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img4.jpg?v=840",
   ];
+  const [categories, setCategories] = useState<Array<typeCategory>>([]);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(GET_ALL_CATEGORIES);
+      if (response.data) setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   return (
     <div>
       <SliderCarosel images={images} />
+      <CategoriesSection categories={categories} />
       <Box pt={4} />
       <h1 style={{ textAlign: "center" }}>
         <Link to={"/collections/san-pham-moi"} style={{ textDecoration: "none", color: "inherit" }}>
