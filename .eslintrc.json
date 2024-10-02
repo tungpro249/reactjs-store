@@ -18,11 +18,52 @@
     "react"
   ],
   "rules": {
+    "no-console": "off",
+    "rule-name": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "eslint-disable-next-line": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-boolean-value": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/require-default-props": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ],
+    "import/order": "off",
+    "import/prefer-default-export": "off",
+    "no-return-await": "off",
+    "no-plusplus": "off",
+    "no-nested-ternary": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "react/no-this-in-sfc": "off",
+    "no-use-before-define": [
+      "warn",
+      {
+        "functions": true,
+        "variables": true
+      }
+    ],
+    "no-unneeded-ternary": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unstable-nested-components": "off",
+    "react/prop-types": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "react/button-has-type": "off",
+    "no-prototype-builtins": "off",
+    "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": [
       1,
       {

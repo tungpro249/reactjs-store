@@ -69,7 +69,7 @@ const Information = () => {
       setAvatarUrl(URL.createObjectURL(file)); // Preview the new avatar
     }
   };
-  console.log("avatarUrl", avatarUrl);
+
   return (
     <Box sx={{ padding: "50px 0", width: "50%", margin: "auto", textAlign: "center" }}>
       <Avatar
