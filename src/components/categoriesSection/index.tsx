@@ -29,7 +29,7 @@ const CategoriesSection = ({ categories }: { categories: typeCategory }) => {
       },
     ],
   };
-
+  console.log("category", categories);
   return (
     <Box sx={{ mb: 8 }}>
       <Typography

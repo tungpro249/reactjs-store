@@ -5,7 +5,12 @@ import Typography from "@mui/material/Typography";
 
 const CategoryCard = ({ category }: { category: typeCategory }) => (
   <Card>
-    <CardMedia component="img" height="250" image={category.image} alt={category.name} />
+    <CardMedia
+      component="img"
+      height="250"
+      image={`http://localhost:1000/${category.image}`}
+      alt={category.name}
+    />
     <CardContent sx={{ textAlign: "center" }}>
       <Typography variant="h6">{category.name}</Typography>
     </CardContent>

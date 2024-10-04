@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, Grid, Slider, Pagination } from "@mui/material";
+import { Box, Button, Card, CardActions, Grid, Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
@@ -22,7 +22,7 @@ const Collections = () => {
   // @ts-ignore
   const [, productDispatch] = useProductController();
   // @ts-ignore
-  const [userController, userDispatch] = useAppController();
+  const [userController] = useAppController();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -170,8 +170,8 @@ const Collections = () => {
         {/*  </Box>*/}
         {/*</Box>*/}
         <Grid container pt={3}>
-          {filteredProducts.map((item: typeProduct, index) => (
-            <Grid item xs={12} md={6} lg={4} key={index}>
+          {filteredProducts.map((item: typeProduct) => (
+            <Grid item xs={12} md={6} lg={4} key={item.id}>
               <Card style={{ padding: "25px", margin: "10px" }}>
                 <Box onClick={() => handleProductClick(item)}>
                   <ClothesCard item={item} />
