@@ -100,7 +100,10 @@ const Collections = () => {
     const userId = userController?.user?.currentUser?.data.id;
     if (userId) {
       try {
-        const response = await axios.post(addToCart(userId), { productId: id, quantity: 1 });
+        const response = await axios.post(addToCart(userId), {
+          productId: id,
+          quantity: 1,
+        });
         if (response.status === 200) alert("Sản phẩm đã được thêm vào giỏ hàng!");
       } catch (error) {
         console.error("Error adding to cart:", error);
@@ -215,4 +218,4 @@ const Collections = () => {
   );
 };
 
-export default Collections;
+export default Collections

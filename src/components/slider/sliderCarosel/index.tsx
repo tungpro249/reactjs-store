@@ -3,10 +3,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface SliderCarouselProps {
-  images: string[];  // Mảng chứa URL của các ảnh
-  autoPlay?: boolean;  // Tùy chọn tự động chạy slide
-  showThumbs?: boolean;  // Tùy chọn hiển thị thumbnails
-  infiniteLoop?: boolean;  // Tùy chọn vòng lặp vô hạn
+  images: string[]; // Mảng chứa URL của các ảnh
+  autoPlay?: boolean; // Tùy chọn tự động chạy slide
+  showThumbs?: boolean; // Tùy chọn hiển thị thumbnails
+  infiniteLoop?: boolean; // Tùy chọn vòng lặp vô hạn
 }
 
 const SliderCarousel: React.FC<SliderCarouselProps> = ({
@@ -18,7 +18,7 @@ const SliderCarousel: React.FC<SliderCarouselProps> = ({
   <Carousel autoPlay={autoPlay} showThumbs={showThumbs} infiniteLoop={infiniteLoop}>
     {images.map((image, index) => (
       <div key={index}>
-        <img alt={`slide-${index}`} src={image}/>
+        <img alt={`slide-${index}`} src={image} />
       </div>
     ))}
   </Carousel>

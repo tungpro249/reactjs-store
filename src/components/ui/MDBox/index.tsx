@@ -4,7 +4,6 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for MDBox
-import MDBoxRoot from "./MDBoxRoot";
 import Box from "@mui/material/Box";
 
 const MDBox = forwardRef(
@@ -54,4 +53,4 @@ MDBox.propTypes = {
   ]),
 };
 
-export default MDBox;
+export default MDBox

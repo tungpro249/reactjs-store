@@ -5,7 +5,7 @@ import TableForm from "../../../components/table";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../constants/api";
-import { DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import { UPDATE_TYPE } from "../../../constants/app";
 import { typeOder } from "../../../types/typeOrder";
 import StatusAutocomplete from "./components/AutoComplete";
 
@@ -57,19 +57,43 @@ const Order = () => {
         >
           <h3>Sửa</h3>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+          >
             <TextField placeholder={"Tên sản phẩm"} value={order?.product_name} disabled />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+          >
             <TextField placeholder={"Tên tên người đặt"} value={order?.user_name} disabled />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+          >
             <TextField placeholder={"Số lượng"} value={order?.quantity} disabled />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+          >
             <TextField placeholder={"Giá tiền"} value={`${order?.price} VNĐ`} disabled />
           </Box>
           <br />
@@ -149,4 +173,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default Order

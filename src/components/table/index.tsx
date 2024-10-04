@@ -102,7 +102,10 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
                   ))}
                   {/* Use ActionButtons for each row */}
                   <TableCell
-                    style={{ border: "1px solid rgba(0, 0, 0, 0.1)", textAlign: "center" }}
+                    style={{
+                      border: "1px solid rgba(0, 0, 0, 0.1)",
+                      textAlign: "center",
+                    }}
                     colSpan={1}
                   >
                     <ActionButtons
@@ -138,4 +141,4 @@ const TableForm = ({ columns, data, handleDelete, handleEdit }: any) => {
   );
 };
 
-export default TableForm;
+export default TableForm

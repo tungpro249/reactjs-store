@@ -116,7 +116,13 @@ const UpdateProduct = ({
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Tên sản phẩm</label>
             <TextField
               placeholder="Tên sản phẩm"
@@ -126,12 +132,24 @@ const UpdateProduct = ({
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Danh mục</label>
             <CategoryAutocomplete handleChoose={setCategory} defaultData={category} />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Giá tiền</label>
             <TextField
               placeholder="Giá tiền"
@@ -141,7 +159,13 @@ const UpdateProduct = ({
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Số lượng</label>
             <TextField
               placeholder="Số lượng"
@@ -151,7 +175,13 @@ const UpdateProduct = ({
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Mô tả</label>
             <TextField
               placeholder="Mô tả"
@@ -188,4 +218,4 @@ const UpdateProduct = ({
   );
 };
 
-export default UpdateProduct;
+export default UpdateProduct

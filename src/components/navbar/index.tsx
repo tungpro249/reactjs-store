@@ -80,7 +80,12 @@ function Navbar() {
           <ListItem key={link.label} disablePadding>
             <Link
               href={link.href}
-              sx={{ color: "black", textDecoration: "none", width: "100%", padding: "0 10px" }}
+              sx={{
+                color: "black",
+                textDecoration: "none",
+                width: "100%",
+                padding: "0 10px",
+              }}
             >
               <ListItemText primary={link.label} />
             </Link>
@@ -127,7 +132,14 @@ function Navbar() {
             </IconButton>
           </Box>
           <Box>
-            <Link href="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+            <Link
+              href="/"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+              }}
+            >
               {/*<AdbIcon sx={{ display: { xs: "flex", md: "none" } }} />*/}
               <IconButton
                 size="large"
@@ -153,7 +165,12 @@ function Navbar() {
             {links.map((link) => (
               <Link
                 href={link.href}
-                sx={{ mr: 2, display: "block", color: "black", textDecoration: "none" }}
+                sx={{
+                  mr: 2,
+                  display: "block",
+                  color: "black",
+                  textDecoration: "none",
+                }}
                 key={link.label}
               >
                 {link.label}
@@ -165,7 +182,11 @@ function Navbar() {
             {user !== null ? (
               <>
                 <Box
-                  style={{ display: "flex", alignItems: "center", marginRight: 0 }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginRight: 0,
+                  }}
                   onClick={handleAvatarClick}
                 >
                   <Avatar
@@ -197,7 +218,11 @@ function Navbar() {
                     <MenuItem onClick={handleMenuClose}>
                       <Link
                         href={"/account/information"}
-                        style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                        style={{
+                          textDecoration: "none",
+                          display: "flex",
+                          color: "inherit",
+                        }}
                       >
                         <ListItemIcon>
                           <Person />
@@ -208,7 +233,11 @@ function Navbar() {
                     <MenuItem onClick={handleMenuClose}>
                       <Link
                         href={"/account/my-order"}
-                        style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                        style={{
+                          textDecoration: "none",
+                          display: "flex",
+                          color: "inherit",
+                        }}
                       >
                         <ListItemIcon>
                           <AccountCircle />
@@ -219,7 +248,11 @@ function Navbar() {
                     <MenuItem onClick={handleMenuClose}>
                       <Link
                         href={"/account/change-password"}
-                        style={{ textDecoration: "none", display: "flex", color: "inherit" }}
+                        style={{
+                          textDecoration: "none",
+                          display: "flex",
+                          color: "inherit",
+                        }}
                       >
                         <ListItemIcon>
                           <AccountCircle />
@@ -248,4 +281,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbar

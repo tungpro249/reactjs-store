@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -111,4 +111,4 @@ const VietnamLocalSelect = ({
   );
 };
 
-export default VietnamLocalSelect;
+export default VietnamLocalSelect

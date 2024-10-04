@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,7 +10,6 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { REGISTER_API } from "../../../constants/api";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 
@@ -279,4 +279,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Register

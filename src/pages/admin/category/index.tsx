@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  ADD_CATEGORY_API,
-  deleteCategory,
-  GET_ALL_CATEGORIES,
-  updateCategory,
-} from "../../../constants/api";
-import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import { deleteCategory, GET_ALL_CATEGORIES } from "../../../constants/api";
+import { Box, Button, Grid, Modal } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
@@ -145,4 +140,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Category

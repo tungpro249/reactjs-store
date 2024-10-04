@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  TextareaAutosize,
-  Typography,
-} from "@mui/material";
+import { Button, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
 import ReactImageMagnify from "react-image-magnify";
-import ClothesCard from "../../../components/clothesCard";
 import { useAppController } from "../../../contexts/app";
-import { Comment } from "../../../components/comment";
-import FormCardComponent from "../../../components/form/productActionCard";
 import SimilarProducts from "../SimilarProduct";
 
 const DetailProduct = () => {
@@ -194,4 +184,4 @@ const DetailProduct = () => {
   );
 };
 
-export default DetailProduct;
+export default DetailProduct

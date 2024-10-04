@@ -89,4 +89,4 @@ const UpdateCategory = ({
   );
 };
 
-export default UpdateCategory;
+export default UpdateCategory

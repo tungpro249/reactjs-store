@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Avatar, Divider, Grid, Paper } from "@mui/material";
+import { Avatar, Grid, Paper } from "@mui/material";
 
 export function Comment({
   avatar,

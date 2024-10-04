@@ -52,4 +52,4 @@ MDButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default MDButton;
+export default MDButton

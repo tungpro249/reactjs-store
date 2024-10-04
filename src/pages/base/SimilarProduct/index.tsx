@@ -45,4 +45,4 @@ const SimilarProducts: React.FC<SimilarProductsProps> = ({
   );
 };
 
-export default SimilarProducts;
+export default SimilarProducts

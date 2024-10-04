@@ -70,4 +70,4 @@ const ReceiveNotifyEmail = () => {
     </Box>
   );
 };
-export default ReceiveNotifyEmail;
+export default ReceiveNotifyEmail

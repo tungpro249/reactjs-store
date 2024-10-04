@@ -74,4 +74,4 @@ const Foodter = () => (
   </>
 );
 
-export default Foodter;
+export default Foodter

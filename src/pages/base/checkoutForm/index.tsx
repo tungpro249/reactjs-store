@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Autocomplete,
   Box,
   Button,
   FormControl,
@@ -16,7 +15,7 @@ import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 import axios from "axios";
-import { payment, paymentWithoutAccount } from "../../../constants/api";
+import { paymentWithoutAccount } from "../../../constants/api";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -115,7 +114,12 @@ const CheckoutForm = () => {
             <TextField placeholder={"Địa chỉ"} fullWidth />
             <Box>
               <Button
-                style={{ background: "#3e80c1", float: "right", color: "white", marginTop: "15px" }}
+                style={{
+                  background: "#3e80c1",
+                  float: "right",
+                  color: "white",
+                  marginTop: "15px",
+                }}
                 onClick={() => {
                   setOpen(true);
                 }}
@@ -126,7 +130,14 @@ const CheckoutForm = () => {
           </Box>
         </Grid>
         <Grid item xs={1} md={1}>
-          <Box sx={{ border: "1px solid #ddd", height: "100%", width: "0px", margin: "auto" }} />
+          <Box
+            sx={{
+              border: "1px solid #ddd",
+              height: "100%",
+              width: "0px",
+              margin: "auto",
+            }}
+          />
         </Grid>
         <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
           {productInCart && (
@@ -209,4 +220,4 @@ const CheckoutForm = () => {
   );
 };
 
-export default CheckoutForm;
+export default CheckoutForm

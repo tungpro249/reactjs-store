@@ -75,5 +75,5 @@ const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   );
 };
 
-export default AddCategory;
+export default AddCategory
 

@@ -43,4 +43,4 @@ const ProductActionCard: React.FC<ProductActionCardComponentProps> = ({
   );
 };
 
-export default ProductActionCard;
+export default ProductActionCard

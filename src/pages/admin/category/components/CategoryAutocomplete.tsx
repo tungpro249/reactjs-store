@@ -51,4 +51,4 @@ const CategoryAutocomplete = ({
   );
 };
 
-export default CategoryAutocomplete;
+export default CategoryAutocomplete

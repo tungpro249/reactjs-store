@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Grid, CssBaseline, Avatar, Typography, Link } from "@mui/material";
+import { Avatar, Box, Button, CssBaseline, Grid, TextField, Typography } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -107,4 +107,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgetPassword

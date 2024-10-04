@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useState } from "react";
 import { typeOder } from "../../../types/typeOrder";
 import { useAppController } from "../../../contexts/app";
@@ -14,7 +15,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import * as React from "react";
 
 const OrderCustomer = () => {
   const [orders, setOrders] = useState<Array<typeOder>>([]);
@@ -147,4 +147,4 @@ const OrderCustomer = () => {
     </>
   );
 };
-export default OrderCustomer;
+export default OrderCustomer

@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   FormControl,
   FormControlLabel,
@@ -177,7 +176,14 @@ const Cart = () => {
                       color="error"
                     >
                       <DeleteIcon />
-                      <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Xóa</p>
+                      <p
+                        style={{
+                          fontSize: "13px",
+                          paddingLeft: "5px",
+                        }}
+                      >
+                        Xóa
+                      </p>
                     </IconButton>
                   </TableCell>
                 </TableRow>
@@ -304,4 +310,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart

@@ -32,4 +32,4 @@ MDInput.propTypes = {
 
 MDInput.displayName = "MDInput";
 
-export default MDInput;
+export default MDInput

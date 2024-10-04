@@ -36,4 +36,4 @@ MDAvatar.propTypes = {
 
 MDAvatar.displayName = "MDAvatar";
 
-export default MDAvatar;
+export default MDAvatar

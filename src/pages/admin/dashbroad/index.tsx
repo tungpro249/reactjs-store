@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { VerticalBarChart } from "./components/VerticalBarChart";
 import axios from "axios";
@@ -53,4 +52,4 @@ const Dashbroad = () => {
   );
 };
 
-export default Dashbroad;
+export default Dashbroad

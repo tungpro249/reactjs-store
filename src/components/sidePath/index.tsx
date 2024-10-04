@@ -45,4 +45,4 @@ const SidePath = ({ handdleAdd, showButton }: { handdleAdd: Function; showButton
   );
 };
 
-export default SidePath;
+export default SidePath

@@ -48,4 +48,4 @@ const CategoriesSection = ({ categories }: { categories: typeCategory }) => {
   );
 };
 
-export default CategoriesSection;
+export default CategoriesSection

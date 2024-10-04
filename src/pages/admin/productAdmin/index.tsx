@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ADD_CATEGORY_API, deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
-import { Box, Button, Card, CardMedia, Grid, Modal, TextField } from "@mui/material";
+import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { Box, Button, Grid, Modal } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";

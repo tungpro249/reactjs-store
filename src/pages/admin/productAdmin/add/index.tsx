@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 import { ADD_PRODUCT_API } from "../../../../constants/api";
@@ -105,7 +105,13 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Tên sản phẩm</label>
             <TextField
               placeholder="Tên sản phẩm"
@@ -117,12 +123,24 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Danh mục</label>
             <CategoryAutocomplete handleChoose={setCategory} />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Giá tiền</label>
             <TextField
               placeholder="Giá tiền"
@@ -134,7 +152,13 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Số lượng</label>
             <TextField
               placeholder="Số lượng"
@@ -146,7 +170,13 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
             />
           </Box>
           <br />
-          <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <label style={{ marginRight: "10px" }}>Mô tả</label>
             <TextField
               placeholder="Mô tả"
@@ -183,4 +213,4 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   );
 };
 
-export default AddProduct;
+export default AddProduct
