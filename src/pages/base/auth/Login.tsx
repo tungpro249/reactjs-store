@@ -10,10 +10,10 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { LOGIN_API } from "../../../constants/api";
+import { LOGIN_API } from "../../../common/constants/api";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { BACKGROUND_COLOR_LOCK } from "../../../constants/app";
+import { BACKGROUND_COLOR_LOCK } from "../../../common/constants/app";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +58,7 @@ const Login = () => {
     try {
       const response = await axios.post(LOGIN_API, {
         email: email,
-        pass_word: password,
+        password: password,
       });
       if (response.data !== null) {
         alert("Đăng nhập thành công.");

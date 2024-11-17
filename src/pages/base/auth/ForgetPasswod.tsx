@@ -3,7 +3,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { forgotPassword } from "../../../constants/api";
+import { forgotPassword } from "../../../common/constants/api";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");

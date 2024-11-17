@@ -190,7 +190,9 @@ function Navbar() {
                   onClick={handleAvatarClick}
                 >
                   <Avatar
+                    // @ts-ignore
                     alt={`${name?.last_name} ${name?.first_name}`}
+                    // @ts-ignore
                     src={`http://localhost:1000/${avatar?.avatar}`}
                     sx={{ width: 50, height: 50 }}
                   />
@@ -281,4 +283,4 @@ function Navbar() {
   );
 }
 
-export default Navbar
+export default Navbar;

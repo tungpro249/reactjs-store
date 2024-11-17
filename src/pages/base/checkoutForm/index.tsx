@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 import axios from "axios";
-import { paymentWithoutAccount } from "../../../constants/api";
+import { paymentWithoutAccount } from "../../../common/constants/api";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");

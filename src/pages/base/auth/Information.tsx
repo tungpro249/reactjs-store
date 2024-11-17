@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppController } from "../../../contexts/app";
-import { getInfoUser, updateInformation } from "../../../constants/api";
+import { getInfoUser, updateInformation } from "../../../common/constants/api";
 import axios from "axios";
 import { typeUser } from "../../../types/typeUser";
 

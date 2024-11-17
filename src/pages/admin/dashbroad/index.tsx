@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { Grid } from "@mui/material";
 import { VerticalBarChart } from "./components/VerticalBarChart";
 import axios from "axios";
-import { GET_STATISTICAL } from "../../../constants/api";
+import { GET_STATISTICAL } from "../../../common/constants/api";
 import { formatNumber } from "../../../utils";
 
 const Dashbroad = () => {

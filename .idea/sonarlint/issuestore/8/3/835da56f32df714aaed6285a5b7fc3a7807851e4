@@ -1,0 +1,4 @@
+
+çtypescript:S6606$"jPrefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.(∞“ßß8∆ú∏Ç≥2
+~typescript:S6582%"[Prefer using an optional chain expression instead, as it's more concise and easier to read.(≈ç…—8∆ú∏Ç≥2
+dtypescript:S1854+"<Remove this useless assignment to variable "userController".(ßØÜ˘ˇˇˇˇ8«ú∏Ç≥2

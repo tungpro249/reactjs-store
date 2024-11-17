@@ -5,7 +5,7 @@ import {
   GET_ALL_CART,
   GET_PRODUCT_DETAIL,
   UPDATE_CART_SUCCESS,
-} from "../constants/action";
+} from "../common/constants/action";
 import { typeProduct } from "../types/typeProduct";
 
 // @ts-ignore

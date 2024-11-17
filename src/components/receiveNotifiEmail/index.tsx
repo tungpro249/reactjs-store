@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
 import axios from "axios";
-import { REGISTER_LOYAL_CUSTOMER } from "../../constants/api";
+import { REGISTER_LOYAL_CUSTOMER } from "../../common/constants/api";
 import { useState } from "react";
 
 const ReceiveNotifyEmail = () => {

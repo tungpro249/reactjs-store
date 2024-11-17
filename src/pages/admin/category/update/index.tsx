@@ -1,8 +1,8 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
-import { updateCategory } from "../../../../constants/api";
-import { CATEGORY_NAME_IS_EMPTY } from "../../../../constants/message";
+import { updateCategory } from "../../../../common/constants/api";
+import { CATEGORY_NAME_IS_EMPTY } from "../../../../common/constants/message";
 import { typeCategory } from "../../../../types/typeCategory";
 
 const UpdateCategory = ({

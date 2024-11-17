@@ -4,8 +4,8 @@ import SidePath from "../../../components/sidePath";
 import TableForm from "../../../components/table";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../constants/api";
-import { UPDATE_TYPE } from "../../../constants/app";
+import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../common/constants/api";
+import { UPDATE_TYPE } from "../../../common/constants/app";
 import { typeOder } from "../../../types/typeOrder";
 import StatusAutocomplete from "./components/AutoComplete";
 

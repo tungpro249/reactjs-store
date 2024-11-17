@@ -2,7 +2,7 @@ import { Avatar, Box, Button, CssBaseline, Grid, TextField, Typography } from "@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import axios from "axios";
-import { resetPassword } from "../../../constants/api";
+import { resetPassword } from "../../../common/constants/api";
 import { useLocation } from "react-router-dom";
 
 const ResetPassword = () => {

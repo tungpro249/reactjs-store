@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { typeOder } from "../../../types/typeOrder";
 import { useAppController } from "../../../contexts/app";
 import axios from "axios";
-import { deleteOrder, getOrderUser } from "../../../constants/api";
+import { deleteOrder, getOrderUser } from "../../../common/constants/api";
 import {
   Box,
   Button,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../constants/api";
+import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../common/constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
 import ReactImageMagnify from "react-image-magnify";

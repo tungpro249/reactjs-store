@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
-import { ADD_PRODUCT_API } from "../../../../constants/api";
+import { ADD_PRODUCT_API } from "../../../../common/constants/api";
 import { typeCategory } from "../../../../types/typeCategory";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
 

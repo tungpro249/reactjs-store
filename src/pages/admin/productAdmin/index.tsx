@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
 import { Box, Button, Grid, Modal } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
-import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../common/constants/app";
 import AddProduct from "./add";
 import UpdateProduct from "./update";
 import { typeProduct } from "../../../types/typeProduct";

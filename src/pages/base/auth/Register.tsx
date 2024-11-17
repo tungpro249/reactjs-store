@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { REGISTER_API } from "../../../constants/api";
+import { REGISTER_API } from "../../../common/constants/api";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 
 const Register = () => {
@@ -106,7 +106,7 @@ const Register = () => {
         user_name: userName,
         last_name: lastName,
         first_name: firstName,
-        pass_word: password,
+        password: password,
         email,
         phone,
         address: `${city}-${district}-${ward}-${address}`,
@@ -121,161 +121,159 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Grid container component="main">
-        <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} sx={{ margin: "auto" }}>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              px: 4,
-              py: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              background: "#edeaea77",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Đăng ký
-            </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Box style={{ display: "flex" }}>
-                <TextField
-                  margin="normal"
-                  required
-                  id="lastName"
-                  label="Họ"
-                  name="lastName"
-                  onChange={(e) => setLastName(e.target.value)}
-                  autoComplete="lastName"
-                  error={!!errorLastName}
-                  helperText={errorLastName ? errorLastName : ""}
-                  fullWidth
-                />
-                <Box sx={{ width: "30px" }} />
-                <TextField
-                  margin="normal"
-                  required
-                  id="firstName"
-                  label="Tên"
-                  name="firstName"
-                  onChange={(e) => setFirstName(e.target.value)}
-                  autoComplete="firstName"
-                  error={!!errorFirstName}
-                  helperText={errorFirstName ? errorFirstName : ""}
-                  fullWidth
-                />
-              </Box>
+    <Grid container component="main">
+      <CssBaseline />
+      <Grid item xs={12} sm={8} md={5} sx={{ margin: "auto" }}>
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            px: 4,
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            background: "#edeaea77",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Đăng ký
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box style={{ display: "flex" }}>
               <TextField
                 margin="normal"
                 required
+                id="lastName"
+                label="Họ"
+                name="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+                autoComplete="lastName"
+                error={!!errorLastName}
+                helperText={errorLastName ? errorLastName : ""}
                 fullWidth
-                onChange={(e) => setUserName(e.target.value)}
-                id="userName"
-                label="Tên tài khoản"
-                name="userName"
-                autoComplete="userName"
-                error={!!errorUserName}
-                helperText={errorUserName ? errorUserName : ""}
               />
+              <Box sx={{ width: "30px" }} />
               <TextField
                 margin="normal"
                 required
+                id="firstName"
+                label="Tên"
+                name="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
+                autoComplete="firstName"
+                error={!!errorFirstName}
+                helperText={errorFirstName ? errorFirstName : ""}
                 fullWidth
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                label="Mật khẩu"
-                type="password"
-                id="password"
-                error={!!errorPassword}
-                helperText={errorPassword ? errorPassword : ""}
-                autoComplete="current-password"
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="rePassword"
-                label="Nhập lại mật khẩu"
-                onChange={(e) => setRePassword(e.target.value)}
-                error={!!errorRePassword}
-                helperText={errorRePassword ? errorRePassword : ""}
-                type="password"
-                id="rePassword"
-                autoComplete="current-password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="phone"
-                label="Số điện thoại"
-                onChange={(e) => setPhone(e.target.value)}
-                name="phone"
-                autoComplete="phone"
-                error={!!errorPhone}
-                helperText={errorPhone ? errorPhone : ""}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
-                error={!!errorEmail}
-                helperText={errorEmail ? errorEmail : ""}
-              />
-              <VietnamLocalSelect
-                handleChooseCity={setCity}
-                handleChooseDistrict={setDistrict}
-                handleChooseWard={setWard}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="address"
-                label="Địa chỉ"
-                name="address"
-                onChange={(e) => setAddress(e.target.value)}
-                autoComplete="address"
-                error={!!errorAddress}
-                helperText={errorAddress ? errorAddress : ""}
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={() => handleSubmit()}
-              >
-                Đăng ký
-              </Button>
-              <Grid container>
-                <Grid item xs={12} md={6}>
-                  <Link href="/forget-password" variant="body2">
-                    Quên mật khẩu ?
-                  </Link>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Link href="/account/login" variant="body2">
-                    {"Bạn đã có tài khoản? Đăng nhập"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              onChange={(e) => setUserName(e.target.value)}
+              id="userName"
+              label="Tên tài khoản"
+              name="userName"
+              autoComplete="userName"
+              error={!!errorUserName}
+              helperText={errorUserName ? errorUserName : ""}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              label="Mật khẩu"
+              type="password"
+              id="password"
+              error={!!errorPassword}
+              helperText={errorPassword ? errorPassword : ""}
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="rePassword"
+              label="Nhập lại mật khẩu"
+              onChange={(e) => setRePassword(e.target.value)}
+              error={!!errorRePassword}
+              helperText={errorRePassword ? errorRePassword : ""}
+              type="password"
+              id="rePassword"
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="phone"
+              label="Số điện thoại"
+              onChange={(e) => setPhone(e.target.value)}
+              name="phone"
+              autoComplete="phone"
+              error={!!errorPhone}
+              helperText={errorPhone ? errorPhone : ""}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              error={!!errorEmail}
+              helperText={errorEmail ? errorEmail : ""}
+            />
+            <VietnamLocalSelect
+              handleChooseCity={setCity}
+              handleChooseDistrict={setDistrict}
+              handleChooseWard={setWard}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="address"
+              label="Địa chỉ"
+              name="address"
+              onChange={(e) => setAddress(e.target.value)}
+              autoComplete="address"
+              error={!!errorAddress}
+              helperText={errorAddress ? errorAddress : ""}
+            />
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => handleSubmit()}
+            >
+              Đăng ký
+            </Button>
+            <Grid container>
+              <Grid item xs={12} md={6}>
+                <Link href="/forget-password" variant="body2">
+                  Quên mật khẩu ?
+                </Link>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Link href="/account/login" variant="body2">
+                  {"Bạn đã có tài khoản? Đăng nhập"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
-        </Grid>
+        </Box>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

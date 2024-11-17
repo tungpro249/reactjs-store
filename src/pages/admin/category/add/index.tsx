@@ -1,8 +1,8 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
-import { ADD_CATEGORY_API } from "../../../../constants/api";
-import { CATEGORY_NAME_IS_EMPTY } from "../../../../constants/message";
+import { ADD_CATEGORY_API } from "../../../../common/constants/api";
+import { CATEGORY_NAME_IS_EMPTY } from "../../../../common/constants/message";
 
 const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   const [name, setName] = useState<string>("");

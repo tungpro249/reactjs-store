@@ -3,7 +3,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CHANGE_PASSWORD_API } from "../../../constants/api";
+import { CHANGE_PASSWORD_API } from "../../../common/constants/api";
 
 const ChangePassword = () => {
   const [oldPass, setOldPass] = useState("");

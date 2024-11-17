@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useReducer } from "react";
-import { LOGIN_SUCCESS } from "../constants/action";
+import { LOGIN_SUCCESS } from "../common/constants/action";
 import { typeUser } from "../types/typeUser";
 
 // @ts-ignore

@@ -5,7 +5,7 @@ import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
-import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../constants/api";
+import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
 import SliderCarosel from "../../../components/slider/sliderCarosel";
 import { useAppController } from "../../../contexts/app";
 import FormCardComponent from "../../../components/form/productActionCard";

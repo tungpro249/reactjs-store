@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { deleteCategory, GET_ALL_CATEGORIES } from "../../../constants/api";
+import { deleteCategory, GET_ALL_CATEGORIES } from "../../../common/constants/api";
 import { Box, Button, Grid, Modal } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";
-import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../constants/app";
+import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../common/constants/app";
 import AddCategory from "./add";
 import UpdateCategory from "./update";
 import { typeCategory } from "../../../types/typeCategory";
@@ -110,7 +110,10 @@ const Category = () => {
     return <div />;
   };
 
-  const columns = [{ header: "Tên sản phẩm", field: "name" }];
+  const columns = [
+    { header: "Tên sản phẩm", field: "name" },
+    { header: "Hình ảnh", field: "image" },
+  ];
 
   return (
     <>

@@ -21,7 +21,7 @@ import {
   getAllCart,
   payment,
   updateCart,
-} from "../../../constants/api";
+} from "../../../common/constants/api";
 import axios from "axios";
 import { useAppController } from "../../../contexts/app";
 import IconButton from "@mui/material/IconButton";
