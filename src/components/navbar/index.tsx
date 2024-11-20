@@ -7,19 +7,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
-import {
-  Avatar,
-  Box,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuList,
-  Toolbar,
-} from "@mui/material";
-
-import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Toolbar from "@mui/material/Toolbar";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ExitToApp from "@mui/icons-material/ExitToApp";
+import Person from "@mui/icons-material/Person";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import MDAvatar from "../ui/MDAvatar";

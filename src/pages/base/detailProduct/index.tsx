@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, CardActions, CardContent, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../common/constants/api";
@@ -184,4 +188,4 @@ const DetailProduct = () => {
   );
 };
 
-export default DetailProduct
+export default DetailProduct;

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
-import { Box, Button, Grid, Modal } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
 import SidePath from "../../../components/sidePath";

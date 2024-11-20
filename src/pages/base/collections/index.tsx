@@ -1,4 +1,10 @@
-import { Box, Button, Card, CardActions, Grid, Pagination, Slider } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
+import Slider from "@mui/material/Slider";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
@@ -215,4 +221,4 @@ const Collections = () => {
   );
 };
 
-export default Collections
+export default Collections;

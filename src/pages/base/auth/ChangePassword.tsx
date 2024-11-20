@@ -1,4 +1,10 @@
-import { Avatar, Box, Button, CssBaseline, Grid, TextField, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -121,4 +127,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword
+export default ChangePassword;

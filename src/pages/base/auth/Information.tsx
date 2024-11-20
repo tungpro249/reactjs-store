@@ -1,4 +1,8 @@
-import { Avatar, Box, Button, Grid, TextField } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useAppController } from "../../../contexts/app";
 import { getInfoUser, updateInformation } from "../../../common/constants/api";
@@ -134,4 +138,4 @@ const Information = () => {
   );
 };
 
-export default Information
+export default Information;

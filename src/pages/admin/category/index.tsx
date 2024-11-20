@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { deleteCategory, GET_ALL_CATEGORIES } from "../../../common/constants/api";
-import { Box, Button, Grid, Modal } from "@mui/material";
-import Toolbar from "@mui/material/Toolbar";
-import TableForm from "../../../components/table";
-import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../common/constants/app";
+import { GET_ALL_CATEGORIES, deleteCategory } from "../../../common/constants/api";
+import { useEffect, useState } from "react";
+
 import AddCategory from "./add";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import SidePath from "../../../components/sidePath";
+import TableForm from "../../../components/table";
+import Toolbar from "@mui/material/Toolbar";
 import UpdateCategory from "./update";
+import axios from "axios";
 import { typeCategory } from "../../../types/typeCategory";
 
 const Category = () => {
@@ -143,4 +147,4 @@ const Category = () => {
   );
 };
 
-export default Category
+export default Category;

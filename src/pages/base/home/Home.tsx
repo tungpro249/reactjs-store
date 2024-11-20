@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import{ useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import ClothesCard from "../../../components/clothesCard";
 import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";

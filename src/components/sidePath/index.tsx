@@ -1,5 +1,5 @@
-import { Box, Button } from "@mui/material";
-import React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { useLocation } from "react-router-dom";
 
 const SidePath = ({ handdleAdd, showButton }: { handdleAdd: Function; showButton?: boolean }) => {

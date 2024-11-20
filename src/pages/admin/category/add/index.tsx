@@ -1,8 +1,10 @@
-import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
-import axios from "axios";
 import { ADD_CATEGORY_API } from "../../../../common/constants/api";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { CATEGORY_NAME_IS_EMPTY } from "../../../../common/constants/message";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import  { useState } from "react";
 
 const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   const [name, setName] = useState<string>("");
@@ -75,5 +77,4 @@ const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   );
 };
 
-export default AddCategory
-
+export default AddCategory;

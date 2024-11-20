@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { updateProduct } from "../../../../common/constants/api";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
@@ -218,4 +223,4 @@ const UpdateProduct = ({
   );
 };
 
-export default UpdateProduct
+export default UpdateProduct;

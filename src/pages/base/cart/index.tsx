@@ -1,18 +1,16 @@
-import {
-  Box,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Modal,
-  Radio,
-  RadioGroup,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import {

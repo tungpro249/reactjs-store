@@ -1,4 +1,6 @@
-import { Button, Card, CardActions } from "@mui/material";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
 import React from "react";
 
 interface ProductActionCardComponentProps {
@@ -43,4 +45,4 @@ const ProductActionCard: React.FC<ProductActionCardComponentProps> = ({
   );
 };
 
-export default ProductActionCard
+export default ProductActionCard;

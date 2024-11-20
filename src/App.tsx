@@ -1,33 +1,35 @@
+import "./App.css";
+
 import React, { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./pages/base/home/Home";
-import About from "./pages/base/about/About";
-import SignIn from "./pages/base/auth/Login";
-import Register from "./pages/base/auth/Register";
-import "./App.css";
-import NotFound from "./components/notFound";
-import Blog from "./pages/base/blog";
-import Collections from "./pages/base/collections";
-import DetailProduct from "./pages/base/detailProduct";
-import Foodter from "./components/foodter";
-import Navbar from "./components/navbar";
-import Cart from "./pages/base/cart";
-import ReceiveNotifyEmail from "./components/receiveNotifiEmail";
-import ForgetPassword from "./pages/base/auth/ForgetPasswod";
-import Box from "@mui/material/Box";
-import Dashboard from "./pages/admin/dashbroad";
-import SideBar from "./components/sideBar";
-import ProductAdmin from "./pages/admin/productAdmin";
-import Category from "./pages/admin/category";
-import VerticalTabs from "./pages/customer/tabs";
-import ChangePassword from "./pages/base/auth/ChangePassword";
-import Order from "./pages/admin/order";
-import CheckoutForm from "./pages/base/checkoutForm";
 import { loginSuccess, useAppController } from "./contexts/app";
-import Information from "./pages/base/auth/Information";
-import ResetPassword from "./pages/base/auth/ResetPassword";
-import LoyalCustomer from "./pages/admin/loyalCustomer";
-import OrderCustomer from "./pages/customer/order";
+
+const About = React.lazy(() => import("./pages/base/about/About"));
+const Blog = React.lazy(() => import("./pages/base/blog"));
+const Box = React.lazy(() => import("@mui/material/Box"));
+const Cart = React.lazy(() => import("./pages/base/cart"));
+const Category = React.lazy(() => import("./pages/admin/category"));
+const ChangePassword = React.lazy(() => import("./pages/base/auth/ChangePassword"));
+const CheckoutForm = React.lazy(() => import("./pages/base/checkoutForm"));
+const Collections = React.lazy(() => import("./pages/base/collections"));
+const Dashboard = React.lazy(() => import("./pages/admin/dashbroad"));
+const DetailProduct = React.lazy(() => import("./pages/base/detailProduct"));
+const Foodter = React.lazy(() => import("./components/foodter"));
+const ForgetPassword = React.lazy(() => import("./pages/base/auth/ForgetPasswod"));
+const Home = React.lazy(() => import("./pages/base/home/Home"));
+const Information = React.lazy(() => import("./pages/base/auth/Information"));
+const LoyalCustomer = React.lazy(() => import("./pages/admin/loyalCustomer"));
+const Navbar = React.lazy(() => import("./components/navbar"));
+const NotFound = React.lazy(() => import("./components/notFound"));
+const Order = React.lazy(() => import("./pages/admin/order"));
+const OrderCustomer = React.lazy(() => import("./pages/customer/order"));
+const ProductAdmin = React.lazy(() => import("./pages/admin/productAdmin"));
+const ReceiveNotifyEmail = React.lazy(() => import("./components/receiveNotifiEmail"));
+const Register = React.lazy(() => import("./pages/base/auth/Register"));
+const ResetPassword = React.lazy(() => import("./pages/base/auth/ResetPassword"));
+const SideBar = React.lazy(() => import("./components/sideBar"));
+const SignIn = React.lazy(() => import("./pages/base/auth/Login"));
+const VerticalTabs = React.lazy(() => import("./pages/customer/tabs"));
 
 function App() {
   const location = useLocation();
@@ -47,7 +49,35 @@ function App() {
     if (user) {
       loginSuccess(userDispatch, JSON.parse(user));
     }
-  }, [localStorage.getItem("user")]);
+  }, []);
+
+  const AdminRoutes = () => (
+    <>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/product" element={<ProductAdmin />} />
+      <Route path="/category" element={<Category />} />
+    </>
+  );
+
+  const CustomerRoutes = () => (
+    <>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/collections/san-pham-moi" element={<Collections />} />
+      <Route path="/collections/sale" element={<Collections />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/product/:id" element={<DetailProduct />} />
+      <Route path={"/account/my-order"} element={<OrderCustomer />} />
+      <Route path="/shipping-policy" element={<VerticalTabs />} />
+      <Route path="/payment-guide" element={<VerticalTabs />} />
+      <Route path="/privacy-policy" element={<VerticalTabs />} />
+      <Route path="/size-guide" element={<VerticalTabs />} />
+      <Route path="/return-policy" element={<VerticalTabs />} />
+      <Route path="/warranty-policy" element={<VerticalTabs />} />
+      <Route path="/checkout-form" element={<CheckoutForm />} />
+    </>
+  );
 
   return (
     <Box sx={{ display: checkRole ? "flex" : "" }}>
@@ -65,35 +95,7 @@ function App() {
           />
           <Route path="/account/information" element={<Information />} />
           <Route path="/order" element={<Order />} />
-          {checkRole ? (
-            // admin page*
-            <>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/product" element={<ProductAdmin />} />
-              <Route path="/category" element={<Category />} />
-            </>
-          ) : (
-            //customer page
-            <>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/collections/san-pham-moi" element={<Collections />} />
-              <Route path="/collections/sale" element={<Collections />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/product/:id" element={<DetailProduct />} />
-              <Route path={"/account/my-order"} element={<OrderCustomer />} />
-              {/*tab rows*/}
-              <Route path="/shipping-policy" element={<VerticalTabs />} />
-              <Route path="/payment-guide" element={<VerticalTabs />} />
-              <Route path="/privacy-policy" element={<VerticalTabs />} />
-              <Route path="/size-guide" element={<VerticalTabs />} />
-              <Route path="/return-policy" element={<VerticalTabs />} />
-              <Route path="/warranty-policy" element={<VerticalTabs />} />
-
-              <Route path="/checkout-form" element={<CheckoutForm />} />
-            </>
-          )}
+          {checkRole ? AdminRoutes() : CustomerRoutes()}
           <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>

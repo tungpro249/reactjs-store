@@ -12,7 +12,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CategoryIcon from "@mui/icons-material/Category";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import { Link, useNavigate } from "react-router-dom";
-import { ExitToApp } from "@mui/icons-material";
+import ExitToApp from "@mui/icons-material/ExitToApp";
 
 const SideBar = () => {
   const navigate = useNavigate();

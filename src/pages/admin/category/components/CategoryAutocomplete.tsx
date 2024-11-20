@@ -1,8 +1,9 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { typeCategory } from "../../../../types/typeCategory";
-import axios from "axios";
+
 import { GET_ALL_CATEGORIES } from "../../../../common/constants/api";
+import axios from "axios";
+import { typeCategory } from "../../../../types/typeCategory";
 
 const CategoryAutocomplete = ({
   handleChoose,

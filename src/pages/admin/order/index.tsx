@@ -1,8 +1,12 @@
 import Toolbar from "@mui/material/Toolbar";
-import { Box, Button, Grid, Modal, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
 import SidePath from "../../../components/sidePath";
 import TableForm from "../../../components/table";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../common/constants/api";
 import { UPDATE_TYPE } from "../../../common/constants/app";
@@ -173,4 +177,4 @@ const Order = () => {
   );
 };
 
-export default Order
+export default Order;

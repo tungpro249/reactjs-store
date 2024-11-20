@@ -1,9 +1,11 @@
-import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
-import axios from "axios";
-import { updateCategory } from "../../../../common/constants/api";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { CATEGORY_NAME_IS_EMPTY } from "../../../../common/constants/message";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
 import { typeCategory } from "../../../../types/typeCategory";
+import { updateCategory } from "../../../../common/constants/api";
+import { useState } from "react";
 
 const UpdateCategory = ({
   handleClose,
@@ -89,4 +91,4 @@ const UpdateCategory = ({
   );
 };
 
-export default UpdateCategory
+export default UpdateCategory;

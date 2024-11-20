@@ -1,5 +1,6 @@
-import React from "react";
-import { Card, CardContent, CardMedia } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import { typeCategory } from "../../types/typeCategory";
 import Typography from "@mui/material/Typography";
 
