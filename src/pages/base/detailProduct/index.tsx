@@ -9,7 +9,6 @@ import axios from "axios";
 import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../common/constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
-import ReactImageMagnify from "react-image-magnify";
 import { useAppController } from "../../../contexts/app";
 import SimilarProducts from "../SimilarProduct";
 
@@ -113,7 +112,12 @@ const DetailProduct = () => {
           <Box style={{ display: "flex" }} p={5}>
             <Grid item xs={12} md={6} px={2}>
               <Box width={"100%"}>
-                <ReactImageMagnify {...imageProps} isActivatedOnTouch />
+                <img
+                  src={`http://localhost:1000/${productDetail.image.replace(/\\/g, "/")}`}
+                  alt="Product"
+                  style={{ width: "100%" }}
+                />
+                {/* <ReactImageMagnify {...imageProps} isActivatedOnTouch /> */}
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>

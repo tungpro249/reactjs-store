@@ -3,6 +3,7 @@ import "./App.css";
 import React, { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { loginSuccess, useAppController } from "./contexts/app";
+import StoreLocation from "pages/base/store-location";
 
 const About = React.lazy(() => import("./pages/base/about/About"));
 const Blog = React.lazy(() => import("./pages/base/blog"));
@@ -68,7 +69,7 @@ function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/product/:id" element={<DetailProduct />} />
-      <Route path={"/account/my-order"} element={<OrderCustomer />} />
+      <Route path="/account/my-order" element={<OrderCustomer />} />
       <Route path="/shipping-policy" element={<VerticalTabs />} />
       <Route path="/payment-guide" element={<VerticalTabs />} />
       <Route path="/privacy-policy" element={<VerticalTabs />} />
@@ -76,6 +77,7 @@ function App() {
       <Route path="/return-policy" element={<VerticalTabs />} />
       <Route path="/warranty-policy" element={<VerticalTabs />} />
       <Route path="/checkout-form" element={<CheckoutForm />} />
+      <Route path="/showroom" element={<StoreLocation />} />
     </>
   );
 
