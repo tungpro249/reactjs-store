@@ -3,8 +3,6 @@ M
 src/pages/base/cart/index.tsx,e\7\e739badb1e18e10dc6cb4de495d6075fd3be2733
 R
 "src/pages/customer/order/index.tsx,d\5\d56d94d4ba6341f4d4205062b60b59c427182b2a
-Q
-!src/components/sidePath/index.tsx,a\2\a2b57b62b60b8ee69254583cafb3705bc3f6cd23
 J
 src/types/typeCategory.tsx,b\6\b64642310733065d175da331a19fe0aa134c3dfe
 ;

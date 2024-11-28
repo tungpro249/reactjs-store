@@ -6,6 +6,7 @@ import { VerticalBarChart } from "./components/VerticalBarChart";
 import axios from "axios";
 import { GET_STATISTICAL } from "../../../common/constants/api";
 import { formatNumber } from "../../../utils";
+import { LineChart } from "./components/LineChart";
 
 const Dashbroad = () => {
   const [statistical, setStatisticalResponse] = useState<any>([]);

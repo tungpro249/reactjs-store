@@ -9,6 +9,7 @@ import axios from "axios";
 import { ADD_PRODUCT_API } from "../../../../common/constants/api";
 import { typeCategory } from "../../../../types/typeCategory";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
+import ActionForm from "components/form/actionForm";
 
 const AddProduct = ({ handleClose }: { handleClose: Function }) => {
   const [name, setName] = useState("");
@@ -192,28 +193,7 @@ const AddProduct = ({ handleClose }: { handleClose: Function }) => {
           </Box>
         </Grid>
       </Grid>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={() => handleAddProductApi()}
-        >
-          Thêm
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
+      <ActionForm onConfirm={handleAddProductApi} onCancel={handleClose} />
     </Box>
   );
 };

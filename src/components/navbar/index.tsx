@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
-// @ts-ignore
-import Logo from "assets/image/logo.jpg";
+import logo from "../../assets/image/logo.jpg";
 import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "@mui/material/Link";
@@ -19,8 +18,6 @@ import Toolbar from "@mui/material/Toolbar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import MDAvatar from "../ui/MDAvatar";
 
 const links = [
@@ -28,7 +25,6 @@ const links = [
   { href: "/blog", label: "Blog" },
   { href: "/collections/sale", label: "Sale" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -37,9 +33,6 @@ function Navbar() {
   const [avatar, setAvatar] = useState(null);
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // @ts-ignore
-  const [userController] = useAppController();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -52,10 +45,6 @@ function Navbar() {
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleAvatarClick = () => {
@@ -72,28 +61,6 @@ function Navbar() {
     window.location.reload();
   };
 
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation">
-      <List>
-        {links.map((link, index) => (
-          <ListItem key={link.label} disablePadding>
-            <Link
-              href={link.href}
-              sx={{
-                color: "black",
-                textDecoration: "none",
-                width: "100%",
-                padding: "0 10px",
-              }}
-            >
-              <ListItemText primary={link.label} />
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <>
       <Box
@@ -104,10 +71,13 @@ function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <p style={{ display: "flex", alignItems: "center" }}>
+        <Link
+          href="/showroom"
+          style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#fff" }}
+        >
           <HomeIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
           <span>Hệ thống showroom</span>
-        </p>
+        </Link>
         <p style={{ display: "flex", alignItems: "center" }}>
           <PhoneIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
           <span>Mua hàng onlline</span>
@@ -116,7 +86,7 @@ function Navbar() {
       <AppBar position="static" style={{ background: "#fff", padding: "0 20px" }}>
         <Toolbar disableGutters>
           <Link href="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <MDAvatar alt="logo" src={Logo} size={"100px"} />
+            <MDAvatar alt="logo" src={logo} size={"100px"} />
           </Link>
 
           <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 0.6 }}>
@@ -155,7 +125,7 @@ function Navbar() {
                   textDecoration: "none",
                 }}
               >
-                <Avatar alt="logo" src={Logo} />
+                <Avatar alt="logo" src={logo} />
               </IconButton>
             </Link>
           </Box>
@@ -192,7 +162,7 @@ function Navbar() {
                     // @ts-ignore
                     alt={`${name?.last_name} ${name?.first_name}`}
                     // @ts-ignore
-                    src={`http://localhost:1000/${avatar?.avatar}`}
+                    src={`${process.env.IMAGE_URL}/${avatar?.avatar}`}
                     sx={{ width: 50, height: 50 }}
                   />
                   <Box pr={1} />

@@ -31,11 +31,11 @@ const SideBar = () => {
     <div
       style={{
         background: "#cfcccc",
-        padding: "25px",
+        padding: "30px",
         borderRadius: "10px",
         height: "90vh",
-        marginTop: "5px",
-        marginLeft: "8px",
+        marginTop: "16px",
+        marginLeft: "18px",
       }}
     >
       <h1 style={{ padding: "10px" }}>Dashboard</h1>

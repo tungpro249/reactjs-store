@@ -10,6 +10,7 @@ import { updateProduct } from "../../../../common/constants/api";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
 import { typeCategory } from "../../../../types/typeCategory";
 import { typeProduct } from "../../../../types/typeProduct";
+import ActionForm from "components/form/actionForm";
 
 const UpdateProduct = ({
   handleClose,
@@ -114,7 +115,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image={`http://localhost:1000/${product.image}`}
+                image={`${process.env.IMAGE_URL}/${product.image}`}
                 alt="Choose Image"
               />
             )}
@@ -197,28 +198,7 @@ const UpdateProduct = ({
           </Box>
         </Grid>
       </Grid>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={handleUpdateProductApi}
-        >
-          Sửa
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
+      <ActionForm onConfirm={handleUpdateProductApi} onCancel={handleClose} />
     </Box>
   );
 };

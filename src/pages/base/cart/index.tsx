@@ -25,6 +25,7 @@ import { useAppController } from "../../../contexts/app";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { typeProduct } from "../../../types/typeProduct";
+import MDImage from "components/ui/MDImage";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -136,12 +137,7 @@ const Cart = () => {
                 <TableRow key={key} className={"table-border"}>
                   <TableCell className={"table-border"}>{item.name}</TableCell>
                   <TableCell className={"table-border"}>
-                    <img
-                      src={"http://localhost:1000/" + item?.image.replace(/\\/g, "/")}
-                      alt={item.name}
-                      width={150}
-                      height={200}
-                    />
+                    <MDImage src={item.image} alt={item.name} width={150} height={200} />
                   </TableCell>
                   <TableCell className={"table-border"}>{item.price} VNĐ</TableCell>
                   <TableCell className={"table-border"}>
@@ -308,4 +304,4 @@ const Cart = () => {
   );
 };
 
-export default Cart
+export default Cart;

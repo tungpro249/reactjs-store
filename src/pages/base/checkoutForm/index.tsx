@@ -14,6 +14,7 @@ import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 import axios from "axios";
 import { paymentWithoutAccount } from "../../../common/constants/api";
+import MDImage from "components/ui/MDImage";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -140,7 +141,7 @@ const CheckoutForm = () => {
         <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
           {productInCart && (
             <Box p={5} display={"flex"}>
-              <img src={"http://localhost:1000/" + productInCart.image} width={200} height={200} />
+              <MDImage src={productInCart.image} alt={productInCart.name} width={200} height={200} />
               <Box ml={3} lineHeight={2}>
                 <Box>
                   <strong>Tên sản phẩm:</strong>

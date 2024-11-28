@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
-import SidePath from "../../../components/sidePath";
 import TableForm from "../../../components/table";
 import Toolbar from "@mui/material/Toolbar";
 import UpdateCategory from "./update";
@@ -115,8 +114,8 @@ const Category = () => {
   };
 
   const columns = [
-    { header: "Tên sản phẩm", field: "name" },
-    { header: "Hình ảnh", field: "image" },
+    { Header: "Tên sản phẩm", accessor: "name", width: 400 },
+    { Header: "Hình ảnh", accessor: "image", width: 400 },
   ];
 
   return (
@@ -124,11 +123,14 @@ const Category = () => {
       <Toolbar />
       <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
-          <SidePath handdleAdd={handleAddCategory} showButton />
           <Box pt={5}>
             <TableForm
               columns={columns}
+              headerTitle="Quản lý danh mục"
+              isCreate
+              isUploadFileExcel
               data={categories}
+              handleAdd={handleAddCategory}
               handleDelete={handleDeleteCategory}
               handleEdit={handleEditCategory}
             />

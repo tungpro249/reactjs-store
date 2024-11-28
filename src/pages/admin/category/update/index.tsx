@@ -6,6 +6,9 @@ import axios from "axios";
 import { typeCategory } from "../../../../types/typeCategory";
 import { updateCategory } from "../../../../common/constants/api";
 import { useState } from "react";
+import ActionForm from "components/form/actionForm";
+import Card from "@mui/material/Card/Card";
+import CardMedia from "@mui/material/CardMedia/CardMedia";
 
 const UpdateCategory = ({
   handleClose,
@@ -18,6 +21,7 @@ const UpdateCategory = ({
 }) => {
   const [name, setName] = useState<string>(category.name);
   const [errorCategoryName, setErrorCategoryName] = useState("");
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const isValid = () => {
     let check = true;
@@ -41,6 +45,17 @@ const UpdateCategory = ({
       }
     }
   };
+  const handleImageClick = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.addEventListener("change", (event) => {
+      //@ts-ignore
+      const file = event.target?.files[0];
+      setSelectedImage(file);
+    });
+    input.click();
+  };
 
   return (
     <Box
@@ -55,7 +70,24 @@ const UpdateCategory = ({
     >
       <h3>Sửa</h3>
       <br />
-      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+      <Box>
+        <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
+          {selectedImage ? (
+            <CardMedia
+              component="img"
+              height="450"
+              image={URL.createObjectURL(selectedImage)}
+              alt="Selected Image"
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              height="450"
+              image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg"
+              alt="Choose Image"
+            />
+          )}
+        </Card>
         <label>Tên danh muc</label>
         <TextField
           placeholder={"Tên danh mục"}
@@ -65,28 +97,7 @@ const UpdateCategory = ({
           error={!!errorCategoryName}
         />
       </Box>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={() => handleUpdate()}
-        >
-          Xác nhận
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
+      <ActionForm onConfirm={handleUpdate} onCancel={handleClose} />
     </Box>
   );
 };

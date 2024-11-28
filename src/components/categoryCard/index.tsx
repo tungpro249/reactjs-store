@@ -18,7 +18,7 @@ const CategoryCard = ({
       component="img"
       height={height}
       width={200}
-      image={`http://localhost:1000/${category.image}`}
+      image={`${process.env.IMAGE_URL}/${category.image}`}
       alt={category.name}
       style={{ marginRight: "10px" }}
     />

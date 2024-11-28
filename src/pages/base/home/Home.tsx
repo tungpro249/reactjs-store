@@ -116,7 +116,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <SliderCarosel images={images} />
       <CategoriesSection categories={categories} />
       <Box pt={4} />
@@ -152,6 +152,6 @@ export default function Home() {
         </Link>
       </h1>
       <Box pb={4} />
-    </div>
+    </>
   );
 }

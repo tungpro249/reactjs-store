@@ -77,7 +77,7 @@ const Information = () => {
   return (
     <Box sx={{ padding: "50px 0", width: "50%", margin: "auto", textAlign: "center" }}>
       <Avatar
-        src={`http://localhost:1000/${avatarUrl.replace(/\\\\/g, "/")}`}
+        src={`${process.env.IMAGE_URL}/${avatarUrl.replace(/\\\\/g, "/")}`}
         sx={{ width: 100, height: 100, margin: "auto", mb: 2 }}
       />
       <input
