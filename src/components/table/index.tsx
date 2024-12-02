@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import ActionButtons from "./actionButtons";
-import { useTable, usePagination, TableInstance } from "react-table";
+import { useTable, usePagination, TableInstance, TableState } from "react-table";
 import MDImage from "components/ui/MDImage";
 import Toolbar from "./toolbar";
 
@@ -17,15 +17,16 @@ interface TableData {
   category: { name: string };
   date_created: string;
 }
+interface ExtendedTableState<TData extends object> extends TableState<TData> {
+  pageIndex: number;
+  pageSize: number;
+}
 
 interface TableInstanceWithPagination extends TableInstance<TableData> {
   page: TableData[];
   gotoPage: (updater: number) => void;
   setPageSize: (size: number) => void;
-  state: {
-    pageIndex: number;
-    pageSize: number;
-  };
+  state: ExtendedTableState<TableData>;
 }
 const TableForm = React.memo(
   ({
@@ -63,7 +64,7 @@ const TableForm = React.memo(
       {
         columns: memoizedColumns,
         data: memoizedData,
-        initialState: { pageIndex: 0, pageSize: 10 },
+        initialState: { pageIndex: 0, pageSize: 10 } as Partial<TableState<TableData>>,
       },
       usePagination
     ) as TableInstanceWithPagination;
@@ -155,6 +156,7 @@ const TableForm = React.memo(
             <TableBody {...getTableBodyProps()}>
               {page.length > 0 ? (
                 page.map((row, index) => {
+                  // @ts-ignore
                   prepareRow(row);
                   return (
                     // @ts-ignore

@@ -14,6 +14,8 @@ import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
 import { useAppController } from "../../../contexts/app";
+import { formatString } from "utils";
+import MDButton from "components/ui/MDButton";
 
 const Collections = () => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
@@ -152,9 +154,9 @@ const Collections = () => {
             key={item.id}
             onClick={() => handleCategoryClick(item.id)}
             className={categoryId === item.id ? "selected-category" : ""}
-            style={{ padding: "5px", width: "70%" }}
+            style={{ padding: "5px", width: "70%", cursor: "pointer" }}
           >
-            {item.name}
+            {formatString(item.name)}
           </Box>
         ))}
       </Grid>
@@ -182,29 +184,27 @@ const Collections = () => {
                 <Box onClick={() => handleProductClick(item)}>
                   <ClothesCard item={item} />
                 </Box>
-                <CardActions style={{ justifyContent: "space-around" }}>
-                  <Button
+                <CardActions>
+                  <MDButton
                     style={{
                       background: "#e11467de",
                       padding: "9px",
                       fontWeight: "bold",
                       color: "aliceblue",
                     }}
+                    label="Mua"
                     onClick={() => handleBuy(item)}
-                  >
-                    Mua
-                  </Button>
-                  <Button
+                  />
+                  <MDButton
                     style={{
                       background: "rgb(45 155 236)",
                       padding: "9px",
                       fontWeight: "bold",
                       color: "aliceblue",
                     }}
+                    label=" Thêm vào giỏ hàng"
                     onClick={() => handleAddToCart(item?.id)}
-                  >
-                    Thêm vào giỏ hàng
-                  </Button>
+                  />
                 </CardActions>
               </Card>
             </Grid>

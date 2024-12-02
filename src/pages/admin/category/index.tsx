@@ -12,6 +12,8 @@ import Toolbar from "@mui/material/Toolbar";
 import UpdateCategory from "./update";
 import axios from "axios";
 import { typeCategory } from "../../../types/typeCategory";
+import MessageModalForm from "components/form/messagesModalForm";
+import Snackbar from "@mui/material/Snackbar/Snackbar";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -50,12 +52,18 @@ const Category = () => {
     setType(ADD_TYPE);
     setOpen(true);
   };
-
   const handleDelete = async () => {
     if (categoryId) {
       try {
         const response = await axios.delete(deleteCategory(categoryId));
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          open={true}
+          onClose={() => {}}
+          message="Xóa thành công"
+        />;
         alert("Xóa thành công");
+        setOpen(false);
         window.location.reload();
       } catch (error) {
         console.log("Error deleting data:", error);

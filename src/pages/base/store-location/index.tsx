@@ -26,7 +26,7 @@ const StoreLocation = () => {
           {/* Có thể thêm thông tin stores hoặc bộ lọc tại đây */}
         </Grid>
         <Grid item xs={12} md={6}>
-          <APIProvider apiKey={process.env.NEXT_PUBLIC_API_MAP_KEY ?? ""}>
+          <APIProvider apiKey={process.env.REACT_APP_API_MAP_KEY ?? ""}>
             <Map
               style={{
                 borderRadius: "20px",

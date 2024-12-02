@@ -3,17 +3,19 @@ import { Button, ButtonProps } from "@mui/material";
 
 interface MDButtonProps extends ButtonProps {
   label?: string;
+  styles?: React.CSSProperties;
 }
 
 const MDButton: React.FC<MDButtonProps> = ({
-  label = "", 
+  label = "",
   variant = "contained",
-  color = "primary", 
-  size = "medium", 
+  color = "primary",
+  size = "medium",
   fullWidth = false,
   disabled = false,
-  onClick, 
-  sx, 
+  onClick,
+  sx,
+  styles,
   ...props
 }) => {
   return (
@@ -24,7 +26,14 @@ const MDButton: React.FC<MDButtonProps> = ({
       fullWidth={fullWidth}
       disabled={disabled}
       onClick={onClick}
-      style={{ width: "100%", borderRadius: "10px" }}
+      onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.transform = "scale(1.05)")}
+      onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.transform = "scale(1)")}
+      style={{
+        width: "100%",
+        borderRadius: "10px",
+        transition: "transform 0.3s ease-in-out",
+        ...styles,
+      }}
       sx={{ ...sx }}
       {...props}
     >

@@ -9,21 +9,46 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
 import Toolbar from "@mui/material/Toolbar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
 import MDAvatar from "../ui/MDAvatar";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import MenuItemsList from "./menuItemsList";
 
 const links = [
   { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
   { href: "/blog", label: "Blog" },
   { href: "/collections/sale", label: "Sale" },
+];
+
+const menuItems = [
+  {
+    href: "/account/information",
+    icon: <Person />,
+    label: "Tài khoản của tôi",
+  },
+  {
+    href: "/account/my-order",
+    icon: <AccountCircle />,
+    label: "Đơn hàng",
+  },
+  {
+    href: "/account/change-password",
+    icon: <AccountCircle />,
+    label: "Thay đổi mật khẩu",
+  },
+  {
+    href: "/cart",
+    icon: <AddShoppingCartIcon />,
+    label: "Giỏ hàng",
+  },
+  {
+    icon: <ExitToApp />,
+    label: "Đăng xuất",
+    onClick: () => console.log("User logged out"),
+  },
 ];
 
 function Navbar() {
@@ -162,7 +187,7 @@ function Navbar() {
                     // @ts-ignore
                     alt={`${name?.last_name} ${name?.first_name}`}
                     // @ts-ignore
-                    src={`${process.env.IMAGE_URL}/${avatar?.avatar}`}
+                    src={`${process.env.REACT_APP_IMAGE_URL}/${avatar?.avatar}`}
                     sx={{ width: 50, height: 50 }}
                   />
                   <Box pr={1} />
@@ -171,74 +196,11 @@ function Navbar() {
                     {name?.last_name} {name?.first_name}
                   </span>
                 </Box>
-
-                <Menu
-                  open={menuOpen}
-                  onClose={handleMenuClose}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  sx={{ top: "64px" }}
-                >
-                  <MenuList>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/information"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <Person />
-                        </ListItemIcon>
-                        <ListItemText primary="Tài khoản của tôi" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/my-order"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <AccountCircle />
-                        </ListItemIcon>
-                        <ListItemText primary="Đơn hàng" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/change-password"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <AccountCircle />
-                        </ListItemIcon>
-                        <ListItemText primary="Thay đổi mật khẩu" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleLogout}>
-                      <ListItemIcon>
-                        <ExitToApp />
-                      </ListItemIcon>
-                      <ListItemText primary="Đăng xuất" />
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
+                <MenuItemsList
+                  menuItems={menuItems}
+                  menuOpen={menuOpen}
+                  handleMenuClose={handleMenuClose}
+                />
               </>
             ) : (
               <Link href="/account/login" sx={{ color: "black", textDecoration: "none" }}>

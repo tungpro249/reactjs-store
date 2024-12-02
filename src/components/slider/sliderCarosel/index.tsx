@@ -3,10 +3,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface SliderCarouselProps {
-  images: string[]; // Mảng chứa URL của các ảnh
-  autoPlay?: boolean; // Tùy chọn tự động chạy slide
-  showThumbs?: boolean; // Tùy chọn hiển thị thumbnails
-  infiniteLoop?: boolean; // Tùy chọn vòng lặp vô hạn
+  images: string[]; 
+  autoPlay?: boolean; 
+  showThumbs?: boolean;
+  infiniteLoop?: boolean; 
 }
 
 const SliderCarousel: React.FC<SliderCarouselProps> = ({

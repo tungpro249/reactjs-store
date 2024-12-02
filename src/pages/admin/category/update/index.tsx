@@ -37,7 +37,12 @@ const UpdateCategory = ({
   const handleUpdate = async () => {
     if (categoryId && isValid()) {
       try {
-        const response = await axios.put(updateCategory(categoryId), { name });
+        const formData = new FormData();
+        if (selectedImage) {
+          formData.append("image", selectedImage);
+        }
+        formData.append("name", name);
+        const response = await axios.put(updateCategory(categoryId), formData);
         alert("Sửa thành công");
         window.location.reload();
       } catch (error) {

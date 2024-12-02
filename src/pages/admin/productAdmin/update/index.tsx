@@ -115,7 +115,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image={`${process.env.IMAGE_URL}/${product.image}`}
+                image={`${process.env.REACT_APP_IMAGE_URL}/${product.image}`}
                 alt="Choose Image"
               />
             )}
