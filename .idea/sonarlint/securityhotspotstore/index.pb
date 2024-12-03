@@ -9,8 +9,6 @@ J
 src/App.tsx,8\3\835da56f32df714aaed6285a5b7fc3a7807851e4
 U
 %src/components/categoryCard/index.tsx,1\5\15a832c937f20df8978dfb8db3ac548d46a4966c
-Z
-*src/components/categoriesSection/index.tsx,4\a\4a3d727b6043a0ba0fcd7a55353a2ca9686ca3b6
 L
 src/pages/base/home/Home.tsx,d\8\d804c9f5ead56ed72d519af1b20fb275b3eb4eb1
 I
@@ -57,8 +55,6 @@ A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-8
-src/.env,f\8\f8550963f8b93cc32435b4600b84f3d3def8daa7
 A
 src/config/api.ts,4\e\4e3c8421203508c4a29a8f8c3e27f0157d5fd03e
 _
@@ -71,3 +67,7 @@ _
 /src/components/form/productActionCard/index.tsx,7\4\74e9998396446dd909aad3a828b49a39ff7ad74a
 Q
 !src/pages/customer/tabs/index.tsx,7\8\784cf06bda57cb6f68178e327949304b91305264
+O
+src/components/navbar/index.tsx,1\f\1fe1bdca8ddb0bc0671e9160e3ea0731473ede71
+]
+-src/components/slider/sliderSyncing/index.tsx,f\a\fae4eaf4a20a56b3112833076c83a6e4448d3dc7

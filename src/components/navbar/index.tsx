@@ -23,34 +23,6 @@ const links = [
   { href: "/collections/sale", label: "Sale" },
 ];
 
-const menuItems = [
-  {
-    href: "/account/information",
-    icon: <Person />,
-    label: "Tài khoản của tôi",
-  },
-  {
-    href: "/account/my-order",
-    icon: <AccountCircle />,
-    label: "Đơn hàng",
-  },
-  {
-    href: "/account/change-password",
-    icon: <AccountCircle />,
-    label: "Thay đổi mật khẩu",
-  },
-  {
-    href: "/cart",
-    icon: <AddShoppingCartIcon />,
-    label: "Giỏ hàng",
-  },
-  {
-    icon: <ExitToApp />,
-    label: "Đăng xuất",
-    onClick: () => console.log("User logged out"),
-  },
-];
-
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
@@ -59,6 +31,33 @@ function Navbar() {
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const menuItems = [
+    {
+      href: "/account/information",
+      icon: <Person />,
+      label: "Tài khoản của tôi",
+    },
+    {
+      href: "/account/my-order",
+      icon: <AccountCircle />,
+      label: "Đơn hàng",
+    },
+    {
+      href: "/account/change-password",
+      icon: <AccountCircle />,
+      label: "Thay đổi mật khẩu",
+    },
+    {
+      href: "/cart",
+      icon: <AddShoppingCartIcon />,
+      label: "Giỏ hàng",
+    },
+    {
+      icon: <ExitToApp />,
+      label: "Đăng xuất",
+      onClick: () => handleLogout(),
+    },
+  ];
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser !== null) {
@@ -98,7 +97,12 @@ function Navbar() {
       >
         <Link
           href="/showroom"
-          style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#fff" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            color: "#fff",
+          }}
         >
           <HomeIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
           <span>Hệ thống showroom</span>

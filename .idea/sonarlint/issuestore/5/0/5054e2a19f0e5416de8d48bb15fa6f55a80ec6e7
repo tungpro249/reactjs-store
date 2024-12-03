@@ -1,4 +1,7 @@
 
-btypescript:S1854":Remove this useless assignment to variable "userDispatch".(œ”Õ»úÿÿÿÿ8ş··2
-Ttypescript:S4123A"1Refactor this redundant 'await' on a non-promise.(¨ÒÌÛ8ş··2
-Xtypescript:S1854L"6Remove this useless assignment to variable "response".(¶ŞÙu8ş··2
+Mtypescript:S1128"*Remove this unused import of 'ActionForm'.(ñ¨Ï‡8¨Ò™Ú¸2
+Utypescript:S1128"-Remove this unused import of 'SliderSyncing'.(’“¤Óşÿÿÿÿ8©Ò™Ú¸2
+btypescript:S1854":Remove this useless assignment to variable "userDispatch".(œ”Õ»úÿÿÿÿ8©Ò™Ú¸2
+Ttypescript:S4123G"1Refactor this redundant 'await' on a non-promise.(¨ÒÌÛ8©Ò™Ú¸2
+Xtypescript:S1854R"6Remove this useless assignment to variable "response".(¶ŞÙu8©Ò™Ú¸2
+Wtypescript:S1854d"4Remove this useless assignment to variable "images".(’ŞÈ”8©Ò™Ú¸2
