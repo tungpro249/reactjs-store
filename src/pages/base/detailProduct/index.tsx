@@ -10,14 +10,11 @@ import Box from "@mui/material/Box";
 import { useAppController } from "../../../contexts/app";
 import SimilarProducts from "../SimilarProduct";
 import MDImage from "components/ui/MDImage";
-import ActionForm from "components/form/actionForm";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import MDButton from "components/ui/MDButton";
 import { CardActions, MenuItem, Select } from "@mui/material";
 import { formatNumber } from "utils";
-import Comments from "./comment";
-import SliderSyncing from "components/slider/sliderSyncing";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -249,7 +246,6 @@ const DetailProduct = () => {
                 />
               </CardActions>
             </Grid>
-            <Comments productId={productDetail?.id} />
           </>
         )}
       </Grid>
