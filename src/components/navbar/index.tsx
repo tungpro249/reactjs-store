@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useAppController } from "../../contexts/app";
-// @ts-ignore
-import Logo from "assets/image/logo.jpg";
+import logo from "../../assets/image/logo.jpg";
 import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
-import {
-  Avatar,
-  Box,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuList,
-  Toolbar,
-} from "@mui/material";
-
-import { AccountCircle, ExitToApp, Person } from "@mui/icons-material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ExitToApp from "@mui/icons-material/ExitToApp";
+import Person from "@mui/icons-material/Person";
 import MDAvatar from "../ui/MDAvatar";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import MenuItemsList from "./menuItemsList";
 
 const links = [
   { href: "/collections/san-pham-moi", label: "Sản phẩm mới" },
   { href: "/blog", label: "Blog" },
   { href: "/collections/sale", label: "Sale" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -39,9 +31,33 @@ function Navbar() {
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // @ts-ignore
-  const [userController] = useAppController();
-
+  const menuItems = [
+    {
+      href: "/account/information",
+      icon: <Person />,
+      label: "Tài khoản của tôi",
+    },
+    {
+      href: "/account/my-order",
+      icon: <AccountCircle />,
+      label: "Đơn hàng",
+    },
+    {
+      href: "/account/change-password",
+      icon: <AccountCircle />,
+      label: "Thay đổi mật khẩu",
+    },
+    {
+      href: "/cart",
+      icon: <AddShoppingCartIcon />,
+      label: "Giỏ hàng",
+    },
+    {
+      icon: <ExitToApp />,
+      label: "Đăng xuất",
+      onClick: () => handleLogout(),
+    },
+  ];
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser !== null) {
@@ -53,10 +69,6 @@ function Navbar() {
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleAvatarClick = () => {
@@ -73,28 +85,6 @@ function Navbar() {
     window.location.reload();
   };
 
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation">
-      <List>
-        {links.map((link, index) => (
-          <ListItem key={link.label} disablePadding>
-            <Link
-              href={link.href}
-              sx={{
-                color: "black",
-                textDecoration: "none",
-                width: "100%",
-                padding: "0 10px",
-              }}
-            >
-              <ListItemText primary={link.label} />
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <>
       <Box
@@ -105,10 +95,18 @@ function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <p style={{ display: "flex", alignItems: "center" }}>
+        <Link
+          href="/showroom"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            color: "#fff",
+          }}
+        >
           <HomeIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
           <span>Hệ thống showroom</span>
-        </p>
+        </Link>
         <p style={{ display: "flex", alignItems: "center" }}>
           <PhoneIcon style={{ fontStyle: "21px", marginRight: "2px" }} />
           <span>Mua hàng onlline</span>
@@ -117,7 +115,7 @@ function Navbar() {
       <AppBar position="static" style={{ background: "#fff", padding: "0 20px" }}>
         <Toolbar disableGutters>
           <Link href="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <MDAvatar alt="logo" src={Logo} size={"100px"} />
+            <MDAvatar alt="logo" src={logo} size={"100px"} />
           </Link>
 
           <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 0.6 }}>
@@ -156,7 +154,7 @@ function Navbar() {
                   textDecoration: "none",
                 }}
               >
-                <Avatar alt="logo" src={Logo} />
+                <Avatar alt="logo" src={logo} />
               </IconButton>
             </Link>
           </Box>
@@ -193,7 +191,7 @@ function Navbar() {
                     // @ts-ignore
                     alt={`${name?.last_name} ${name?.first_name}`}
                     // @ts-ignore
-                    src={`http://localhost:1000/${avatar?.avatar}`}
+                    src={`${process.env.REACT_APP_IMAGE_URL}/${avatar?.avatar}`}
                     sx={{ width: 50, height: 50 }}
                   />
                   <Box pr={1} />
@@ -202,74 +200,11 @@ function Navbar() {
                     {name?.last_name} {name?.first_name}
                   </span>
                 </Box>
-
-                <Menu
-                  open={menuOpen}
-                  onClose={handleMenuClose}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  sx={{ top: "64px" }}
-                >
-                  <MenuList>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/information"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <Person />
-                        </ListItemIcon>
-                        <ListItemText primary="Tài khoản của tôi" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/my-order"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <AccountCircle />
-                        </ListItemIcon>
-                        <ListItemText primary="Đơn hàng" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                      <Link
-                        href={"/account/change-password"}
-                        style={{
-                          textDecoration: "none",
-                          display: "flex",
-                          color: "inherit",
-                        }}
-                      >
-                        <ListItemIcon>
-                          <AccountCircle />
-                        </ListItemIcon>
-                        <ListItemText primary="Thay đổi mật khẩu" />
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleLogout}>
-                      <ListItemIcon>
-                        <ExitToApp />
-                      </ListItemIcon>
-                      <ListItemText primary="Đăng xuất" />
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
+                <MenuItemsList
+                  menuItems={menuItems}
+                  menuOpen={menuOpen}
+                  handleMenuClose={handleMenuClose}
+                />
               </>
             ) : (
               <Link href="/account/login" sx={{ color: "black", textDecoration: "none" }}>

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import ClothesCard from "../../../components/clothesCard";
 import axios from "axios";
 import { typeProduct } from "../../../types/typeProduct";
@@ -9,7 +10,7 @@ import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../com
 import SliderCarosel from "../../../components/slider/sliderCarosel";
 import { useAppController } from "../../../contexts/app";
 import FormCardComponent from "../../../components/form/productActionCard";
-import CategoriesSection from "../../../components/categoriesSection";
+import CategoriesSection from "./categoriesSection";
 import { typeCategory } from "../../../types/typeCategory";
 
 export default function Home() {
@@ -115,7 +116,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <SliderCarosel images={images} />
       <CategoriesSection categories={categories} />
       <Box pt={4} />
@@ -151,6 +152,6 @@ export default function Home() {
         </Link>
       </h1>
       <Box pb={4} />
-    </div>
+    </>
   );
 }

@@ -1,11 +1,10 @@
-import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { typeCategory } from "../../types/typeCategory";
+import { typeCategory } from "../../../../types/typeCategory";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import CategoryCard from "../categoryCard";
+import CategoryCard from "../../../../components/categoryCard";
 
 const CategoriesSection = ({ categories }: { categories: typeCategory[] }) => {
   const settings = {
@@ -30,7 +29,6 @@ const CategoriesSection = ({ categories }: { categories: typeCategory[] }) => {
       },
     ],
   };
-
   return (
     <Box sx={{ my: 8 }}>
       <Typography
@@ -43,7 +41,7 @@ const CategoriesSection = ({ categories }: { categories: typeCategory[] }) => {
       <Slider {...settings}>
         {categories
           ? categories.map((category) => (
-              <CategoryCard key={category.name} category={category} height={250} />
+              <CategoryCard key={category.name} category={category} height={"100%"} />
             ))
           : []}
       </Slider>

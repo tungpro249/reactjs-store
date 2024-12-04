@@ -1,4 +1,10 @@
-import { Box, Button, Card, CardActions, Grid, Pagination, Slider } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
+import Slider from "@mui/material/Slider";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addToCart, GET_ALL_CATEGORIES, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
@@ -8,6 +14,8 @@ import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import { getAllProductSuccess, useProductController } from "../../../contexts/productContext";
 import { useAppController } from "../../../contexts/app";
+import { formatString } from "utils";
+import MDButton from "components/ui/MDButton";
 
 const Collections = () => {
   const [categories, setCategories] = useState<Array<typeCategory>>([]);
@@ -146,9 +154,9 @@ const Collections = () => {
             key={item.id}
             onClick={() => handleCategoryClick(item.id)}
             className={categoryId === item.id ? "selected-category" : ""}
-            style={{ padding: "5px", width: "70%" }}
+            style={{ padding: "5px", width: "70%", cursor: "pointer" }}
           >
-            {item.name}
+            {formatString(item.name)}
           </Box>
         ))}
       </Grid>
@@ -176,29 +184,27 @@ const Collections = () => {
                 <Box onClick={() => handleProductClick(item)}>
                   <ClothesCard item={item} />
                 </Box>
-                <CardActions style={{ justifyContent: "space-around" }}>
-                  <Button
+                <CardActions>
+                  <MDButton
                     style={{
                       background: "#e11467de",
                       padding: "9px",
                       fontWeight: "bold",
                       color: "aliceblue",
                     }}
+                    label="Mua"
                     onClick={() => handleBuy(item)}
-                  >
-                    Mua
-                  </Button>
-                  <Button
+                  />
+                  <MDButton
                     style={{
                       background: "rgb(45 155 236)",
                       padding: "9px",
                       fontWeight: "bold",
                       color: "aliceblue",
                     }}
+                    label=" Thêm vào giỏ hàng"
                     onClick={() => handleAddToCart(item?.id)}
-                  >
-                    Thêm vào giỏ hàng
-                  </Button>
+                  />
                 </CardActions>
               </Card>
             </Grid>
@@ -215,4 +221,4 @@ const Collections = () => {
   );
 };
 
-export default Collections
+export default Collections;

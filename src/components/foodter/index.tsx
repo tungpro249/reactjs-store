@@ -1,4 +1,5 @@
-import { Box, Grid } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Copyright from "../copyRight";
 import { Link } from "react-router-dom";
 

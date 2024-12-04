@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Modal,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import { typeProduct } from "../../../types/typeProduct";
 import VietnamLocalSelect from "../../../components/vietnamLocalSelect";
 import axios from "axios";
 import { paymentWithoutAccount } from "../../../common/constants/api";
+import MDImage from "components/ui/MDImage";
 
 const CheckoutForm = () => {
   const [name, setName] = useState("");
@@ -142,7 +141,7 @@ const CheckoutForm = () => {
         <Grid item xs={5.5} md={5.5} style={{ background: "#ddd" }}>
           {productInCart && (
             <Box p={5} display={"flex"}>
-              <img src={"http://localhost:1000/" + productInCart.image} width={200} height={200} />
+              <MDImage src={productInCart.image} alt={productInCart.name} width={200} height={200} />
               <Box ml={3} lineHeight={2}>
                 <Box>
                   <strong>Tên sản phẩm:</strong>

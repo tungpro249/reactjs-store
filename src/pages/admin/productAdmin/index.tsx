@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { deleteProduct, GET_ALL_PRODUCT_API } from "../../../common/constants/api";
-import { Box, Button, Grid, Modal } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
 import Toolbar from "@mui/material/Toolbar";
 import TableForm from "../../../components/table";
-import SidePath from "../../../components/sidePath";
 import { ADD_TYPE, DELETE_TYPE, UPDATE_TYPE } from "../../../common/constants/app";
 import AddProduct from "./add";
 import UpdateProduct from "./update";
@@ -120,12 +122,12 @@ export default function ProductAdmin() {
     return <div />;
   };
   const columns = [
-    { header: "Tên sản phẩm", field: "name" },
-    { header: "Mô tả", field: "description" },
-    { header: "Danh mục", field: "category" },
-    { header: "Số lượng", field: "quantity" },
-    { header: "Hình ảnh", field: "image" },
-    { header: "Giá tiền", field: "price" },
+    { Header: "Tên sản phẩm", accessor: "name" },
+    { Header: "Mô tả", accessor: "description" },
+    { Header: "Danh mục", accessor: "category" },
+    { Header: "Số lượng", accessor: "quantity" },
+    { Header: "Hình ảnh", accessor: "image" },
+    { Header: "Giá tiền", accessor: "price" },
   ];
 
   return (
@@ -133,18 +135,15 @@ export default function ProductAdmin() {
       <Toolbar />
       <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
-          <SidePath
-            handdleAdd={() => {
-              handleAddProduct();
-            }}
-            showButton
-          />
           <Box pt={5}>
             <TableForm
+              headerTitle="QUẢN LÝ SẢN PHẨM"
               columns={columns}
               data={products}
+              isCreate
               handleDelete={handleDeleteProduct}
               handleEdit={editProduct}
+              handleAdd={handleAddProduct}
             />
           </Box>
         </Grid>

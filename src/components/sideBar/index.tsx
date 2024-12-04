@@ -12,7 +12,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CategoryIcon from "@mui/icons-material/Category";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import { Link, useNavigate } from "react-router-dom";
-import { ExitToApp } from "@mui/icons-material";
+import ExitToApp from "@mui/icons-material/ExitToApp";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -31,11 +31,11 @@ const SideBar = () => {
     <div
       style={{
         background: "#cfcccc",
-        padding: "25px",
+        padding: "30px",
         borderRadius: "10px",
         height: "90vh",
-        marginTop: "5px",
-        marginLeft: "8px",
+        marginTop: "16px",
+        marginLeft: "18px",
       }}
     >
       <h1 style={{ padding: "10px" }}>Dashboard</h1>

@@ -1,12 +1,17 @@
-import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
-import axios from "axios";
 import { ADD_CATEGORY_API } from "../../../../common/constants/api";
+import Box from "@mui/material/Box";
 import { CATEGORY_NAME_IS_EMPTY } from "../../../../common/constants/message";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { useState } from "react";
+import ActionForm from "components/form/actionForm";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia/CardMedia";
 
 const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   const [name, setName] = useState<string>("");
   const [errorCategoryName, setErrorCategoryName] = useState("");
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const isValid = () => {
     let check = true;
@@ -22,13 +27,30 @@ const AddCategory = ({ handleClose }: { handleClose: Function }) => {
   const handleAdd = async () => {
     if (isValid()) {
       try {
-        const response = await axios.post(ADD_CATEGORY_API, { name });
+        const formData = new FormData();
+        if (selectedImage) {
+          formData.append("image", selectedImage);
+        }
+        formData.append("name", name);
+        const response = await axios.post(ADD_CATEGORY_API, formData);
         alert("Thêm thành công");
         window.location.reload();
       } catch (error) {
         console.log("Error deleting data:", error);
       }
     }
+  };
+
+  const handleImageClick = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.addEventListener("change", (event) => {
+      //@ts-ignore
+      const file = event.target?.files[0];
+      setSelectedImage(file);
+    });
+    input.click();
   };
 
   return (
@@ -44,7 +66,24 @@ const AddCategory = ({ handleClose }: { handleClose: Function }) => {
     >
       <h3>Thêm mới</h3>
       <br />
-      <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+      <Box >
+        <Card sx={{ maxWidth: 345 }} onClick={handleImageClick} style={{ cursor: "pointer" }}>
+          {selectedImage ? (
+            <CardMedia
+              component="img"
+              height="450"
+              image={URL.createObjectURL(selectedImage)}
+              alt="Selected Image"
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              height="450"
+              image="https://png.pngtree.com/element_our/20190531/ourlarge/pngtree-gray-plus-sign-free-map-image_1280904.jpg"
+              alt="Choose Image"
+            />
+          )}
+        </Card>
         <label>Tên danh muc</label>
         <TextField
           placeholder={"Tên danh mục"}
@@ -54,26 +93,9 @@ const AddCategory = ({ handleClose }: { handleClose: Function }) => {
           error={!!errorCategoryName}
         />
       </Box>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button type="button" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => handleAdd()}>
-          Xác nhận
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
+      <ActionForm onConfirm={handleAdd} onCancel={handleClose} />
     </Box>
   );
 };
 
-export default AddCategory
-
+export default AddCategory;

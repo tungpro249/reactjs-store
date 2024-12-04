@@ -1,20 +1,17 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import { typeOder } from "../../../types/typeOrder";
 import { useAppController } from "../../../contexts/app";
 import axios from "axios";
 import { deleteOrder, getOrderUser } from "../../../common/constants/api";
-import {
-  Box,
-  Button,
-  Modal,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 const OrderCustomer = () => {
   const [orders, setOrders] = useState<Array<typeOder>>([]);

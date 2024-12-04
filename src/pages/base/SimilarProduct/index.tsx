@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { typeProduct } from "../../../types/typeProduct";
 import ClothesCard from "../../../components/clothesCard";
 import FormCardComponent from "../../../components/form/productActionCard";

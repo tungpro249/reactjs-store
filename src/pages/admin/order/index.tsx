@@ -1,13 +1,17 @@
 import Toolbar from "@mui/material/Toolbar";
-import { Box, Button, Grid, Modal, TextField } from "@mui/material";
-import SidePath from "../../../components/sidePath";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
 import TableForm from "../../../components/table";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_ALL_ORDER_ITEMS_API, updateOrder } from "../../../common/constants/api";
 import { UPDATE_TYPE } from "../../../common/constants/app";
 import { typeOder } from "../../../types/typeOrder";
 import StatusAutocomplete from "./components/AutoComplete";
+import ActionForm from "components/form/actionForm";
 
 const Order = () => {
   const [open, setOpen] = useState(false);
@@ -100,31 +104,7 @@ const Order = () => {
           <Box width={"56%"} margin={"auto"}>
             <StatusAutocomplete status={setStatus} />
           </Box>
-          <Box style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              type="button"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={() => {
-                // @ts-ignore
-                changeStatus(order?.id);
-              }}
-            >
-              Xác nhận
-            </Button>
-            <Box sx={{ padding: "0 30px" }} />
-            <Button
-              type="button"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              color={"error"}
-              onClick={() => {
-                handleClose();
-              }}
-            >
-              Quay lại
-            </Button>
-          </Box>
+          <ActionForm onConfirm={changeStatus} onCancel={handleClose} />
         </Box>
       );
     return <div />;
@@ -138,24 +118,23 @@ const Order = () => {
   };
 
   const columns = [
-    { header: "Tên sản phẩm", field: "product_name" },
-    { header: "Người đặt", field: "user_name" },
-    { header: "Số lượng", field: "quantity" },
-    { header: "Giá tiền", field: "price" },
-    { header: "Thời gian", field: "date_created" },
-    { header: "Trạng thái", field: "status" },
+    { Header: "Tên sản phẩm", accessor: "product_name" },
+    { Header: "Người đặt", accessor: "user_name" },
+    { Header: "Số lượng", accessor: "quantity" },
+    { Header: "Giá tiền", accessor: "price" },
+    { Header: "Thời gian", accessor: "date_created" },
+    { Header: "Trạng thái", accessor: "status" },
   ];
   return (
     <>
       <Toolbar />
       <Grid container spacing={2}>
         <Grid item xs={12} pr={2}>
-          <SidePath handdleAdd={() => {}} showButton={false} />
           <Box pt={5}>
             <TableForm
+              headerTitle="Quản lý đơn hàng"
               columns={columns}
-              data={orders.filter((item: any) => item.status)}
-              handleDelete={() => {}}
+              data={orders}
               handleEdit={handleEditOrder}
             />
           </Box>
@@ -173,4 +152,4 @@ const Order = () => {
   );
 };
 
-export default Order
+export default Order;

@@ -1,6 +1,4 @@
-import React from "react";
-import { Grid } from "@mui/material";
-
+import Grid from "@mui/material/Grid";
 const About = () => {
   return (
     <Grid container pr={20} pl={20} pt={3} pb={3}>

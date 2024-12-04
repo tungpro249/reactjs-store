@@ -4,22 +4,34 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 // ActionButtons component
-const ActionButtons = ({ item, handleEdit, handleDelete }: any) => {
+const ActionButtons = ({
+  item,
+  handleEdit,
+  handleDelete,
+}: {
+  item: any;
+  handleEdit?: Function;
+  handleDelete?: Function;
+}) => {
   return (
     <>
-      <IconButton onClick={() => handleEdit(item)} aria-label="edit" color="primary">
-        <EditIcon />
-        <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Sửa</p>
-      </IconButton>
-      <IconButton
-        onClick={() => handleDelete(item.id)}
-        aria-label="delete"
-        color="error"
-        style={{ display: window.location.pathname === "/order" ? "none" : "" }}
-      >
-        <DeleteIcon />
-        <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Xóa</p>
-      </IconButton>
+      {handleEdit && (
+        <IconButton onClick={() => handleEdit(item)} aria-label="edit" color="primary">
+          <EditIcon />
+          <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Sửa</p>
+        </IconButton>
+      )}
+      {handleDelete && (
+        <IconButton
+          onClick={() => handleDelete(item.id)}
+          aria-label="delete"
+          color="error"
+          style={{ display: window.location.pathname === "/order" ? "none" : "" }}
+        >
+          <DeleteIcon />
+          <p style={{ fontSize: "13px", paddingLeft: "5px" }}>Xóa</p>
+        </IconButton>
+      )}
     </>
   );
 };

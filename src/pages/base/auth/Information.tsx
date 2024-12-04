@@ -1,4 +1,8 @@
-import { Avatar, Box, Button, Grid, TextField } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useAppController } from "../../../contexts/app";
 import { getInfoUser, updateInformation } from "../../../common/constants/api";
@@ -73,7 +77,7 @@ const Information = () => {
   return (
     <Box sx={{ padding: "50px 0", width: "50%", margin: "auto", textAlign: "center" }}>
       <Avatar
-        src={`http://localhost:1000/${avatarUrl.replace(/\\\\/g, "/")}`}
+        src={`${process.env.REACT_APP_IMAGE_URL}/${avatarUrl.replace(/\\\\/g, "/")}`}
         sx={{ width: 100, height: 100, margin: "auto", mb: 2 }}
       />
       <input
@@ -134,4 +138,4 @@ const Information = () => {
   );
 };
 
-export default Information
+export default Information;

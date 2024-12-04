@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Box, Button, Card, CardMedia, Grid, TextField } from "@mui/material";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { updateProduct } from "../../../../common/constants/api";
 import CategoryAutocomplete from "../../category/components/CategoryAutocomplete";
 import { typeCategory } from "../../../../types/typeCategory";
 import { typeProduct } from "../../../../types/typeProduct";
+import ActionForm from "components/form/actionForm";
 
 const UpdateProduct = ({
   handleClose,
@@ -109,7 +115,7 @@ const UpdateProduct = ({
               <CardMedia
                 component="img"
                 height="450"
-                image={`http://localhost:1000/${product.image}`}
+                image={`${process.env.REACT_APP_IMAGE_URL}/${product.image}`}
                 alt="Choose Image"
               />
             )}
@@ -192,30 +198,9 @@ const UpdateProduct = ({
           </Box>
         </Grid>
       </Grid>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={handleUpdateProductApi}
-        >
-          Sửa
-        </Button>
-        <Box sx={{ padding: "0 30px" }} />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color={"error"}
-          onClick={() => {
-            handleClose();
-          }}
-        >
-          Quay lại
-        </Button>
-      </Box>
+      <ActionForm onConfirm={handleUpdateProductApi} onCancel={handleClose} />
     </Box>
   );
 };
 
-export default UpdateProduct
+export default UpdateProduct;

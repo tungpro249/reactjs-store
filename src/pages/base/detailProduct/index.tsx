@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Button, CardActions, CardContent, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { addToCart, GET_ALL_PRODUCT_API, getProductDetail } from "../../../common/constants/api";
 import { typeProduct } from "../../../types/typeProduct";
 import Box from "@mui/material/Box";
-import ReactImageMagnify from "react-image-magnify";
 import { useAppController } from "../../../contexts/app";
 import SimilarProducts from "../SimilarProduct";
+import MDImage from "components/ui/MDImage";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import MDButton from "components/ui/MDButton";
+import { CardActions, MenuItem, Select } from "@mui/material";
+import { formatNumber } from "utils";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -88,74 +95,147 @@ const DetailProduct = () => {
     }
   };
 
-  const imageProps = {
-    smallImage: {
-      alt: productDetail?.name,
-      isFluidWidth: true,
-      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
-    },
-    largeImage: {
-      src: `http://localhost:1000/${productDetail?.image.replace(/\\/g, "/")}`,
-      width: 1200,
-      height: 1800,
-    },
-    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
-  };
-
   return (
     <>
-      <Grid container>
+      <Grid container spacing={4} p={5}>
         {productDetail && (
-          <Box style={{ display: "flex" }} p={5}>
-            <Grid item xs={12} md={6} px={2}>
-              <Box width={"100%"}>
-                <ReactImageMagnify {...imageProps} isActivatedOnTouch />
+          <>
+            {/* Cột hình ảnh */}
+            <Grid item xs={12} md={6}>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                style={{ position: "relative" }}
+              >
+                <Zoom zoomMargin={-200}>
+                  <Box
+                    width="100%"
+                    sx={{
+                      overflow: "hidden",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
+                    <MDImage
+                      src={productDetail.image}
+                      alt={productDetail.name}
+                      styles={{
+                        width: "100%",
+                        objectFit: "cover",
+                        transition: "transform 0.3s ease-in-out",
+                      }}
+                    />
+                  </Box>
+                </Zoom>
               </Box>
             </Grid>
+
+            {/* Cột thông tin sản phẩm */}
             <Grid item xs={12} md={6}>
               <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {productDetail?.name.toUpperCase()}
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h1"
+                  sx={{
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    marginBottom: "16px",
+                    color: "#333",
+                  }}
+                >
+                  {productDetail.name}
                 </Typography>
-                <Typography variant="h6" color="secondary" component="p">
-                  Giá tiền: {productDetail.price}đ
+
+                {/* Giá tiền */}
+                <Typography
+                  variant="h5"
+                  color="secondary"
+                  component="p"
+                  sx={{ fontWeight: "bold", marginBottom: "12px" }}
+                >
+                  Giá tiền: {formatNumber(productDetail.price)}VNĐ
                 </Typography>
-                <Typography variant="h6" color="black" component="p">
-                  Màu sắc: đen vàng đỏ
+
+                {/* Màu sắc */}
+                <Typography
+                  variant="body1"
+                  color="textPrimary"
+                  component="p"
+                  sx={{ marginBottom: "8px" }}
+                >
+                  <strong>Màu sắc:</strong> Đen, Vàng, Đỏ
                 </Typography>
-                <Typography variant="h6" color="black" component="p">
-                  Kích cỡ: X XL XXL
+
+                {/* Kích cỡ */}
+                <Typography
+                  variant="body1"
+                  color="textPrimary"
+                  component="p"
+                  sx={{ marginBottom: "8px" }}
+                >
+                  <Select labelId="size-select-label" value={""} onChange={() => {}}>
+                    {["X", "XL", "XXL"].map((size) => (
+                      <MenuItem key={size} value={size}>
+                        {size}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </Typography>
-                <Typography variant="body1" color="textSecondary" component="p">
-                  Sô lượng trong kho: {productDetail.quantity}
+
+                {/* Số lượng */}
+                <Typography
+                  variant="body1"
+                  color="textSecondary"
+                  component="p"
+                  sx={{ marginBottom: "16px" }}
+                >
+                  <strong>Số lượng trong kho:</strong> {productDetail.quantity}
                 </Typography>
-                {productDetail.description !== "" && (
-                  <Typography variant="body1" color="textSecondary" component="p">
-                    Mô tả: {productDetail.description}
+
+                {/* Mô tả sản phẩm */}
+                {productDetail.description && (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                    sx={{
+                      background: "#f9f9f9",
+                      padding: "12px",
+                      borderRadius: "8px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {productDetail.description}
                   </Typography>
                 )}
               </CardContent>
 
-              {/* Buttons for Add to Cart and Buy */}
-              <CardActions style={{ justifyContent: "space-around" }}>
-                <Button
-                  style={{
-                    background: "#e11467de",
-                    padding: "9px",
+              <CardActions sx={{ marginTop: "20px" }}>
+                <MDButton
+                  sx={{
+                    backgroundColor: "#e11467de",
+                    padding: "12px 24px",
                     fontWeight: "bold",
-                    color: "aliceblue",
+                    fontSize: "16px",
+                    color: "#fff",
+                    borderRadius: "8px",
+                    marginRight: "16px",
                   }}
+                  label="Mua ngay"
                   onClick={() => handleBuy(productDetail)}
-                >
-                  Mua
-                </Button>
-                <Button
-                  style={{
-                    background: "rgb(45 155 236)",
-                    padding: "9px",
+                />
+                <MDButton
+                  sx={{
+                    backgroundColor: "#2D9BEC",
+                    padding: "12px 24px",
                     fontWeight: "bold",
-                    color: "aliceblue",
+                    fontSize: "16px",
+                    color: "#fff",
+                    borderRadius: "8px",
                   }}
+                  label="Thêm vào giỏ hàng"
                   onClick={() => {
                     if (productDetail?.quantity > 0) {
                       handleAddToCart(productDetail?.id);
@@ -163,12 +243,10 @@ const DetailProduct = () => {
                       alert("Sản phẩm đang hết hàng.");
                     }
                   }}
-                >
-                  Thêm vào giỏ hàng
-                </Button>
+                />
               </CardActions>
             </Grid>
-          </Box>
+          </>
         )}
       </Grid>
 
@@ -184,4 +262,4 @@ const DetailProduct = () => {
   );
 };
 
-export default DetailProduct
+export default DetailProduct;

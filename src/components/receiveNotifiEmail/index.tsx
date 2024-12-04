@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
-import { Box, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import axios from "axios";
 import { REGISTER_LOYAL_CUSTOMER } from "../../common/constants/api";
 import { useState } from "react";
